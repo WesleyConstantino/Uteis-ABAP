@@ -1,6 +1,6 @@
     LOOP AT <Tabela Interna> INTO <Workarea>. 
-      <workarea-campo_aux> = <workarea-campo>.
-      MODIFY <tabela interna> FROM <workarea> TRANSPORTING <campo_aux>.
+      <Workarea-Campo_aux> = <Workarea-Campo>.
+      MODIFY <Tabela Interna> FROM <Workarea> TRANSPORTING <Campo_aux>.
     ENDLOOP.
     
     
