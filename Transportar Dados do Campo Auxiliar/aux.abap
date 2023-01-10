@@ -1,5 +1,5 @@
-"Este loop serve para transportar os dados de um campo auxiliar, declarado nos TYPES, para o campo principal da nossa estrutura no TYPES
-
+"Este loop serve para transportar os dados de um campo auxiliar, declarado nos TYPES, para o campo principal da nossa estrutura no TYPES.
+Como fazer:
   LOOP AT <Tabela Interna> INTO <Workarea>. 
       <Workarea-Campo_aux> = <Workarea-Campo>.
       MODIFY <Tabela Interna> FROM <Workarea> TRANSPORTING <Campo_aux>.
