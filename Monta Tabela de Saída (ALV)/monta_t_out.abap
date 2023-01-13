@@ -8,7 +8,7 @@ FORM zf_monta_t_out .
   LOOP AT t_vbak INTO wa_vbak.    "Loop na tabela mestre. "Principal, do primeiro SELECT"
     
     READ TABLE t_vbap INTO wa_vbap WITH KEY vbeln = wa_vbak-vbeln.   "No READ a chave "WITH KEY" deve ser a mesma da condicional do SELECT. Não colocamos as condicionais 
-                                                                      com a tela de seleção, somente das tabelas.
+                                                                      "com a tela de seleção, somente das tabelas.
                                                                       
     IF sy-subrc IS INITIAL. 
       wa_out-aufnr = wa_vbap-aufnr.  "Aqui passo os campos das workareas das tabelas para as minhas workareas da tabela de saída, um a um.
