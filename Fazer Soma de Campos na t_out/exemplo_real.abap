@@ -245,11 +245,11 @@ SELECTION-SCREEN END OF BLOCK b1.
 START-OF-SELECTION.
   IF rb_sinte  = 'X'.
     PERFORM: zf_select_sintetico,
-             zf_monta_t_out,
+             zf_monta_t_out_sintetico,
              zf_exibe_alv_poo.
   ELSE.
     PERFORM: zf_select_analitico,
-             zf_monta_t_out,
+             zf_monta_t_out_analitico,
              zf_exibe_alv_poo.
   ENDIF.
 
@@ -486,8 +486,8 @@ FORM  zf_select_analitico.
      FOR ALL ENTRIES IN t_vbrp
      WHERE vbeln = t_vbrp-vbeln.
 
-     DELETE t_vbrk WHERE ( sfakn <> '' )
-                    AND ( fksto <> '' ).
+    DELETE t_vbrk WHERE ( sfakn <> '' )
+                   AND ( fksto <> '' ).
 
     LOOP AT t_vbrp INTO wa_vbrp.  "Loop para fazer a modificação no meu campo auxiliar
       wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
@@ -549,12 +549,14 @@ FORM zf_exibe_alv_poo.
       IF rb_anali = 'X'. "2
         lo_table->get_columns( )->get_column( 'NETWR_VBAK' )->set_visible( abap_false ). "Ocultar campos da t_out
         lo_table->get_columns( )->get_column( 'NFTOT' )->set_visible( abap_false ).
+        lo_table->get_columns( )->get_column( 'SOMA_NETWR' )->set_visible( abap_false ).
       ELSE. "1
         lo_table->get_columns( )->get_column( 'POSNR' )->set_visible( abap_false ).
         lo_table->get_columns( )->get_column( 'MATNR' )->set_visible( abap_false ).
         lo_table->get_columns( )->get_column( 'ARKTX' )->set_visible( abap_false ).
         lo_table->get_columns( )->get_column( 'NETWR_VBAP' )->set_visible( abap_false ).
         lo_table->get_columns( )->get_column( 'NETWR_J_1BNFLIN' )->set_visible( abap_false ).
+        lo_table->get_columns( )->get_column( 'SOMA_KBETR' )->set_visible( abap_false ).
       ENDIF.
 
 *Mudar nome das colunas do ALV
@@ -564,7 +566,12 @@ FORM zf_exibe_alv_poo.
 
       CREATE OBJECT lo_header. "É necessário que criemos o objeto header
 
-      lo_header->create_header_information( row = 1 column = 1 text = 'Relatório ALV' ). "Texto grande do header
+     IF rb_anali = 'X'.
+      lo_header->create_header_information( row = 1 column = 1 text = 'Relatório Analítico' ). "Texto grande do header
+     ELSE.
+      lo_header->create_header_information( row = 1 column = 1 text = 'Relatório Sintético' ).
+     ENDIF.
+
       lo_header->add_row( ).
 
 
@@ -587,12 +594,11 @@ FORM zf_exibe_alv_poo.
 ENDFORM.
 
 *&---------------------------------------------------------------------*
-*&      Form  zf_monta_t_out
+*&      Form  zf_monta_t_out_sintetico
 *&---------------------------------------------------------------------*
-FORM zf_monta_t_out .
+FORM zf_monta_t_out_sintetico .
 
-  PERFORM: z_soma,
-           z_soma_analitico.
+  PERFORM z_soma_sintetico.
 
   LOOP AT t_vbak INTO wa_vbak. "Loop na tabela mestre #Principal #Do primeiro SELECT
     "No READ a chave deve ser a mesma da condicional do SELECT
@@ -628,12 +634,6 @@ FORM zf_monta_t_out .
       IF sy-subrc IS INITIAL.
         wa_out-soma_netwr = wa_colect-netwr.
       ENDIF.
-
-      READ TABLE t_colect_2 INTO wa_colect_2 WITH KEY knumv = wa_vbak-knumv.
-      IF sy-subrc IS INITIAL.
-        wa_out-soma_kbetr = wa_colect_2-kbetr.
-      ENDIF.
-
     ENDIF.
 
 
@@ -689,10 +689,100 @@ FORM zf_monta_t_out .
 
 ENDFORM.
 
+
 *&---------------------------------------------------------------------*
-*&      Form  Z_SOMA
+*&      Form  ZF_MONTA_T_OUT_ANALITICO
 *&---------------------------------------------------------------------*
-FORM z_soma .
+FORM zf_monta_t_out_analitico .
+  PERFORM z_soma_sintetico_analitico.
+
+  LOOP AT t_vbap INTO wa_vbap.
+
+    wa_out-aufnr = wa_vbap-aufnr.
+    wa_out-posnr = wa_vbap-posnr.
+    wa_out-matnr = wa_vbap-matnr.
+    wa_out-arktx = wa_vbap-arktx.
+    wa_out-werks = wa_vbap-werks.
+    wa_out-lgort = wa_vbap-lgort.
+    wa_out-netwr_vbap = wa_vbap-netwr.
+
+    READ TABLE t_vbak INTO wa_vbak WITH KEY vbeln = wa_vbap-vbeln. """""""""""""""""""""""""""""""""""""""""""""""'
+    IF sy-subrc IS INITIAL.
+      wa_out-vbeln = wa_vbak-vbeln.
+      wa_out-posnr = wa_vbap-posnr.
+      wa_out-erdat = wa_vbak-erdat.
+      wa_out-auart = wa_vbak-auart.
+      wa_out-vkorg = wa_vbak-vkorg.
+      wa_out-vtweg = wa_vbak-vtweg.
+      wa_out-spart = wa_vbak-spart.
+      wa_out-vkbur = wa_vbak-vkbur.
+      wa_out-netwr_vbak = wa_vbak-netwr.
+      wa_out-waerk = wa_vbak-waerk.
+      wa_out-kunnr = wa_vbak-kunnr.
+      wa_out-bstnk = wa_vbak-bstnk.
+      wa_out-lifsk = wa_vbak-lifsk.
+    ENDIF.
+
+    READ TABLE t_kna1 INTO wa_kna1 WITH KEY kunnr = wa_vbak-kunnr.
+    IF sy-subrc IS INITIAL.
+      wa_out-name1 = wa_kna1-name1.
+      wa_out-txjcd = wa_kna1-txjcd.
+      wa_out-ort01 = wa_kna1-ort01.
+      wa_out-pstlz = wa_kna1-pstlz.
+      wa_out-regio = wa_kna1-regio.
+      wa_out-stras = wa_kna1-stras.
+      wa_out-ort02 = wa_kna1-ort02.
+      wa_out-stcd1 = wa_kna1-stcd1.
+      wa_out-stcd2 = wa_kna1-stcd2.
+      wa_out-stcd3 = wa_kna1-stcd3.
+    ENDIF.
+
+    READ TABLE t_vbrp INTO wa_vbrp WITH KEY aubel = wa_vbak-vbeln.
+    IF sy-subrc IS INITIAL.
+      wa_out-vgbel = wa_vbrp-vgbel.
+      wa_out-vbeln2 = wa_vbrp-vbeln.
+    ENDIF.
+
+    READ TABLE t_vbrk INTO wa_vbrk WITH KEY vbeln = wa_vbrp-vbeln.
+    IF sy-subrc IS INITIAL.
+
+    ENDIF.
+
+    READ TABLE t_j_1bnflin INTO wa_j_1bnflin WITH KEY refkey = wa_vbrp-vbeln_aux.
+    IF sy-subrc IS INITIAL.
+      wa_out-nfenum = wa_j_1bnfdoc-nfenum.
+      wa_out-nftot = wa_j_1bnfdoc-nftot.
+      wa_out-authdate = wa_j_1bnfdoc-authdate.
+
+      READ TABLE t_j_1bnfdoc INTO wa_j_1bnfdoc WITH KEY docnum = wa_j_1bnflin-docnum.
+      IF sy-subrc IS INITIAL.
+        wa_out-docnum = wa_j_1bnflin-docnum.
+        wa_out-netwr_j_1bnflin = wa_j_1bnflin-netwr.
+      ENDIF.
+
+      READ TABLE t_colect_2 INTO wa_colect_2 WITH KEY knumv = wa_vbak-knumv.
+      IF sy-subrc IS INITIAL.
+        wa_out-soma_kbetr = wa_colect_2-kbetr.
+      ENDIF.
+
+      ENDIF.
+      APPEND wa_out TO t_out.
+      CLEAR: wa_out,
+             wa_vbak,
+             wa_vbap,
+             wa_vbrp,
+             wa_kna1,
+             wa_j_1bnfdoc,
+             wa_j_1bnflin,
+             wa_colect_2.
+    ENDLOOP.
+ENDFORM.
+
+
+*&---------------------------------------------------------------------*
+*&      Form  z_soma_sintetico
+*&---------------------------------------------------------------------*
+FORM z_soma_sintetico .
 
   LOOP AT t_vbap INTO wa_vbap.
     wa_colect-vbeln = wa_vbap-vbeln.
@@ -705,9 +795,9 @@ FORM z_soma .
 ENDFORM.
 
 *&---------------------------------------------------------------------*
-*&      Form  Z_SOMA_analitico
+*&      Form  z_soma_sintetico_analitico
 *&---------------------------------------------------------------------*
-FORM z_soma_analitico .
+FORM z_soma_sintetico_analitico .
 
   LOOP AT t_konv INTO wa_konv.
     wa_colect_2-kbetr = wa_konv-kbetr.
