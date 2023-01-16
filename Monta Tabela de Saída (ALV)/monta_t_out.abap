@@ -1,4 +1,4 @@
-
+*É assim que populamos uma tabela de saída
 
 *&---------------------------------------------------------------------*
 *&      Form  zf_monta_t_out
