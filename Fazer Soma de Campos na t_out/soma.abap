@@ -1,6 +1,8 @@
 "O que era pedido na EF:
 "VBAK-VBELN = VBAP-VBELN somar VBAP-NETWR de todos os itens encontrados.
 
+*!!!(Nessa mesma pasta deixarei o programa completo usado como exemplo, para melhor compreensão.)!!!
+
 "Solução:
 
 *&---------------------------------------------------------------------*
@@ -58,3 +60,5 @@ FORM z_soma .
   ENDLOOP.
 
 ENDFORM.
+
+*!!!(Nessa mesma pasta deixarei o programa completo usado como exemplo, para melhor compreensão.)!!!
