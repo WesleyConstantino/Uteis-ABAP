@@ -15,11 +15,11 @@ FORM zf_exibe_alv_poo.
 
 *Campos que serão ocultados da t_out de acordo com RADIOBUTTON selecionado:
       IF rb_anali = 'X'. "2
-        lo_table->get_columns( )->get_column( 'NETWR_VBAK' )->set_visible( abap_false ). "Ocultar campos da t_out
+        lo_table->get_columns( )->get_column( 'NETWR_VBAK' )->set_visible( abap_false ). "Ocultar campos da t_out. Passo "em maiúsculo" entre aspas simples o nome do campo da t_out que desejo ocultar.
         lo_table->get_columns( )->get_column( 'NFTOT' )->set_visible( abap_false ).
         lo_table->get_columns( )->get_column( 'SOMA_NETWR' )->set_visible( abap_false ).
       ELSE. "1
-        lo_table->get_columns( )->get_column( 'POSNR' )->set_visible( abap_false ).
+        lo_table->get_columns( )->get_column( 'POSNR' )->set_visible( abap_false ). 
         lo_table->get_columns( )->get_column( 'MATNR' )->set_visible( abap_false ).
         lo_table->get_columns( )->get_column( 'ARKTX' )->set_visible( abap_false ).
         lo_table->get_columns( )->get_column( 'NETWR_VBAP' )->set_visible( abap_false ).
