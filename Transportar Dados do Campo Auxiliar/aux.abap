@@ -13,3 +13,23 @@ Como fazer:
       wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
       MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
     ENDLOOP.
+
+
+*&---------------------------------------------------------------------*
+*&      Form  ZF_SELECT
+*&---------------------------------------------------------------------*
+    SELECT aubel
+           vgbel
+           vbeln
+           vbeln "Passando dados para o campo aux em vez de fazer o loop comentado abaixo
+      FROM vbrp
+      INTO TABLE t_vbrp
+      FOR ALL ENTRIES IN t_vbak
+      WHERE aubel = t_vbak-vbeln AND
+            vgbel IN s_vgbel AND
+            vbeln IN s_vbeln2.
+
+    "LOOP AT t_vbrp INTO wa_vbrp.  "Loop para fazer a modificação no meu campo auxiliar
+    " wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
+    "MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
+    "ENDLOOP.
