@@ -286,17 +286,12 @@ FORM zf_select_sintetico.
   " lifsk = p_bloque AND     "VBAK-LIFSK = Ordem de venda bloqueada? informado na tela de seleção
   " lifsk = p_desblo.
 
-*******************************************************
-  "Criar condional:
+  "Condional para tratar os checkboxes:
   IF p_bloque = 'X' AND p_desblo = ''.
     DELETE t_vbak WHERE lifsk IS NOT INITIAL.
-    "   delete LIFSK
-    "    from VBAK
-    "    where LIFSK is not initial
   ELSEIF p_bloque = ' ' AND p_desblo = 'X'.
     DELETE t_vbak WHERE lifsk IS INITIAL.
   ENDIF.
-*******************************************************
 
 * Delete para ganho de performance no meu SELECT
   DELETE t_vbak WHERE ( auart <> 'ZA01' )
@@ -428,6 +423,7 @@ FORM  zf_select_analitico.
           kunnr IN s_kunnr AND
           bstnk IN s_bstnk.
 
+  "Condional para tratar os checkboxes:
   IF p_bloque = 'X' AND p_desblo = ''.
     DELETE t_vbak WHERE lifsk IS NOT INITIAL.
   ELSEIF p_bloque = ' ' AND p_desblo = 'X'.
@@ -441,6 +437,9 @@ FORM  zf_select_analitico.
            werks
            lgort
            netwr
+           posnr
+           matnr
+           arktx
       FROM vbap
       INTO TABLE t_vbap
       FOR ALL ENTRIES IN t_vbak
@@ -448,6 +447,9 @@ FORM  zf_select_analitico.
             aufnr IN s_aufnr AND
             werks IN s_werks AND
             lgort IN s_lgort.
+
+* Delete para ganho de performance no meu SELECT
+    DELETE t_vbap WHERE aufnr = ''.
 
     SELECT kunnr
            name1
@@ -470,13 +472,18 @@ FORM  zf_select_analitico.
     SELECT aubel
            vgbel
            vbeln
-           vbeln
+           vbeln "Passando dados para o campo aux em vez de fazer o loop comentado abaixo
       FROM vbrp
       INTO TABLE t_vbrp
       FOR ALL ENTRIES IN t_vbak
       WHERE aubel = t_vbak-vbeln AND
             vgbel IN s_vgbel AND
             vbeln IN s_vbeln2.
+
+    "LOOP AT t_vbrp INTO wa_vbrp.  "Loop para fazer a modificação no meu campo auxiliar
+    " wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
+    "MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
+    "ENDLOOP.
 
     SELECT vbeln
            sfakn
@@ -489,10 +496,6 @@ FORM  zf_select_analitico.
     DELETE t_vbrk WHERE ( sfakn <> '' )
                    AND ( fksto <> '' ).
 
-    LOOP AT t_vbrp INTO wa_vbrp.  "Loop para fazer a modificação no meu campo auxiliar
-      wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
-      MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
-    ENDLOOP.
 
     SELECT refkey
            docnum
@@ -566,11 +569,11 @@ FORM zf_exibe_alv_poo.
 
       CREATE OBJECT lo_header. "É necessário que criemos o objeto header
 
-     IF rb_anali = 'X'.
-      lo_header->create_header_information( row = 1 column = 1 text = 'Relatório Analítico' ). "Texto grande do header
-     ELSE.
-      lo_header->create_header_information( row = 1 column = 1 text = 'Relatório Sintético' ).
-     ENDIF.
+      IF rb_anali = 'X'.
+        lo_header->create_header_information( row = 1 column = 1 text = 'Relatório Analítico' ). "Texto grande do header
+      ELSE.
+        lo_header->create_header_information( row = 1 column = 1 text = 'Relatório Sintético' ).
+      ENDIF.
 
       lo_header->add_row( ).
 
@@ -698,6 +701,8 @@ FORM zf_monta_t_out_analitico .
 
   LOOP AT t_vbap INTO wa_vbap.
 
+    " READ TABLE t_vbap INTO wa_vbap WITH KEY vbeln = wa_vbak-vbeln.  "Problema aqui, os dados estão em branco
+    " IF sy-subrc IS INITIAL.
     wa_out-aufnr = wa_vbap-aufnr.
     wa_out-posnr = wa_vbap-posnr.
     wa_out-matnr = wa_vbap-matnr.
@@ -705,6 +710,7 @@ FORM zf_monta_t_out_analitico .
     wa_out-werks = wa_vbap-werks.
     wa_out-lgort = wa_vbap-lgort.
     wa_out-netwr_vbap = wa_vbap-netwr.
+    " ENDIF.
 
     READ TABLE t_vbak INTO wa_vbak WITH KEY vbeln = wa_vbap-vbeln. """""""""""""""""""""""""""""""""""""""""""""""'
     IF sy-subrc IS INITIAL.
@@ -765,17 +771,17 @@ FORM zf_monta_t_out_analitico .
         wa_out-soma_kbetr = wa_colect_2-kbetr.
       ENDIF.
 
-      ENDIF.
-      APPEND wa_out TO t_out.
-      CLEAR: wa_out,
-             wa_vbak,
-             wa_vbap,
-             wa_vbrp,
-             wa_kna1,
-             wa_j_1bnfdoc,
-             wa_j_1bnflin,
-             wa_colect_2.
-    ENDLOOP.
+    ENDIF.
+    APPEND wa_out TO t_out.
+    CLEAR: wa_out,
+           wa_vbak,
+           wa_vbap,
+           wa_vbrp,
+           wa_kna1,
+           wa_j_1bnfdoc,
+           wa_j_1bnflin,
+           wa_colect_2.
+  ENDLOOP.
 ENDFORM.
 
 
