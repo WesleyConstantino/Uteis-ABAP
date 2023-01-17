@@ -19,14 +19,14 @@ TYPES: BEGIN OF ty_vbrp,
        END OF ty_vbrp.
   
   
-  *------------FORMA 1--------------
+*------------FORMA 1--------------
     LOOP AT t_vbrp INTO wa_vbrp.  
       wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
       MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
     ENDLOOP.
 
 
-  *------------FORMA 2--------------
+*------------FORMA 2--------------
 *&---------------------------------------------------------------------*
 *&      Form  ZF_SELECT
 *&---------------------------------------------------------------------*
