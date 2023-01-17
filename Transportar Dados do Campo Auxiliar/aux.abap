@@ -23,7 +23,17 @@ TYPES: BEGIN OF ty_vbrp,
 *&---------------------------------------------------------------------*
 *&      Form  ZF_SELECT
 *&---------------------------------------------------------------------*
-    LOOP AT t_vbrp INTO wa_vbrp.  
+    SELECT aubel
+           vgbel
+           vbeln
+      FROM vbrp
+      INTO TABLE t_vbrp
+      FOR ALL ENTRIES IN t_vbak
+      WHERE aubel = t_vbak-vbeln AND
+            vgbel IN s_vgbel AND
+            vbeln IN s_vbeln2.
+            
+    LOOP AT t_vbrp INTO wa_vbrp.   "Faço este loop para passar os dados para o campo aux.
       wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
       MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
     ENDLOOP.
@@ -36,7 +46,7 @@ TYPES: BEGIN OF ty_vbrp,
     SELECT aubel
            vgbel
            vbeln
-           vbeln "Já passo os dados para o campo aux diretamente aqui, repetindo o vbeln, sendo que o campos aux é do tipo vbeln.
+           vbeln "Já passo os dados para o campo aux diretamente aqui, repetindo o vbeln, sendo que o campos aux é do tipo vbeln. 
       FROM vbrp
       INTO TABLE t_vbrp
       FOR ALL ENTRIES IN t_vbak
