@@ -8,13 +8,15 @@ Como fazer:
     
     
     
-  "Exemplo de código real:  
+  "Exemplo de código real: 
+  "-FORMA 1-
     LOOP AT t_vbrp INTO wa_vbrp.  
       wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
       MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
     ENDLOOP.
 
 
+   "-FORMA 2-
 *&---------------------------------------------------------------------*
 *&      Form  ZF_SELECT
 *&---------------------------------------------------------------------*
@@ -28,8 +30,3 @@ Como fazer:
       WHERE aubel = t_vbak-vbeln AND
             vgbel IN s_vgbel AND
             vbeln IN s_vbeln2.
-
-    "LOOP AT t_vbrp INTO wa_vbrp.  "Loop para fazer a modificação no meu campo auxiliar
-    " wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
-    "MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
-    "ENDLOOP.
