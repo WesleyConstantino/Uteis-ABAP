@@ -28,7 +28,7 @@ FORM zf_exibe_alv_poo.
       ENDIF.
 
 *Mudar nome das colunas do ALV
-      lo_table->get_columns( )->get_column( 'SOMA_NETWR' )->set_short_text( 'Soma' ). "Mudar o texto curto da tabela
+      lo_table->get_columns( )->get_column( 'SOMA_NETWR' )->set_short_text( 'Soma' ). "Mudar o texto curto da tabela. Mudo o nme do campo SOMA_NETWR para o nome Soma.
       lo_table->get_columns( )->get_column( 'SOMA_NETWR' )->set_medium_text( 'Soma' ).
       lo_table->get_columns( )->get_column( 'SOMA_NETWR' )->set_long_text( 'Soma' ).
 
