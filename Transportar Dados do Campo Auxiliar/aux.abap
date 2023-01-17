@@ -11,12 +11,12 @@ Como fazer:
   "Exemplo de código real: 
   
   "Esta é a estrutura do meu TYPES:
-         BEGIN OF ty_vbrp,
+TYPES: BEGIN OF ty_vbrp,
          aubel         TYPE vbrp-aubel,
          vgbel         TYPE vbrp-vgbel,
          vbeln         TYPE vbrp-vbeln,
          vbeln_aux(35) TYPE c,
-       END OF ty_vbrp,
+       END OF ty_vbrp.
   
   
   *------------FORMA 1--------------
