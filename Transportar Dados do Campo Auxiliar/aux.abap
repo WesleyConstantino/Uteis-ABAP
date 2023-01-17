@@ -23,7 +23,7 @@ Como fazer:
     SELECT aubel
            vgbel
            vbeln
-           vbeln "Passando dados para o campo aux em vez de fazer o loop comentado abaixo
+           vbeln "Já passo os dados para o campo aux diretamente aqui, repetindo o vbeln, sendo que o campos aux é do tipo vbeln.
       FROM vbrp
       INTO TABLE t_vbrp
       FOR ALL ENTRIES IN t_vbak
