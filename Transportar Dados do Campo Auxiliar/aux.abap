@@ -9,14 +9,24 @@ Como fazer:
     
     
   "Exemplo de código real: 
-  "-FORMA 1-
+  
+  "Esta é a estrutura do meu TYPES:
+         BEGIN OF ty_vbrp,
+         aubel         TYPE vbrp-aubel,
+         vgbel         TYPE vbrp-vgbel,
+         vbeln         TYPE vbrp-vbeln,
+         vbeln_aux(35) TYPE c,
+       END OF ty_vbrp,
+  
+  
+  *------------FORMA 1--------------
     LOOP AT t_vbrp INTO wa_vbrp.  
       wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
       MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
     ENDLOOP.
 
 
-   "-FORMA 2-
+  *------------FORMA 2--------------
 *&---------------------------------------------------------------------*
 *&      Form  ZF_SELECT
 *&---------------------------------------------------------------------*
