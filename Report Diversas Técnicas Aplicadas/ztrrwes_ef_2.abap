@@ -721,17 +721,37 @@ FORM zf_show_alv_poo.
       ENDIF.
 
 *Mudar nome das colunas do ALV
-      lo_table->get_columns( )->get_column( 'SOMA_MSEG_DMBTR' )->set_short_text( 'Soma DMBTR' ).
-      lo_table->get_columns( )->get_column( 'SOMA_MSEG_DMBTR' )->set_medium_text( 'Soma DMBTR' ).
-      lo_table->get_columns( )->get_column( 'SOMA_MSEG_DMBTR' )->set_long_text( 'Soma DMBTR' ).
+      lo_table->get_columns( )->get_column( 'SOMA_MSEG_DMBTR' )->set_short_text( 'Pre.Móvel' ).
+      lo_table->get_columns( )->get_column( 'SOMA_MSEG_DMBTR' )->set_medium_text( 'Preço médio móvel' ).
+      lo_table->get_columns( )->get_column( 'SOMA_MSEG_DMBTR' )->set_long_text( 'Preço médio móvel' ).
 
-      lo_table->get_columns( )->get_column( 'SOMA_VBAP_NETWR_MWSBP' )->set_long_text( 'Soma NETWR MWSBP' ).
-      lo_table->get_columns( )->get_column( 'SOMA_VBAP_NETWR_MWSBP' )->set_medium_text( 'Soma NETWR' ).
-      lo_table->get_columns( )->get_column( 'SOMA_VBAP_NETWR_MWSBP' )->set_short_text( 'Soma NETWR' ).
+      lo_table->get_columns( )->get_column( 'SOMA_VBAP_NETWR_MWSBP' )->set_long_text( 'NF-e' ).
+      lo_table->get_columns( )->get_column( 'SOMA_VBAP_NETWR_MWSBP' )->set_medium_text( 'NF-e' ).
+      lo_table->get_columns( )->get_column( 'SOMA_VBAP_NETWR_MWSBP' )->set_short_text( 'NF-e' ).
 
-      lo_table->get_columns( )->get_column( 'SOMA_ZMMT101_VAL_ICMS_PROP' )->set_long_text( 'Soma ZMMT101' ).
-      lo_table->get_columns( )->get_column( 'SOMA_ZMMT101_VAL_ICMS_PROP' )->set_medium_text( 'Soma ZMMT101' ).
-      lo_table->get_columns( )->get_column( 'SOMA_ZMMT101_VAL_ICMS_PROP' )->set_short_text( 'Sm ZMMT101' ).
+      lo_table->get_columns( )->get_column( 'SOMA_ZMMT101_VAL_ICMS_PROP' )->set_long_text( 'Val.ICMS.e' ).
+      lo_table->get_columns( )->get_column( 'SOMA_ZMMT101_VAL_ICMS_PROP' )->set_medium_text( 'Valor ICMS entrada' ).
+      lo_table->get_columns( )->get_column( 'SOMA_ZMMT101_VAL_ICMS_PROP' )->set_short_text( 'Val.ICMS.e' ).
+
+      lo_table->get_columns( )->get_column( 'VL_ICMS_ENTRADA_ANALI' )->set_short_text( 'Ent.Icms' ).
+      lo_table->get_columns( )->get_column( 'VL_ICMS_ENTRADA_ANALI' )->set_medium_text( 'Ent.Icms' ).
+      lo_table->get_columns( )->get_column( 'VL_ICMS_ENTRADA_ANALI' )->set_long_text( 'Ent.Icms' ).
+
+      lo_table->get_columns( )->get_column( 'VL_ICMS_ST_ENTRADA_ANALI' )->set_short_text( 'En.Icms.St' ).
+      lo_table->get_columns( )->get_column( 'VL_ICMS_ST_ENTRADA_ANALI' )->set_medium_text( 'Ent.Icms.St' ).
+      lo_table->get_columns( )->get_column( 'VL_ICMS_ST_ENTRADA_ANALI' )->set_long_text( 'Ent.Icms.St' ).
+
+      lo_table->get_columns( )->get_column( 'VL_BRUTO' )->set_short_text( 'Vl.Bruto' ).
+      lo_table->get_columns( )->get_column( 'VL_BRUTO' )->set_medium_text( 'Vl.Bruto' ).
+      lo_table->get_columns( )->get_column( 'VL_BRUTO' )->set_long_text( 'Vl.Bruto' ).
+
+      lo_table->get_columns( )->get_column( 'VL_TOTAL' )->set_long_text( 'Vl.Total' ).
+      lo_table->get_columns( )->get_column( 'VL_TOTAL' )->set_medium_text( 'Vl.Total' ).
+      lo_table->get_columns( )->get_column( 'VL_TOTAL' )->set_short_text( 'Vl.Total' ).
+
+      lo_table->get_columns( )->get_column( 'VL_DESCONTO' )->set_long_text( 'Vl.Desc' ).
+      lo_table->get_columns( )->get_column( 'VL_DESCONTO' )->set_medium_text( 'Vl.Desc' ).
+      lo_table->get_columns( )->get_column( 'VL_DESCONTO' )->set_short_text( 'Vl.Desc' ).
 
       CREATE OBJECT lo_header. "É necessário que criemos o objeto header
 
