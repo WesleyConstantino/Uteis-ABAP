@@ -9,7 +9,7 @@ READ TABLE lt_cdhdr INTO ls_cdhdr WITH KEY objectid = ls_ekko_ekpo-ebeln.
 
 
 "Exemplo explicativo:
-<Workarea já existente> ou <DATA(Variável in line )> = VALUE #( <Tabela Interna>[ <Campo da Workarea> = <Outra Workarea>-<Campo> ] OPTIONAL ).
+<Workarea já existente> ou <DATA(Variável in line )> = VALUE #( <Tabela Interna>[ <Campo da Tabela Interna> = <Outra Workarea>-<Campo> ] OPTIONAL ).
 
 "Obs:
 # - Logo após a palavra VALUE, faz a conversão dos dados altomáticamente.
