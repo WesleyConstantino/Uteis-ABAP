@@ -4,7 +4,7 @@
 DATA(ls_cdhdr) = VALUE #( lt_cdhdr[ objectid = ls_ekko_ekpo-ebeln ] OPTIONAL ).
 
 "Exemplo explicativo:
-<Tabela interna já existente> ou <DATA(Variável in line )> = VALUE #( <Tabela Transparente>[ <Campo da Tabela Transparente> = <Outra Tabela>-<Campo> ] OPTIONAL ).
+<Workarea já existente> ou <DATA(Variável in line )> = VALUE #( <Tabela Interna>[ <Campo da Workarea> = <Outra Workarea>-<Campo> ] OPTIONAL ).
 
 "Obs:
 # - Logo após a palavra VALUE, faz a conversão dos dados altomáticamente.
