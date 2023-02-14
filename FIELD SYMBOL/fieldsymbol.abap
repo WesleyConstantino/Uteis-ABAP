@@ -8,6 +8,8 @@
         
 "Depois, verifico se o meu FIELD SYMBOL está assinado, como abaixo:
         IF <lfs_log_msg> IS ASSIGNED.
+        
+"E por fim, atribuo os valores aos campos do meu FIELD SYMBOL, como  abaixo:        
         <lfs_log_msg>-docnum = s_docnum-low.
         <lfs_log_msg>-idoctp = 'SFDC_NOTAFISCAL'.
         <lfs_log_msg>-status = 'E'.
