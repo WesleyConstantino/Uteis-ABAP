@@ -1,4 +1,5 @@
-"Para criar um FIELD SYMBOL dessa forma, primeiro preciso declarar a tabela interna que desejo fazer o FIELD SYMBOL.
+"Para criar um FIELD SYMBOL dessa forma, primeiro preciso declarar a tabela interna que desejo fazer o FIELD SYMBOL, como abaixo:
+
         DATA: lt_log_msg TYPE zavtsdt_message_log. "Tabela interna
   
         APPEND INITIAL LINE TO lt_log_msg ASSIGNING FIELD-SYMBOL(<lfs_log_msg>).
