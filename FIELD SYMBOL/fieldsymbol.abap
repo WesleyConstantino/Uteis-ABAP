@@ -3,6 +3,7 @@
         DATA: lt_log_msg TYPE zavtsdt_message_log. "Tabela interna
   
   "Em seguida, appendo uma linha vazia assinando com o FIELD SYMBOL, como abaixo:
+  
         APPEND INITIAL LINE TO lt_log_msg ASSIGNING FIELD-SYMBOL(<lfs_log_msg>).
         IF <lfs_log_msg> IS ASSIGNED.
         <lfs_log_msg>-docnum = s_docnum-low.
