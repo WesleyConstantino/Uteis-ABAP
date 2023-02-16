@@ -5,14 +5,17 @@
 *&---------------------------------------------------------------------*
 DATA lr_matnr TYPE RANGE OF mara-matnr.
 
-
+*&---------------------------------------------------------------------*
+*                            Workareas                                 *
+*&---------------------------------------------------------------------*
 DATA ln_matnr LIKE LINE OF lr_matnr.
-ln_matnr-sign = 'I'. "pode ser I ou E
-ln_matnr-option = 'BT'. "EQ, BT, CP
-ln_matnr-low = '10'.
-ln_matnr-high = '50'.
-APPEND ln_matnr TO lr_matnr.
-CLEAR ln_matnr.
+
+*&---------------------------------------------------------------------*
+*&      Form  ZF_SELECT
+*&---------------------------------------------------------------------*
+FORM zf_selecto.
+PERFORM zf_range_estrutura.
+
 IF lr_matnr IS NOT INITIAL.
   SELECT *
     FROM mara
@@ -20,6 +23,21 @@ IF lr_matnr IS NOT INITIAL.
     WHERE matnr in @lr_matnr.
 ENDIF.
 
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  ZF_RANGE_ESTRUTURA
+*&---------------------------------------------------------------------*
+FORM zf_range_estrutura.
+
+ln_matnr-sign = 'I'. "pode ser I ou E
+ln_matnr-option = 'BT'. "EQ, BT, CP
+ln_matnr-low = '10'.
+ln_matnr-high = '50'.
+APPEND ln_matnr TO lr_matnr.
+CLEAR ln_matnr.
+
+ENDFORM.
 
 
  
