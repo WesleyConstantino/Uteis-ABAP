@@ -18,7 +18,7 @@ IF lr_matnr IS NOT INITIAL.
   SELECT *
     FROM mara
     INTO TABLE @DATA(lt_mara)
-    WHERE matnr in @lr_matnr.
+    WHERE matnr in @lr_matnr. "Aqui meu SELECT puxará o matnr entre 10 e 50. Valores que foram declarados na estrutura do Range
 ENDIF.
 
 ENDFORM.
