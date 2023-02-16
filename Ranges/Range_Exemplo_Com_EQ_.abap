@@ -28,7 +28,6 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 FORM zf_range_estrutura.
 
-
 ln_matnr-sign = 'I'.
 ln_matnr-option = 'EQ'.
 ln_matnr-low = '10'.
