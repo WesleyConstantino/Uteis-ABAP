@@ -32,7 +32,8 @@ ln_matnr-sign = 'I'. "pode ser I ou E
 ln_matnr-option = 'BT'. "EQ, BT, CP
 ln_matnr-low = '10'.
 ln_matnr-high = '50'.
-APPEND ln_matnr TO lr_matnr.
+
+APPEND ln_matnr TO lr_matnr. "Sempre que quiser criar uma linha no Range, dou uma Append, caso contrário ele fica vazio.
 CLEAR ln_matnr.
 
 ENDFORM.
