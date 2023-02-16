@@ -1,7 +1,11 @@
 "O Range é um intervalo "de até"
 
-
+*&---------------------------------------------------------------------*
+*                              Ranges                                  *
+*&---------------------------------------------------------------------*
 DATA lr_matnr TYPE RANGE OF mara-matnr.
+
+
 DATA ln_matnr LIKE LINE OF lr_matnr.
 ln_matnr-sign = 'I'. "pode ser I ou E
 ln_matnr-option = 'BT'. "EQ, BT, CP
