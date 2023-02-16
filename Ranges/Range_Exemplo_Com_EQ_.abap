@@ -32,15 +32,19 @@ ln_matnr-sign = 'I'.
 ln_matnr-option = 'EQ'.
 ln_matnr-low = '10'.
 APPEND ln_matnr TO lr_matnr.
+
 ln_matnr-low = '20'.
 APPEND ln_matnr TO lr_matnr.
+
 ln_matnr-low = '30'.
 APPEND ln_matnr TO lr_matnr.
+
 ln_matnr-low = '40'.
 APPEND ln_matnr TO lr_matnr.
-ln_matnr-low = '9999'.
 
+ln_matnr-low = '9999'.
 APPEND ln_matnr TO lr_matnr.
+
 CLEAR ln_matnr.
 
 ENDFORM.
