@@ -28,8 +28,8 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 FORM zf_range_estrutura.
 
-ln_matnr-sign = 'I'. "pode ser I ou E
-ln_matnr-option = 'BT'. "EQ, BT, CP
+ln_matnr-sign = 'I'. 
+ln_matnr-option = 'BT'. 
 ln_matnr-low = '10'.
 ln_matnr-high = '50'.
 
