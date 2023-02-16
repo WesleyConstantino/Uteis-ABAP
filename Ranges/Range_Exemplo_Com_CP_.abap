@@ -6,7 +6,7 @@ ln_matnr-option = 'CP'.
 ln_matnr-low = '*10*'. "Aqui no low, passo o padrão que quero que seja verificado, neste caso, que contenha a sequência de "10", podendo 
                        "ser em quanter posição. Para auternar a posição que quero ter meu padrão, uso o "*". Caso passe o valor low = '10*',
                        "estou dizendo que meu intervalo tem que iniciar com "10", sem importar o que vem depois; caso passe o valor low = '*10',
-                       estarei dizendo que quero um intervalo que apenas termine em "10", sem importar o que tem no começo.
+                       "estarei dizendo que quero um intervalo que apenas termine em "10", sem importar o que tem no começo.
 
 ********************************************************************************************************************************************************
 ********************************************************************************************************************************************************
