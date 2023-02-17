@@ -9,7 +9,8 @@
                                                option = 'EQ'
                                                low = ls_mara-matnr  ) ).
                                                
- " 
+ "Ao final da execussão, teremos um range com o mesmo número de linhas que a da tabela interna; Os valores de sign e option serão os mesmos para todas as
+ "linha, o que vai mudar de linha pra linha é só o valor do low.
 
 
 ********************************************************************************************************************************************************
