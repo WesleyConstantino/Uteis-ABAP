@@ -12,7 +12,7 @@ DATA lr_matnr TYPE RANGE OF mara-matnr.
 *&---------------------------------------------------------------------*
 *&      Form  ZF_SELECT
 *&---------------------------------------------------------------------*
-FORM zf_selecto.
+FORM zf_select.
 PERFORM zf_preenche_range.
 
 SELECT *
