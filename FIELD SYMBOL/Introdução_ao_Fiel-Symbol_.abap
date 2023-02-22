@@ -1,6 +1,9 @@
 *Introdução ao Field-Symbol:
 "Os Field-Symbols funcionam como uma de workarea
 
+"------------------------------------------------
+"Exemplo de trecho de código:--------------------
+
 "Declaração:
 FIELD-SYMBOLS <fs_out> TYPE ty_out.  
 "----------------------------------
