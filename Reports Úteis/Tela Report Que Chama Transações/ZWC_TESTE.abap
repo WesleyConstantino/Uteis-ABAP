@@ -18,15 +18,15 @@ REPORT  ZWC_TESTE.
 
 TABLES: sscrfields.
 
-SELECTION-SCREEN PUSHBUTTON /20(40) btt01 USER-COMMAND btt01. "A barra "/" pula uma linha
+SELECTION-SCREEN PUSHBUTTON /20(40) btt01 USER-COMMAND btt01. "btt01 é o nome deste botão
 SELECTION-SCREEN SKIP.
 SELECTION-SCREEN PUSHBUTTON 20(40) btt02 USER-COMMAND btt02.
 
 INITIALIZATION.
-  btt01 = 'BOTÃO EM BLOCO 1'.
+  btt01 = 'BOTÃO EM BLOCO 1'. "'BOTÃO EM BLOCO 1' é o texto do botão que ficará visivel para o usuário
   btt02 = 'BOTÃO EM BLOCO 2'.
 AT SELECTION-SCREEN.
-  CASE sscrfields-ucomm.
+  CASE sscrfields-ucomm. 
     WHEN 'BTT01'.
       CALL TRANSACTION 'SE38'.
     WHEN 'BTT02'.
