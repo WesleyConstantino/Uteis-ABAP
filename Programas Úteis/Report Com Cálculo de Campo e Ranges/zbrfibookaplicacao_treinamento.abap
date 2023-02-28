@@ -32,7 +32,7 @@ TYPES:
          montan_b          TYPE bseg-dmbtr,
          irrf              TYPE bseg-dmbtr,
          iof               TYPE bseg-dmbtr,
-         saknr             TYPE bseg-saknr,
+         hkont             TYPE bseg-hkont,
        END OF ty_out,
 *------* ty_ZBRFIRENDIMENTO
       BEGIN OF ty_zbrfirendimento,
@@ -40,7 +40,7 @@ TYPES:
          saknr_4 TYPE zbrfirendimento-saknr_4,
          saknr_1 TYPE zbrfirendimento-saknr_1,
          blart   TYPE zbrfirendimento-blart,
-        bukrs    TYPE zbrfirendimento-bukrs,
+         bukrs   TYPE zbrfirendimento-bukrs,
        END OF ty_zbrfirendimento,
 *------* ty_BKPF
       BEGIN OF ty_bkpf,
@@ -57,14 +57,13 @@ TYPES:
          gjahr TYPE bseg-gjahr,
          hkont TYPE bseg-hkont,
          bschl TYPE bseg-bschl,
-         saknr TYPE bseg-saknr,
          belnr TYPE bseg-belnr,
        END OF ty_bseg.
 
 *&---------------------------------------------------------------------*
 *                              Ranges                                  *
 *&---------------------------------------------------------------------*
-DATA lr_saknr TYPE RANGE OF zbrfirendimento-saknr_1.
+DATA gr_hkont TYPE RANGE OF bseg-hkont.
 
 *&---------------------------------------------------------------------*
 *                        Tabelas Internas                              *
@@ -81,16 +80,16 @@ DATA: wa_out                  LIKE LINE OF t_out,
       wa_zbrfirendimento      LIKE LINE OF t_zbrfirendimento,
       wa_bkpf                 LIKE LINE OF t_bkpf,
       wa_bseg                 LIKE LINE OF t_bseg,
-      wa_saknr                LIKE LINE OF lr_saknr.
+      wa_hkont                LIKE LINE OF gr_hkont.
 
 *&---------------------------------------------------------------------*
 *                         Tela de seleção                              *
 *&---------------------------------------------------------------------*
 SELECTION-SCREEN BEGIN OF BLOCK b0 WITH FRAME TITLE text-000.
 
-SELECT-OPTIONS: s_bukrs  FOR t001-bukrs NO-EXTENSION NO INTERVALS,
+SELECT-OPTIONS: s_belnr  FOR bkpf-belnr NO-EXTENSION NO INTERVALS,
                 s_budat  FOR bkpf-budat NO-EXTENSION NO INTERVALS,
-                s_belnr  FOR bkpf-belnr NO-EXTENSION NO INTERVALS,
+                s_bukrs  FOR t001-bukrs NO-EXTENSION NO INTERVALS,
                 s_gjahr  FOR bkpf-gjahr NO-EXTENSION NO INTERVALS.
 
 SELECTION-SCREEN END OF BLOCK b0.
@@ -118,8 +117,6 @@ FORM zf_select.
 
   IF t_zbrfirendimento IS NOT INITIAL.
 
-    PERFORM zf_range_estrutura.
-
 *------* bkpf
     SELECT bukrs
            belnr
@@ -135,13 +132,14 @@ FORM zf_select.
 
     IF t_bkpf IS NOT INITIAL.
 
+      PERFORM zf_range_estrutura.
+
 *------* bseg
       SELECT dmbtr
              bukrs
              gjahr
              hkont
              bschl
-             saknr
              belnr
       INTO TABLE t_bseg
       FROM bseg
@@ -149,7 +147,7 @@ FORM zf_select.
       WHERE bukrs = t_bkpf-bukrs AND
             gjahr = t_bkpf-gjahr AND
             belnr = t_bkpf-belnr AND
-            hkont IN lr_saknr.
+            hkont IN gr_hkont.
 
       DELETE t_bseg WHERE bschl <> '40'.
 
@@ -174,30 +172,43 @@ FORM zf_monta_t_out .
     wa_out-gjahr = wa_bkpf-gjahr.
     wa_out-budat = wa_bkpf-budat.
 
+
     READ TABLE t_bseg INTO wa_bseg WITH KEY bukrs = wa_bkpf-bukrs
+                                            belnr = wa_bkpf-belnr
                                             gjahr = wa_bkpf-gjahr.
+
     IF sy-subrc IS INITIAL.
+      wa_out-hkont = wa_bseg-hkont.
 
-      wa_out-saknr        = wa_bseg-saknr.
+      READ TABLE t_zbrfirendimento INTO wa_zbrfirendimento WITH KEY bukrs = wa_bseg-bukrs
+                                                                    saknr_1 = wa_bseg-hkont.
 
-      IF wa_bseg-hkont EQ wa_zbrfirendimento-saknr_1.
-        wa_out-montan   = wa_bseg-hkont.
-        wa_out-montan_b = wa_out-iof - wa_out-montan.
-      ENDIF.
+      IF sy-subrc IS INITIAL.
 
-      IF wa_bseg-hkont EQ wa_zbrfirendimento-saknr_3.
-        wa_out-irrf = wa_bseg-hkont.
-      ENDIF.
+        LOOP AT t_bseg INTO wa_bseg.
+          IF wa_bseg-belnr EQ wa_bkpf-belnr.
 
-      IF wa_bseg-hkont EQ wa_zbrfirendimento-saknr_4.
-        wa_out-iof = wa_bseg-hkont.
-      ENDIF.
-    ENDIF. "t_bseg
+            IF wa_bseg-hkont EQ wa_zbrfirendimento-saknr_1.
+              wa_out-montan   = wa_bseg-dmbtr.
+            ENDIF.
+
+            IF wa_bseg-hkont EQ wa_zbrfirendimento-saknr_3.
+              wa_out-irrf = wa_bseg-dmbtr.
+            ENDIF.
+
+            IF wa_bseg-hkont EQ wa_zbrfirendimento-saknr_4.
+              wa_out-iof = wa_bseg-dmbtr.
+            ENDIF.
+          ENDIF.
+        ENDLOOP.
+        wa_out-montan_b = wa_out-montan - wa_out-iof.
+      ENDIF. "t_bseg
+    ENDIF. "t_zbrfirendimento
 
     APPEND wa_out TO t_out.
     CLEAR: wa_out,
-            wa_bkpf,
-            wa_bseg.
+           wa_bkpf,
+           wa_bseg.
   ENDLOOP.
 ENDFORM.                    "zf_monta_t_out
 
@@ -206,26 +217,26 @@ ENDFORM.                    "zf_monta_t_out
 *&---------------------------------------------------------------------*
 FORM zf_range_estrutura.
 
-  wa_saknr-sign = 'I'.
-  wa_saknr-option = 'EQ'.
+  wa_hkont-sign = 'I'.
+  wa_hkont-option = 'EQ'.
 
   LOOP AT t_zbrfirendimento INTO wa_zbrfirendimento.
 
-    wa_saknr-low = wa_zbrfirendimento-saknr_3.
-    APPEND wa_saknr TO lr_saknr.
+    wa_hkont-low = wa_zbrfirendimento-saknr_3.
+    APPEND wa_hkont TO gr_hkont.
 
-    wa_saknr-low = wa_zbrfirendimento-saknr_4.
-    APPEND wa_saknr TO lr_saknr.
+    wa_hkont-low = wa_zbrfirendimento-saknr_4.
+    APPEND wa_hkont TO gr_hkont.
 
-    wa_saknr-low = wa_zbrfirendimento-saknr_1.
-    APPEND wa_saknr TO lr_saknr.
+    wa_hkont-low = wa_zbrfirendimento-saknr_1.
+    APPEND wa_hkont TO gr_hkont.
 
-    CLEAR wa_saknr-low.
+    CLEAR wa_hkont-low.
 
   ENDLOOP.
 
-  SORT lr_saknr BY low.
-  DELETE ADJACENT DUPLICATES FROM lr_saknr.
+  SORT gr_hkont BY low.
+  DELETE ADJACENT DUPLICATES FROM gr_hkont.
 
 ENDFORM.                    "zf_range_estrutura
 
@@ -238,7 +249,8 @@ FORM zf_exibe_alv_poo.
         lo_header    TYPE REF TO cl_salv_form_layout_grid,   "Para criação do header
         lo_columns   TYPE REF TO cl_salv_columns_table,  "Ajustar tamanho dos subtítulos
         lo_functions TYPE REF TO cl_salv_functions,
-        lo_display   TYPE REF TO cl_salv_display_settings.
+        lo_display   TYPE REF TO cl_salv_display_settings,
+        lo_column    TYPE REF TO cl_salv_column.
 
 
   TRY.
@@ -260,6 +272,14 @@ FORM zf_exibe_alv_poo.
 
       lo_columns = lo_table->get_columns( ). "Ajustar tamanho dos subtítulos
       lo_columns->set_optimize( abap_true ). "Ajustar tamanho dos subtítulos
+
+*--------* Mudar nomes
+      lo_column ?= lo_columns->get_column( 'BUKRS' ). "?= Down Casting: Converte o que estiver vindo do lado direito para o esquerdo.
+      lo_column->set_short_text( 'Empresa' ).
+      lo_column->set_medium_text( 'Empresa' ).
+      lo_column->set_long_text( 'Empresa' ).
+
+
 
       lo_table->display( ) . "O dispay é fundamental para a exibição do ALV
 
