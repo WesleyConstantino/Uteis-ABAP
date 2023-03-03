@@ -1,5 +1,7 @@
 *Exemplo simples de como funciona a orientação a objetos no Abap
 
+*****************************************************
+
 "Definição da classe
 CLASS lcl_ola_mundo DEFINITION.
   PUBLIC SECTION.
@@ -7,15 +9,16 @@ CLASS lcl_ola_mundo DEFINITION.
       dizer_ola_mundo.
 ENDCLASS.
 
-***********************************************
+*****************************************************
 
+"Chamada da classe e utilização do método no programa
 START-OF-SELECTION.
   DATA: lo_ola_mundo TYPE REF TO lcl_ola_mundo.
 
   CREATE OBJECT lo_ola_mundo.
   lo_ola_mundo->dizer_ola_mundo( ).
-
-***********************************************
+  
+*****************************************************
 
 "Implementação da classe
 CLASS lcl_ola_mundo IMPLEMENTATION.
