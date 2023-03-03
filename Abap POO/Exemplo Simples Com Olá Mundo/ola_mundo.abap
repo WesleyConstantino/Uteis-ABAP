@@ -1,4 +1,4 @@
-Exemplo simples de como funciona a orientação a objetos no Abap
+*Exemplo simples de como funciona a orientação a objetos no Abap
 
 "Definição da classe
 CLASS lcl_ola_mundo DEFINITION.
