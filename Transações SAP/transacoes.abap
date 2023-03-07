@@ -5,4 +5,4 @@ SE80 - Criação e visualização de programas em geral.
 SE09 - Criação e visualização de requests.
 SE24 - Criação e visualização de classes.
 SE93 - Criação e transações.
-ZDOC_CREATE - Criação de cocumentação.
+ZDOC_CREATE - Criação de documentação.
