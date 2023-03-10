@@ -18,3 +18,7 @@
            "PASSO 3: Devemos adicionar o evento AT SELECTION-SCREEN OUTPUT, esse evento reconhecerá as mudanças de cliques dos Radio Buttons em tempo real.
             "Exemplo do PASSO 3:
              AT SELECTION-SCREEN OUTPUT.
+             
+           "PASSO 4:
+            "Exemplo do PASSO 4:
+             AT SELECTION-SCREEN OUTPUT.
