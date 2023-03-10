@@ -33,4 +33,11 @@
               ENDLOOP.
              ENDFORM.
               
+           "PASSO 6: 
+            "Exemplo do PASSO 6:
+             FORM modifica_tela .
+              LOOP AT SCREEN.  
+              
+              ENDLOOP.
+             ENDFORM.
 
