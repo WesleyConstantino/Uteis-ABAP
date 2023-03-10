@@ -1,4 +1,4 @@
-*Explicação: para criar um checkbox, basta declará-lo no PARAMETERS tipando-o com um char de uma posição deguido da declaração "AS CHECKBOX".
+*Explicação: para criar um checkbox, basta declará-lo no PARAMETERS tipando-o com um char de uma posição seguido da declaração "AS CHECKBOX".
             "Caso queira que um dos checkboxs fique flegado por padrão, adiciono "DEFAULT 'X'".
             
  
