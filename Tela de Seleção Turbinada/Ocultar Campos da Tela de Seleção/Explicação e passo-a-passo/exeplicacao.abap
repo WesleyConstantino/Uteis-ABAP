@@ -137,7 +137,7 @@
             
             
             
-           "PASSO 9: Antes de fechar o meu LOOP AT, preciso dar um MODIFY SCREEN para que as atualizações de visibilidade funcione nos campos.
+           "PASSO 9: Antes de fechar o meu LOOP AT, preciso dar um MODIFY SCREEN para que as atualizações de visibilidade funcione nos campos. Feito isso, está pronto!
             "Exemplo do PASSO 9: 
              FORM modifica_tela .
               LOOP AT SCREEN.  
@@ -152,33 +152,33 @@
              "PARAMETERS
              IF rb_param EQ 'X'.
              
-             IF screen-group1 EQ 'PRM'.                    "<<<< ADICIONADO NESTE PASSO
-               screen-invisible = 0.                       "<<<< ADICIONADO NESTE PASSO
-               screen-input     = 1.                       "<<<< ADICIONADO NESTE PASSO
-               screen-active    = 1.                       "<<<< ADICIONADO NESTE PASSO
-              ENDIF.                                       "<<<< ADICIONADO NESTE PASSO
+             IF screen-group1 EQ 'PRM'.                   
+               screen-invisible = 0.                       
+               screen-input     = 1.                     
+               screen-active    = 1.                       
+              ENDIF.                                       
 
-             IF screen-group1 EQ 'SLC'.                    "<<<< ADICIONADO NESTE PASSO
-                screen-invisible = 1.                      "<<<< ADICIONADO NESTE PASSO
-                screen-input     = 0.                      "<<<< ADICIONADO NESTE PASSO
-                screen-active    = 0.                      "<<<< ADICIONADO NESTE PASSO
-             ENDIF.                                        "<<<< ADICIONADO NESTE PASSO
+             IF screen-group1 EQ 'SLC'.                    
+                screen-invisible = 1.                      
+                screen-input     = 0.                      
+                screen-active    = 0.                      
+             ENDIF.                                        
              
              ENDIF.
 
             "SELECT-OPTIONS
             IF rb_sl_op EQ 'X'.
 
-             IF screen-group1 EQ 'SLC'.                    "<<<< ADICIONADO NESTE PASSO
-               screen-invisible = 0.                       "<<<< ADICIONADO NESTE PASSO
-               screen-input     = 1.                       "<<<< ADICIONADO NESTE PASSO
-               screen-active    = 1.                       "<<<< ADICIONADO NESTE PASSO
-              ENDIF.                                       "<<<< ADICIONADO NESTE PASSO
+             IF screen-group1 EQ 'SLC'.               
+               screen-invisible = 0.                    
+               screen-input     = 1.                    
+               screen-active    = 1.                    
+              ENDIF.                         
 
-             IF screen-group1 EQ 'PRM'.                    "<<<< ADICIONADO NESTE PASSO
-                screen-invisible = 1.                      "<<<< ADICIONADO NESTE PASSO
-                screen-input     = 0.                      "<<<< ADICIONADO NESTE PASSO
-                screen-active    = 0.                      "<<<< ADICIONADO NESTE PASSO
+             IF screen-group1 EQ 'PRM'.              
+                screen-invisible = 1.                
+                screen-input     = 0.                   
+                screen-active    = 0.                      
              ENDIF.                                        
              
              ENDIF.
