@@ -138,7 +138,7 @@
             
             
             
-           "PASSO 9: Antes de fechar o meu LOOP AT, preciso dar um MODIFY SCREEN para que as atualizações de visibilidade funcione nos campos. Feito isso, está pronto!
+           "PASSO 9: Antes de fechar o meu LOOP AT, preciso dar um MODIFY SCREEN para que as atualizações de visibilidade funcione nos campos.
             "Exemplo do PASSO 9: 
              FORM modifica_tela .
               LOOP AT SCREEN.  
@@ -189,6 +189,10 @@
             ENDLOOP.
             ENDFORM.
 
+           "PASSO 10: Para finalizar, preciso chamar o PERFORM modifica_tela embaixo do comando AT SELECTION-SCREEN OUTPUT, comando que adicionamos no PASSO 3. Agora está pronto!
+            "Exemplo do PASSO 10:
+            AT SELECTION-SCREEN OUTPUT.
+            PERFORM modifica_tela.                       "<<<< ADICIONADO NESTE PASSO
 
 
 
