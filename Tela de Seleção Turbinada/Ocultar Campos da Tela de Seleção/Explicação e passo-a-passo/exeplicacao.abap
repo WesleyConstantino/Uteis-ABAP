@@ -53,6 +53,6 @@
 
             ENDIF.
               
-              ENDLOOP.
-             ENDFORM.
+            ENDLOOP.
+            ENDFORM.
 
