@@ -81,4 +81,29 @@
               
             ENDLOOP.
             ENDFORM.
+            
+            "PASSO 8: 
+            "Exemplo do PASSO 8: 
+             FORM modifica_tela .
+              LOOP AT SCREEN.  
+              
+              "Todos
+              IF rb_todos EQ 'X'.
+              IF screen-group1 EQ 'PRM' OR screen-group1 EQ 'SLC'.   
+               screen-invisible = 0.                                 
+              ENDIF.                                                 "<<<< ADICIONADO NESTE PASSO
+              ENDIF.
+
+             "PARAMETERS
+             IF rb_param EQ 'X'.
+
+             ENDIF.
+
+            "SELECT-OPTIONS
+            IF rb_sl_op EQ 'X'.
+
+            ENDIF.
+              
+            ENDLOOP.
+            ENDFORM.
 
