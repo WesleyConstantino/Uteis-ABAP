@@ -10,7 +10,7 @@
             "Trecho usado como exemplo no PASSO-A-PASSO 3: 
             SELECTION-SCREEN COMMENT 14(6) text-005 FOR FIELD rb_opened.
             
-            "PASSO 4:
+            "PASSO 4: Após a intrução "FOR FIELD" passo o nome do radiobutton que desejo fazer essas alterações, como no trecho de código acima. E pronto!
    
  
 *-------------------* Trecho de código real:
