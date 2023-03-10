@@ -6,7 +6,7 @@
             "PASSO 3:
    
  
- *-------------------* Trecho de código real:
+*-------------------* Trecho de código real:
 SELECTION-SCREEN BEGIN OF LINE.
 PARAMETERS: rb_all RADIOBUTTON GROUP gr1 DEFAULT 'X'.
 SELECTION-SCREEN COMMENT 5(5) text-004 FOR FIELD rb_all.
