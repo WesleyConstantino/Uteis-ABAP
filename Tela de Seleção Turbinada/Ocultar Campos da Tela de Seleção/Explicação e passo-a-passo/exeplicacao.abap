@@ -4,6 +4,8 @@
             "Exemplo do PASSO 1:
              PARAMETERS: p_vbeln TYPE vbak-vbeln MODIF ID prm.
              
+             SELECT-OPTIONS: s_erdat FOR vbak-erdat MODIF ID slc.
+             
            "PASSO 2: Devemos criar os Radio Buttons para fazerem o filtro dos campos que desejamos ocultar.
             "Exemplo do PASSO 2:
              SELECTION-SCREEN BEGIN OF LINE.
