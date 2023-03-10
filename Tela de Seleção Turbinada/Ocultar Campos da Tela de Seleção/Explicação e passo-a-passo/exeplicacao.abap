@@ -24,3 +24,13 @@
              FORM modifica_tela .
              
              ENDFORM.
+             
+           "PASSO 5: Escrever a lógica do form, para que ele possa mudar a visibilidade dos campos. Primeiro faço um LOOP AT na tela "SCREEN".
+            "Exemplo do PASSO 5:
+             FORM modifica_tela .
+              LOOP AT SCREEN.  
+              
+              ENDLOOP.
+             ENDFORM.
+              
+
