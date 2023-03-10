@@ -14,3 +14,6 @@
              PARAMETERS: rb_sl_op RADIOBUTTON GROUP g1.
              SELECTION-SCREEN COMMENT 30(14) text-005 FOR FIELD rb_sl_op.
              SELECTION-SCREEN END OF LINE.
+             
+           "PASSO 3: Devemos criar os Radio Buttons para fazerem o filtro dos campos que desejamos ocultar.
+            "Exemplo do PASSO 3:
