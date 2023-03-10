@@ -21,4 +21,6 @@
              
            "PASSO 4: Criar um form para mudar a visibilidades dos campos conforme o Radio Button flegado.
             "Exemplo do PASSO 4:
-             AT SELECTION-SCREEN OUTPUT.
+             FORM modifica_tela .
+             
+             ENDFORM.
