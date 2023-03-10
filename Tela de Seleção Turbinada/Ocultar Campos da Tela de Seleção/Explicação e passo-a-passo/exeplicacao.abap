@@ -33,7 +33,7 @@
               ENDLOOP.
              ENDFORM.
               
-           "PASSO 6: 
+           "PASSO 6: Adiciono uma condicional para verificar qual RADIOBUTTON está flegado.
             "Exemplo do PASSO 6:
              FORM modifica_tela .
               LOOP AT SCREEN.  
