@@ -48,7 +48,6 @@ FORM modifica_tela .
 
 *PARAMETERS
     IF rb_param EQ 'X'.
-
       IF screen-group1 EQ 'PRM'.
         screen-invisible = 0.
         screen-input     = 1.
