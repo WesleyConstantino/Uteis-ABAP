@@ -82,7 +82,7 @@
             ENDLOOP.
             ENDFORM.
             
-            "PASSO 8: 
+           "PASSO 8: Implemento a lógica dos outros RADIOBUTTONS, sempre desativando o screen-invisible dele e ativando o do outro.
             "Exemplo do PASSO 8: 
              FORM modifica_tela .
               LOOP AT SCREEN.  
