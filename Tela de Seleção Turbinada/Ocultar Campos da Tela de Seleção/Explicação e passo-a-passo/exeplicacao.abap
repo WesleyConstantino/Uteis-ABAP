@@ -134,4 +134,60 @@
               
             ENDLOOP.
             ENDFORM.
+            
+            
+            
+           "PASSO 9: Antes de fechar o meu LOOP AT, preciso dar um MODIFY SCREEN para que as atualizações de visibilidade funcione nos campos.
+            "Exemplo do PASSO 9: 
+             FORM modifica_tela .
+              LOOP AT SCREEN.  
+              
+              "Todos
+              IF rb_todos EQ 'X'.
+              IF screen-group1 EQ 'PRM' OR screen-group1 EQ 'SLC'.   
+               screen-invisible = 0.                                 
+              ENDIF.                         
+              ENDIF.
+
+             "PARAMETERS
+             IF rb_param EQ 'X'.
+             
+             IF screen-group1 EQ 'PRM'.                    "<<<< ADICIONADO NESTE PASSO
+               screen-invisible = 0.                       "<<<< ADICIONADO NESTE PASSO
+               screen-input     = 1.                       "<<<< ADICIONADO NESTE PASSO
+               screen-active    = 1.                       "<<<< ADICIONADO NESTE PASSO
+              ENDIF.                                       "<<<< ADICIONADO NESTE PASSO
+
+             IF screen-group1 EQ 'SLC'.                    "<<<< ADICIONADO NESTE PASSO
+                screen-invisible = 1.                      "<<<< ADICIONADO NESTE PASSO
+                screen-input     = 0.                      "<<<< ADICIONADO NESTE PASSO
+                screen-active    = 0.                      "<<<< ADICIONADO NESTE PASSO
+             ENDIF.                                        "<<<< ADICIONADO NESTE PASSO
+             
+             ENDIF.
+
+            "SELECT-OPTIONS
+            IF rb_sl_op EQ 'X'.
+
+             IF screen-group1 EQ 'SLC'.                    "<<<< ADICIONADO NESTE PASSO
+               screen-invisible = 0.                       "<<<< ADICIONADO NESTE PASSO
+               screen-input     = 1.                       "<<<< ADICIONADO NESTE PASSO
+               screen-active    = 1.                       "<<<< ADICIONADO NESTE PASSO
+              ENDIF.                                       "<<<< ADICIONADO NESTE PASSO
+
+             IF screen-group1 EQ 'PRM'.                    "<<<< ADICIONADO NESTE PASSO
+                screen-invisible = 1.                      "<<<< ADICIONADO NESTE PASSO
+                screen-input     = 0.                      "<<<< ADICIONADO NESTE PASSO
+                screen-active    = 0.                      "<<<< ADICIONADO NESTE PASSO
+             ENDIF.                                        
+             
+             ENDIF.
+
+            ENDIF.
+            MODIFY SCREEN.                                 "<<<< ADICIONADO NESTE PASSO
+            ENDLOOP.
+            ENDFORM.
+
+
+
 
