@@ -1,7 +1,10 @@
-*Explicação: para coloca os RADIOBUTTONs na horizontal, preciso inicialmente colocá-lo dentro de um SELECTION-SCREEN BEGIN OF LINE. Isso fará com que ele fique em linha 
-             "horizontal, porém sem os textos.
-           " para adicionar os textos, primeiro preciso fazer um "PARAMETERS:" para cada um dos radiobuttons; após isso, 
+*Explicação:  
+             "PASSO 1: preciso inicialmente colocá-lo dentro de um SELECTION-SCREEN BEGIN OF LINE. Isso fará com que ele fique em linha horizontal, porém sem os textos.
+             
+            "PASSO 2: para adicionar os textos, primeiro preciso fazer um "PARAMETERS:" para cada um dos radiobuttons.
             
+            "PASSO 3:
+   
  
  *-------------------* Trecho de código real:
 SELECTION-SCREEN BEGIN OF LINE.
