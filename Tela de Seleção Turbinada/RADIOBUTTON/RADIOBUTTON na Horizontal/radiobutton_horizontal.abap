@@ -6,7 +6,11 @@
             "PASSO 3: Abaixo de cada PARAMETERS dos meus RADIOBUTTONS preciso declarar um "SELECTION-SCREEN COMMENT" seguido de "14(6)", que representa (o primeiro número,
             "14, representa onde o radiobutton e o texto vão começar na linha da tela; já o segundo número, "(6)" representa a quantidade de caracteres do meu text-005,
             "declarados nos elementos de texto, a palavra declarada lá foi "aberto").
-            "Trecho que usei como exemplo: SELECTION-SCREEN COMMENT 14(6) text-005 FOR FIELD rb_opened.
+            
+            "Trecho usado como exemplo no PASSO-A-PASSO 3: 
+            SELECTION-SCREEN COMMENT 14(6) text-005 FOR FIELD rb_opened.
+            
+            "PASSO 4:
    
  
 *-------------------* Trecho de código real:
