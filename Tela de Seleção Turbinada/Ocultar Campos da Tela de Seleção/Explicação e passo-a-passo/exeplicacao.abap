@@ -15,5 +15,6 @@
              SELECTION-SCREEN COMMENT 30(14) text-005 FOR FIELD rb_sl_op.
              SELECTION-SCREEN END OF LINE.
              
-           "PASSO 3: Devemos criar os Radio Buttons para fazerem o filtro dos campos que desejamos ocultar.
+           "PASSO 3: Devemos adicionar o evento AT SELECTION-SCREEN OUTPUT, esse evento reconhecerá as mudanças de cliques dos Radio Buttons.
             "Exemplo do PASSO 3:
+            AT SELECTION-SCREEN OUTPUT.
