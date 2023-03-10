@@ -42,7 +42,7 @@ FORM modifica_tela .
 *Todos
     IF rb_todos EQ 'X'.
       IF screen-group1 EQ 'PRM' OR screen-group1 EQ 'SLC'.
-        screen-invisible = 0.
+        screen-invisible = 0.  "O volor 0 deixa a invisibibilidade desativada, e o valor 1 ativa. Isso serve para todos os campos de screen.
       ENDIF.
     ENDIF.
 
