@@ -59,8 +59,26 @@
            "PASSO 7: Digo que para onde meu screen-group1 for igual aos IDs modificados no PASSO 1, quero o screen-invisible = 0, ou seja, a invisibilidade desativada.
                     "Obs: screen, possuí vários campos, onde passarmos como valor o 0, ficará desativado e onde passarmos o 1, ficará ativado.
             "Exemplo do PASSO 7: 
-             IF screen-group1 EQ 'PRM' OR screen-group1 EQ 'SLC'.
-               screen-invisible = 0.  "O volor 0 deixa a invisibibilidade desativada, e o valor 1 ativa. Isso serve para todos os campos de screen.
+             FORM modifica_tela .
+              LOOP AT SCREEN.  
+              
+              "Todos
+              IF rb_todos EQ 'X'.
+              IF screen-group1 EQ 'PRM' OR screen-group1 EQ 'SLC'.   "<<<< ADICIONADO NESTE PASSO
+               screen-invisible = 0.                                 "<<<< ADICIONADO NESTE PASSO
+              ENDIF.                                                 "<<<< ADICIONADO NESTE PASSO
+              ENDIF.
+
+             "PARAMETERS
+             IF rb_param EQ 'X'.
+
              ENDIF.
 
+            "SELECT-OPTIONS
+            IF rb_sl_op EQ 'X'.
+
+            ENDIF.
+              
+            ENDLOOP.
+            ENDFORM.
 
