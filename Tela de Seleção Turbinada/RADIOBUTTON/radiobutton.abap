@@ -2,7 +2,7 @@
             "Em uma tela podem existir mais de um grupo de RADIOBUTTONs, tendo que coter no mínimo 2 RADIOBUTTONs por grupo.
             
  
- *-------------------* Trecho de código real:
+*-------------------* Trecho de código real:
 "Declaração:
 PARAMETERS: rb_todos RADIOBUTTON GROUP gr1 DEFAULT 'X',
             rb_matnr RADIOBUTTON GROUP gr1,
