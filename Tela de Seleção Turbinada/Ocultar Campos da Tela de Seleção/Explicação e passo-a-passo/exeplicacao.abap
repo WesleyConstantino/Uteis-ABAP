@@ -83,7 +83,8 @@
             ENDFORM.
             
            "PASSO 8: Implemento a lógica dos outros RADIOBUTTONS, sempre desativando o screen-invisible dele e ativando o do outro. Além disso, para ocutar compos 
-                    "precisaremos usar mais dois campos do screen, o screen-input e screen-active; 
+                    "precisaremos usar mais dois campos do screen, o screen-input e screen-active; para os dois, devo passar o valor 1(ATIVAR) quando quiser que o
+                    "campo da tela de selecão seja mostrado e o valor 0(DESATIVADO) quando quiser que seja ocultado.
             "Exemplo do PASSO 8: 
              FORM modifica_tela .
               LOOP AT SCREEN.  
