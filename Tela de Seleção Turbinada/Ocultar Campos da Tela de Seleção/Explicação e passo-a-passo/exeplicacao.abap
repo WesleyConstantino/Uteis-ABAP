@@ -56,7 +56,11 @@
             ENDLOOP.
             ENDFORM.
             
-           "PASSO 7: 
-            "Exemplo do PASSO 7:
+           "PASSO 7: Digo que para onde meu screen-group1 for igual aos IDs modificados no PASSO 1, quero o screen-invisible = 0, ou seja, a invisibilidade desativada.
+                    "Obs: screen, possuí vários campos, onde passarmos como valor o 0, ficará desativado e onde passarmos o 1, ficará ativado.
+            "Exemplo do PASSO 7: 
+             IF screen-group1 EQ 'PRM' OR screen-group1 EQ 'SLC'.
+               screen-invisible = 0.  "O volor 0 deixa a invisibibilidade desativada, e o valor 1 ativa. Isso serve para todos os campos de screen.
+             ENDIF.
 
 
