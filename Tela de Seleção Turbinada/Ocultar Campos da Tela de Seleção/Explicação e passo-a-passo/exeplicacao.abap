@@ -17,6 +17,7 @@
              SELECTION-SCREEN END OF LINE.
              
 *---------*PASSO 3: Devemos adicionar o evento AT SELECTION-SCREEN OUTPUT, esse evento reconhecerá as mudanças de cliques dos Radio Buttons em tempo real.
+                   "Esee comando deverá ser adicionado após a tela de seleção.
             "Exemplo do PASSO 3:
              AT SELECTION-SCREEN OUTPUT.
              
