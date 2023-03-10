@@ -31,9 +31,8 @@ SELECTION-SCREEN END OF LINE.
 SELECTION-SCREEN END OF BLOCK b0.
 
 "Evento para reconhecer os ciques do radiobutton e mudar as telas
-
 AT SELECTION-SCREEN OUTPUT.
-  PERFORM modifica_tela.
+  PERFORM modifica_tela. "O perform para ocultar os campos deve estar logo abaixo do evento AT SELECTION-SCREEN OUTPUT
 
 *&---------------------------------------------------------------------*
 *&      Form  MODIFICA_TELA
