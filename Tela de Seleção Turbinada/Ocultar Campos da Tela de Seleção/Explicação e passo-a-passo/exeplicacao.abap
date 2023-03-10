@@ -38,6 +38,21 @@
              FORM modifica_tela .
               LOOP AT SCREEN.  
               
+              "Todos
+              IF rb_todos EQ 'X'.
+
+              ENDIF.
+
+             "PARAMETERS
+             IF rb_param EQ 'X'.
+
+             ENDIF.
+
+            "SELECT-OPTIONS
+            IF rb_sl_op EQ 'X'.
+
+            ENDIF.
+              
               ENDLOOP.
              ENDFORM.
 
