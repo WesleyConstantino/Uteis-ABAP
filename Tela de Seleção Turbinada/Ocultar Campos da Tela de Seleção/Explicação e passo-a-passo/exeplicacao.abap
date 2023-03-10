@@ -2,9 +2,8 @@
 
            "PASSO 1: Devemos modificor o ID dos campos que queremos eventualmente ocultar com "MODIF ID".
             "Exemplo do PASSO 1:
-             PARAMETERS: p_vbeln TYPE vbak-vbeln MODIF ID prm.
-             
-             SELECT-OPTIONS: s_erdat FOR vbak-erdat MODIF ID slc.
+             PARAMETERS: p_vbeln TYPE vbak-vbeln MODIF ID prm.                           
+             SELECT-OPTIONS: s_erdat FOR vbak-erdat MODIF ID slc.             
              
            "PASSO 2: Devemos criar os Radio Buttons para fazerem o filtro dos campos que desejamos ocultar.
             "Exemplo do PASSO 2:
@@ -30,9 +29,9 @@
            "PASSO 5: Escrever a lógica do form, para que ele possa mudar a visibilidade dos campos. Primeiro faço um LOOP AT na tela "SCREEN".
             "Exemplo do PASSO 5:
              FORM modifica_tela .
-              LOOP AT SCREEN.  
+              LOOP AT SCREEN.                       "<<<< ADICIONADO NESTE PASSO
               
-              ENDLOOP.
+              ENDLOOP.                              "<<<< ADICIONADO NESTE PASSO
              ENDFORM.
               
            "PASSO 6: Adiciono uma condicional para verificar qual RADIOBUTTON está flegado.
@@ -41,19 +40,19 @@
               LOOP AT SCREEN.  
               
               "Todos
-              IF rb_todos EQ 'X'.
+              IF rb_todos EQ 'X'.                 "<<<< ADICIONADO NESTE PASSO
 
-              ENDIF.
+              ENDIF.                              "<<<< ADICIONADO NESTE PASSO
 
              "PARAMETERS
-             IF rb_param EQ 'X'.
+             IF rb_param EQ 'X'.                  "<<<< ADICIONADO NESTE PASSO
 
-             ENDIF.
+             ENDIF.                               "<<<< ADICIONADO NESTE PASSO 
 
             "SELECT-OPTIONS
-            IF rb_sl_op EQ 'X'.
+            IF rb_sl_op EQ 'X'.                   "<<<< ADICIONADO NESTE PASSO
 
-            ENDIF.
+            ENDIF.                                "<<<< ADICIONADO NESTE PASSO
               
             ENDLOOP.
             ENDFORM.
