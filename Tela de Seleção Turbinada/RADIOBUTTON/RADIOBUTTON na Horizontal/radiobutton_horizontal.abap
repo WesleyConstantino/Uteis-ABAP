@@ -8,7 +8,7 @@
              "declarados nos elementos de texto, a palavra declarada lá foi "aberto").
             
              "Trecho usado como exemplo no PASSO-A-PASSO: 
-            SELECTION-SCREEN COMMENT 14(6) text-005 FOR FIELD rb_opened.
+              SELECTION-SCREEN COMMENT 14(6) text-005 FOR FIELD rb_opened.
             
              "PASSO 4: Após a intrução "FOR FIELD" passo o nome do radiobutton que desejo fazer essas alterações, como no trecho de código acima. E pronto!
    
