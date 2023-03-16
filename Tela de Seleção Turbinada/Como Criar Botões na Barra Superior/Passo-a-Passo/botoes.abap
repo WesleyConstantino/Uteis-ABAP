@@ -15,7 +15,15 @@
             
 *---------*PASSO 4: Criar um form para fazer a criar cada um dos nossos botões. 
             "Exemplo do PASSO 4: 
-            FORM zf_criar_botoes .
+            FORM zf_criar_botoes.
             
+            ENDFORM.
+            
+*---------*PASSO 5: A primeira coisa a fazer no nosso form "zf_criar_botoes" será declarar uma estrutura do tipo smp_dyntxt; isso nos permitirá personalizar nosso botão
+                   "com título, icone e texto ao passar o cursor do mouse.
+            "Exemplo do PASSO 5: 
+            FORM zf_criar_botoes.
+             DATA: ls_button TYPE smp_dyntxt.
+             
             ENDFORM.
             
