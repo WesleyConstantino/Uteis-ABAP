@@ -28,7 +28,8 @@ SELECTION-SCREEN: FUNCTION KEY 2.
 *Inicialização do Programa
 INITIALIZATION.
   PERFORM: zf_criar_botoes.
-  
+
+*Evento
 AT SELECTION-SCREEN.
   PERFORM: zf_evento_botao.
 
