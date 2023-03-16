@@ -13,3 +13,9 @@
             SELECTION-SCREEN: FUNCTION KEY 1. "Declaração do botão 1
             SELECTION-SCREEN: FUNCTION KEY 2. "Declaração do botão 2
             
+*---------*PASSO 4: Criar um form para fazer a criar cada um dos nossos botões. 
+            "Exemplo do PASSO 4: 
+            FORM zf_criar_botoes .
+            
+            ENDFORM.
+            
