@@ -53,3 +53,17 @@
             INITIALIZATION.
             PERFORM: zf_criar_botoes.
             
+*---------*PASSO 8: Agora precisaremos criar um form para reconhecer o evento de click dos botões.
+            "Exemplo do PASSO 8:
+            FORM zf_evento_botao.
+
+            CASE sy-ucomm.
+               WHEN 'FC01'.  "FC01 corresponde ao botão 1: Exclusão de Registros. (É possível descobrir isso no debbug através do "sy-ucomm")
+                  "Instrução desejada
+               WHEN 'FC02'.  "FC02 corresponde ao botão 2: Inclusão de Registros
+                  "Instrução desejada
+            ENDCASE.
+            ENDFORM.
+            
+            
+            
