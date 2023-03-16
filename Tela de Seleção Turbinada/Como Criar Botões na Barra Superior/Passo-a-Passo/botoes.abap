@@ -58,12 +58,16 @@
             FORM zf_evento_botao.
 
             CASE sy-ucomm.
-               WHEN 'FC01'.  "FC01 corresponde ao botão 1: Exclusão de Registros. (É possível descobrir isso no debbug através do "sy-ucomm")
+               WHEN 'FC01'.  "FC01 corresponde ao botão 1: Exclusão de Registros. (É possível descobrir isso no debbug através do "sy-ucomm").
                   "Instrução desejada
-               WHEN 'FC02'.  "FC02 corresponde ao botão 2: Inclusão de Registros
+               WHEN 'FC02'.  "FC02 corresponde ao botão 2: Inclusão de Registros.
                   "Instrução desejada
             ENDCASE.
             ENDFORM.
             
+*---------*PASSO 9: Por último, chamo o meu perform "zf_evento_botao" embaixo do evento "AT SELECTION-SCREEN" e está pronto. 
+            "Exemplo do PASSO 9:  
+            AT SELECTION-SCREEN.
+            PERFORM: zf_evento_botao.
             
             
