@@ -51,3 +51,18 @@ FORM zf_criar_botoes .
   ls_button-quickinfo    = 'Incluir registro'.
   sscrfields-functxt_02 = ls_button.
 ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  zf_evento_botao
+*&---------------------------------------------------------------------*
+FORM zf_evento_botao.
+  "Botão 1: Exclusão de Registros
+  IF sy-ucomm EQ 'FC01'.
+    CALL TRANSACTION 'SE11'. 
+  ENDIF.
+
+  "Botão 2: Inclusão de Registros
+  IF sy-ucomm EQ 'FC02'.
+    CALL TRANSACTION 'SE38'
+  ENDIF.
+ENDFORM.
