@@ -45,4 +45,11 @@
                 ls_button-icon_id      = icon_booking_ok.
                 ls_button-quickinfo    = 'Incluir registro'.
                 sscrfields-functxt_02 = ls_button.
-            ENDFORM.            
+            ENDFORM.         
+            
+ *---------*PASSO 7: Por último, chamaremos o perform do "zf_criar_botoes". Posso chamá-lo abaixo do evento "INITIALIZATION" quando quiser que antes de execultar o
+                    "programa, ou abaixo do evento "START-OF-SELECTION" quando quiser que apareça apenas após a execusão.
+            "Exemplo do PASSO 7:
+            INITIALIZATION.
+            PERFORM: zf_criar_botoes.
+            
