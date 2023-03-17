@@ -1,4 +1,5 @@
 "Transações SAP:
+SE01 - Criação, alteração e visualização de requests.
 SE09 - Criação e visualização de requests.
 SE11 - Dicionário de daados.
 SE14 - Atualizar estrutura de tabela e ajustá-la ao banco de dados, após modificar campos chave na SE11.
