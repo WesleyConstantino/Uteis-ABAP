@@ -51,26 +51,30 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 FORM zf_visualiza_alv_basico .
 
-DATA: lt_fieldcat_basico TYPE slis_t_fieldcat_alv,
-      ls_layout_basico   TYPE slis_layout_alv.
+  DATA: lt_fieldcat_basico TYPE slis_t_fieldcat_alv,
+        ls_layout_basico   TYPE slis_layout_alv.
 
-"Cria o lt_fieldcat[] com base em uma estrutura de dados criada na SE11.
-CALL FUNCTION 'REUSE_ALV_FIELDCATALOG_MERGE'
-  EXPORTING
-    i_structure_name = 'ZTAULA_CURSO' "Tabela da SE11
-  CHANGING
-    ct_fieldcat      = lt_fieldcat_basico[].
+  "Cria o lt_fieldcat[] com base em uma estrutura de dados criada na SE11.
+  CALL FUNCTION 'REUSE_ALV_FIELDCATALOG_MERGE'
+    EXPORTING
+      i_structure_name = 'ZTAULA_CURSO' "Tabela da SE11
+    CHANGING
+      ct_fieldcat      = lt_fieldcat_basico[].
 
 
-"Chamada da função que exibe o ALV em tela
-CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
-  EXPORTING
-    is_layout     = ls_layout_basico
-    it_fieldcat   = lt_fieldcat_basico[]
-  TABLES
-    t_outtab      = it_ztaula_curso[]  "Tabela interna de saída. (Sua tabela de dados)
-  EXCEPTIONS
-    program_error = 1
-    OTHERS        = 2.
+  ls_layout_basico-colwidth_optimize = 'X'. "Ajusta o tamanho das colunas.
+  ls_layout_basico-zebra = 'X'. "Layout zebrado
+
+
+  "Chamada da função que exibe o ALV em tela
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+    EXPORTING
+      is_layout     = ls_layout_basico
+      it_fieldcat   = lt_fieldcat_basico[]
+    TABLES
+      t_outtab      = it_ztaula_curso[]  "Tabela interna de saída. (Sua tabela de dados)
+    EXCEPTIONS
+      program_error = 1
+      OTHERS        = 2.
 
 ENDFORM.
