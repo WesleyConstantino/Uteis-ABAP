@@ -12,14 +12,9 @@ DATA: it_ztaula_curso     TYPE TABLE OF ztaula_curso,
       it_ztaula_curs_alun TYPE TABLE OF ztaula_curs_alun.
 
 *&---------------------------------------------------------------------*
-*                        Estruturas do ALV                             *
+*                     Declaração de Tipos ALV                          *
 *&---------------------------------------------------------------------*
-DATA: lo_container_100 TYPE REF TO cl_gui_custom_container,
-      lo_grid_100      TYPE REF TO cl_gui_alv_grid,
-      lv_okcode_100    TYPE sy-ucomm,
-      lt_fieldcat      TYPE lvc_t_fcat,
-      ls_layout        TYPE lvc_s_layo,
-      ls_variant       TYPE disvariant.
+TYPE-POOLS: slis.
 
 *&---------------------------------------------------------------------*
 *                         Tela de seleção                              *
@@ -46,5 +41,36 @@ FORM zf_obtem_dados.
   FROM ztaula_curs_alun
   INTO TABLE it_ztaula_curs_alun[]
   WHERE nome_curso IN s_curso[].
+
+  PERFORM: zf_visualiza_alv_basico.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  ZF_VISUALIZA_ALV_BASICO
+*&---------------------------------------------------------------------*
+FORM zf_visualiza_alv_basico .
+
+DATA: lt_fieldcat_basico TYPE slis_t_fieldcat_alv,
+      ls_layout_basico   TYPE slis_layout_alv.
+
+"Cria o lt_fieldcat[] com base em uma estrutura de dados criada na SE11.
+CALL FUNCTION 'REUSE_ALV_FIELDCATALOG_MERGE'
+  EXPORTING
+    i_structure_name = 'ZTAULA_CURSO' "Tabela da SE11
+  CHANGING
+    ct_fieldcat      = lt_fieldcat_basico[].
+
+
+"Chamada da função que exibe o ALV em tela
+CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+  EXPORTING
+    is_layout     = ls_layout_basico
+    it_fieldcat   = lt_fieldcat_basico[]
+  TABLES
+    t_outtab      = it_ztaula_curso[]  "Tabela interna de saída. (Sua tabela de dados)
+  EXCEPTIONS
+    program_error = 1
+    OTHERS        = 2.
 
 ENDFORM.
