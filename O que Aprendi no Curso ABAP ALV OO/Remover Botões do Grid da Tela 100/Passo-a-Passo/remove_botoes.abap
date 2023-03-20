@@ -7,7 +7,7 @@ it_toolbar_excluding = it_tool_bar[] "Remoção de botões do grid
 *----------------------------------------------------------------------------------------------------------------------*
 
 "Passo 3: Criaar um form passando todos os botões que desejo remover. Basta descomentar o que quero que seja removido.
-FORM zf_remove_alv_buttons,
+FORM zf_remove_alv_buttons.
 * INICIO: Botões EXTRAS -----------------------------------------------*
 *  APPEND cl_gui_alv_grid=>mc_fc_auf                   TO gt_toolbar[]. "Nível de Totais Detalhados
 *  APPEND cl_gui_alv_grid=>mc_fc_average               TO gt_toolbar[]. "Valor Médio (Calcular Média)
