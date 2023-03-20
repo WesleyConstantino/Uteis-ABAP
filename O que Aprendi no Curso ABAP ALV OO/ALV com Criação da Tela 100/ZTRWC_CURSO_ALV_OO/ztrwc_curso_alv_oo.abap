@@ -149,8 +149,10 @@ MODULE m_show_grid_100 OUTPUT.
           'ATIVO'      'ATIVO'      'ZTAULA_CURSO' 'Ativo'      'X' CHANGING lt_fieldcat[].
 
   IF lo_grid_100 IS INITIAL.
+    "Instância o objeto do ALV
     lo_grid_100 = NEW cl_gui_alv_grid( i_parent = cl_gui_custom_container=>default_screen ).
 
+    "Chama o ALV pela primeira vez
     lo_grid_100->set_table_for_first_display(
     EXPORTING
       is_variant  = ls_variant
@@ -160,6 +162,9 @@ MODULE m_show_grid_100 OUTPUT.
       it_fieldcatalog = lt_fieldcat[]
       it_outtab       = it_ztaula_curso[]
     ).
+
+    "Define título do ALV
+    lo_grid_100->set_gridtitle( 'Lista de Cursos' ).
   ELSE.
     lo_grid_100->refresh_table_display( ).
   ENDIF.
