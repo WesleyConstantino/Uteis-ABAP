@@ -1,46 +1,68 @@
 "Adicionando Cores nas Colunas do ALV
 
-"Passo 1: Adicionar no types mais uma linha "color TYPE char4".
 
-"TYPES:
-  "BEGIN OF ty_curso_aluno.
-    "INCLUDE   TYPE ztaula_curs_alun.
-    "TYPES: id    TYPE icon-id,
-           color TYPE char4,
-  "END OF ty_curso_aluno.
+Passo 1: No form zf_build_fieldcat, adicionar o "emphasize".
+
+"FORM zf_build_fieldcat USING VALUE(p_fieldname) TYPE c
+                        "     VALUE(p_field)     TYPE c
+                        "     VALUE(p_table)     TYPE c
+                        "     VALUE(p_coltext)   TYPE c
+                        "     VALUE(p_checkbox)  TYPE c
+                        "     VALUE(p_icon)      TYPE c
+                              VALUE(p_emphasize) TYPE c
+                        "  CHANGING t_fieldcat   TYPE lvc_t_fcat.
+
+"  DATA: ls_fieldcat LIKE LINE OF t_fieldcat[].
+
+  "Nome do campo dado na tabela interna
+"  ls_fieldcat-fieldname = p_fieldname.
+
+  "Nome do campo na tabela transparente
+"  ls_fieldcat-ref_field = p_field.
+
+  "Tabela transparente
+"  ls_fieldcat-ref_table = p_table.
+
+  "Descrição que daremos para o campo no ALV.
+"  ls_fieldcat-coltext   = p_coltext.
+
+  "Checkbox (Campos que quero que sejam checkbox, marco como 'X' no m_show_grid_100)
+"  ls_fieldcat-checkbox = p_checkbox.
+
+  "ícones
+"  ls_fieldcat-icon = p_icon.
+
+   "Cor das Colunas
+   ls_fieldcat-emphasize = p_emphasize.
+
+"  APPEND ls_fieldcat TO t_fieldcat[].
+
+"ENDFORM.
 *-------------------------------------------------------------------------------------*
 
-"Passo 2: Passar o código de cor para o campo color de acordo com a condicional.  
-         "OBS: As cores no Abap tem códigos, como é o caso do C500, C300 e C600.
 
-  "LOOP AT it_ztaula_curs_alun[] ASSIGNING FIELD-SYMBOL(<fs_curso_alun>).
-    "IF <fs_curso_alun>-inscr_confirmada EQ 'X' AND <fs_curso_alun>-pgto_confirmado EQ 'X'.
-      "<fs_curso_alun>-id    = icon_green_light.
-       <fs_curso_alun>-color = 'C500'.
-    "ELSEIF <fs_curso_alun>-inscr_confirmada EQ 'X' AND <fs_curso_alun>-pgto_confirmado IS INITIAL.
-      "<fs_curso_alun>-id    = icon_yellow_light.
-       <fs_curso_alun>-color = 'C300'.
-    "ELSE.
-      "<fs_curso_alun>-id    = icon_red_light.
-       <fs_curso_alun>-color = 'C600'.
-    "ENDIF.
-  "ENDLOOP.
+Passo 3: Adiciono mais um campo de parâmetro nos forms zf_build_grida e zf_build_gridb 
+         "para definir onde será emphasize.
+         "OBS: Passo o código da cor no campo da coluna que desejo que seja alterada.
+         "Para o campo NOME_CURSO, passei o código da cor C300.
+"Antes de implementar:
+FORM zf_build_grida.
+
+  PERFORM zf_build_fieldcat USING:
+            'NOME_CURSO' 'NOME_CURSO' 'ZTAULA_CURSO' 'Curso'      ' '  ' ' CHANGING lt_fieldcat[],
+            'DT_INICIO'  'DT_INICIO'  'ZTAULA_CURSO' 'Dt. Início' ' '  ' ' CHANGING lt_fieldcat[],
+            'DT_FIM'     'DT_FIM'     'ZTAULA_CURSO' 'Dt. Fim'    ' '  ' ' CHANGING lt_fieldcat[],
+            'ATIVO'      'ATIVO'      'ZTAULA_CURSO' 'Ativo'      'X'  ' ' CHANGING lt_fieldcat[].
+
+"Após implementar:
+FORM zf_build_grida.
+
+  PERFORM zf_build_fieldcat USING:
+            'NOME_CURSO' 'NOME_CURSO' 'ZTAULA_CURSO' 'Curso'      ' '  ' ' 'C300' CHANGING lt_fieldcat[],
+            'DT_INICIO'  'DT_INICIO'  'ZTAULA_CURSO' 'Dt. Início' ' '  ' ' ' '    CHANGING lt_fieldcat[],
+            'DT_FIM'     'DT_FIM'     'ZTAULA_CURSO' 'Dt. Fim'    ' '  ' ' ' '    CHANGING lt_fieldcat[],
+            'ATIVO'      'ATIVO'      'ZTAULA_CURSO' 'Ativo'      'X'  ' ' ' '    CHANGING lt_fieldcat[].
+
+"OBS: Não posso esquecer de adicionar o parâmetro do novo campo também no form zf_build_gridb.
 *-------------------------------------------------------------------------------------*
 
-
-"Passo 3: Definir a propriedade ls_layout-info_fname = 'COLOR', no layout do module 
-         "m_show_grid_100.
-
-"MODULE m_show_grid_100 OUTPUT.
-  "FREE: lt_fieldcat[].
-
-  "ls_layout-cwidth_opt = 'X'. "Ajustar largura das colunas (Layout otimizado).
-  "ls_layout-zebra      = 'X'. "Layout em Zebra.
-   ls_layout-info_fname = 'COLOR'. "Cor das linhas
-  "ls_variant-report    = sy-repid. "Variante (Não usá-la quando o tipo foi pop-up).
-
-  "PERFORM zf_remove_alv_buttons. "Remover botões do grid
-  "PERFORM zf_build_grida.
-  "PERFORM zf_build_gridb.
-
-"ENDMODULE.
