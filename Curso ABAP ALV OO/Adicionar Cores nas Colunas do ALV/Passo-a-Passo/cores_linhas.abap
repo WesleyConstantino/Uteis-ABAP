@@ -1,6 +1,6 @@
 "Adicionando Cores nas Colunas do ALV
 
-Passo 1: Adicionar no types mais uma linha "color TYPE char4".
+"Passo 1: Adicionar no types mais uma linha "color TYPE char4".
 
 "TYPES:
   "BEGIN OF ty_curso_aluno.
@@ -10,7 +10,7 @@ Passo 1: Adicionar no types mais uma linha "color TYPE char4".
   "END OF ty_curso_aluno.
 *-------------------------------------------------------------------------------------*
 
-Passo 2: Passar o código de cor para o campo color de acordo com a condicional.  
+"Passo 2: Passar o código de cor para o campo color de acordo com a condicional.  
          "OBS: As cores no Abap tem códigos, como é o caso do C500, C300 e C600.
 
   "LOOP AT it_ztaula_curs_alun[] ASSIGNING FIELD-SYMBOL(<fs_curso_alun>).
@@ -28,7 +28,7 @@ Passo 2: Passar o código de cor para o campo color de acordo com a condicional.
 *-------------------------------------------------------------------------------------*
 
 
-Passo 3: Definir a propriedade ls_layout-info_fname = 'COLOR', no layout do module 
+"Passo 3: Definir a propriedade ls_layout-info_fname = 'COLOR', no layout do module 
          "m_show_grid_100.
 
 "MODULE m_show_grid_100 OUTPUT.
