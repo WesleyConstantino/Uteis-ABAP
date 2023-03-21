@@ -1,6 +1,0 @@
-PROCESS BEFORE OUTPUT.
- MODULE STATUS_0100. "Botões e eventos de tela
- MODULE M_SHOW_GRID_100.
-*
-PROCESS AFTER INPUT.
- MODULE USER_COMMAND_0100. "Ações de cliques do usuário
