@@ -1,7 +1,7 @@
 "Adicionando Cores nas Colunas do ALV
 
 
-Passo 1: No form zf_build_fieldcat, adicionar o "emphasize".
+"Passo 1: No form zf_build_fieldcat, adicionar o "emphasize".
 
 "FORM zf_build_fieldcat USING VALUE(p_fieldname) TYPE c
                         "     VALUE(p_field)     TYPE c
@@ -41,7 +41,7 @@ Passo 1: No form zf_build_fieldcat, adicionar o "emphasize".
 *-------------------------------------------------------------------------------------*
 
 
-Passo 3: Adiciono mais um campo de parâmetro nos forms zf_build_grida e zf_build_gridb 
+"Passo 2: Adiciono mais um campo de parâmetro nos forms zf_build_grida e zf_build_gridb 
          "para definir onde será emphasize.
          "OBS: Passo o código da cor no campo da coluna que desejo que seja alterada.
          "Para o campo NOME_CURSO, passei o código da cor C300.
