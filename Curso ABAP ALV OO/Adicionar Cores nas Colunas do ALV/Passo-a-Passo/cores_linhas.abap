@@ -6,7 +6,7 @@
   "BEGIN OF ty_curso_aluno.
     "INCLUDE   TYPE ztaula_curs_alun.
     "TYPES: id    TYPE icon-id,
-           color TYPE char4.
+           color TYPE char4,
   "END OF ty_curso_aluno.
 *-------------------------------------------------------------------------------------*
 
