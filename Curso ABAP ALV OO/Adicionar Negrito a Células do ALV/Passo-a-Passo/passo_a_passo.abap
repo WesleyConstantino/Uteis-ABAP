@@ -44,8 +44,7 @@ ENDLOOP.
     ls_celltab-fieldname = 'DT_INICIO'. "Nome do campo que quero deixar em Negrito.
     ls_celltab-style     = '00000121'.  "Código da fonte em Negrito.
     INSERT ls_celltab INTO TABLE lt_zaula_curso_negr-celltab[].
-
-  IF ls_zaula_curso_negr-ativo EQ 'X'.
+    
     ls_celltab-fieldname = 'DT_FIM'. "Nome do campo que quero deixar em Negrito.
     ls_celltab-style     = '00000121'.  "Código da fonte em Negrito.
     INSERT ls_celltab INTO TABLE lt_zaula_curso_negr-celltab[].
@@ -58,43 +57,43 @@ ENDLOOP.
 "Passo 6: Agora pego a minha tabela it_zaula_curso_negr[] e passo como tabela de saída no form
          "lo_grid_100a.
 
-FORM zf_build_grida.
+"FORM zf_build_grida.
 
-  PERFORM zf_build_fieldcat USING:
+"  PERFORM zf_build_fieldcat USING:
             'NOME_CURSO' 'NOME_CURSO' 'ZTAULA_CURSO' 'Curso'      ' '  ' ' 'C710' CHANGING lt_fieldcat[],
             'DT_INICIO'  'DT_INICIO'  'ZTAULA_CURSO' 'Dt. Início' ' '  ' ' ' '    CHANGING lt_fieldcat[],
             'DT_FIM'     'DT_FIM'     'ZTAULA_CURSO' 'Dt. Fim'    ' '  ' ' ' '    CHANGING lt_fieldcat[],
             'ATIVO'      'ATIVO'      'ZTAULA_CURSO' 'Ativo'      'X'  ' ' ' '    CHANGING lt_fieldcat[].
 
-  IF lo_grid_100 IS INITIAL.
+"  IF lo_grid_100 IS INITIAL.
     "Containera, criado no layout da tela 100
-    lo_container_100 = NEW cl_gui_custom_container( container_name = 'CONTAINERA' ).
-    "Instância o objeto do ALV
-    lo_grid_100 = NEW cl_gui_alv_grid( i_parent = lo_container_100 )."Caso não precise de 2 containers, uso : "( i_parent = cl_gui_custom_container=>default_screen )."
+"    lo_container_100 = NEW cl_gui_custom_container( container_name = 'CONTAINERA' ).
+"    "Instância o objeto do ALV
+"    lo_grid_100 = NEW cl_gui_alv_grid( i_parent = lo_container_100 )."Caso não precise de 2 containers, uso : "( i_parent = cl_gui_custom_container=>default_screen )."
 
     "Permite fazer seleção múltipla de linhas no ALV
-    lo_grid_100->set_ready_for_input( 1 ).
+ "   lo_grid_100->set_ready_for_input( 1 ).
 
     "Chama o ALV pela primeira vez
-    lo_grid_100->set_table_for_first_display(
-    EXPORTING
-      it_toolbar_excluding = it_tool_bar[] "Remoção de botões do grid
-      is_variant  = ls_variant "Variant para seleção múltiplas do alv
-      is_layout   = ls_layout
-      i_save      = 'A'
-    CHANGING
-      it_fieldcatalog = lt_fieldcat[]
+ "   lo_grid_100->set_table_for_first_display(
+ "   EXPORTING
+ "     it_toolbar_excluding = it_tool_bar[] "Remoção de botões do grid
+ "     is_variant  = ls_variant "Variant para seleção múltiplas do alv
+ "     is_layout   = ls_layout
+ "     i_save      = 'A'
+ "   CHANGING
+ "     it_fieldcatalog = lt_fieldcat[]
       it_outtab       = it_zaula_curso_negr[]  "Tabela de saída
-    ).
+ "   ).
 
     "Define título do ALV
-    lo_grid_100->set_gridtitle( 'Lista de Cursos' ).
-  ELSE.
+ "   lo_grid_100->set_gridtitle( 'Lista de Cursos' ).
+ " ELSE.
     "Atualiza tela, caso haja alteração nos dados da tabela interna
-    lo_grid_100->refresh_table_display( ).
-  ENDIF.
+ "   lo_grid_100->refresh_table_display( ).
+ " ENDIF.
 
-ENDFORM.
+"ENDFORM.
 *------------------------------------------------------------------------------------------*
 
 "Passo 7: No module m_show_grid_100, passo o atributo ls_layout-stylefname = 'CELLTAB'.
