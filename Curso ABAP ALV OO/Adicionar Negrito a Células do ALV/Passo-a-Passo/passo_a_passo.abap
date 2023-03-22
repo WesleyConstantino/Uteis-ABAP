@@ -11,7 +11,7 @@ END OF ty_zaula_curso.
 
 "Passo 2: Criar a tabela interna do tipo ty_zaula_curso.
 
-DATA: lt_zaula_curso_negr TIPE TABLE OF ty_zaula_curso.
+DATA: lt_zaula_curso_negr TYPE TABLE OF ty_zaula_curso.
 *------------------------------------------------------------------------------------------*
 
 "Passo 3: No form zf_obtem_dados, crio as workareas de lt_zaula_curso_negr e de lt_zaula_curso_negr-celltab.
