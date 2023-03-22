@@ -60,10 +60,10 @@ ENDLOOP.
 "FORM zf_build_grida.
 
 "  PERFORM zf_build_fieldcat USING:
-            'NOME_CURSO' 'NOME_CURSO' 'ZTAULA_CURSO' 'Curso'      ' '  ' ' 'C710' CHANGING lt_fieldcat[],
-            'DT_INICIO'  'DT_INICIO'  'ZTAULA_CURSO' 'Dt. Início' ' '  ' ' ' '    CHANGING lt_fieldcat[],
-            'DT_FIM'     'DT_FIM'     'ZTAULA_CURSO' 'Dt. Fim'    ' '  ' ' ' '    CHANGING lt_fieldcat[],
-            'ATIVO'      'ATIVO'      'ZTAULA_CURSO' 'Ativo'      'X'  ' ' ' '    CHANGING lt_fieldcat[].
+ "           'NOME_CURSO' 'NOME_CURSO' 'ZTAULA_CURSO' 'Curso'      ' '  ' ' 'C710' CHANGING lt_fieldcat[],
+ "           'DT_INICIO'  'DT_INICIO'  'ZTAULA_CURSO' 'Dt. Início' ' '  ' ' ' '    CHANGING lt_fieldcat[],
+ "           'DT_FIM'     'DT_FIM'     'ZTAULA_CURSO' 'Dt. Fim'    ' '  ' ' ' '    CHANGING lt_fieldcat[],
+ "           'ATIVO'      'ATIVO'      'ZTAULA_CURSO' 'Ativo'      'X'  ' ' ' '    CHANGING lt_fieldcat[].
 
 "  IF lo_grid_100 IS INITIAL.
     "Containera, criado no layout da tela 100
