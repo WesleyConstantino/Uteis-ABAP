@@ -17,7 +17,7 @@ DATA: lt_zaula_curso_negr TYPE TABLE OF ty_zaula_curso.
 "Passo 3: No form zf_obtem_dados, crio as workareas de lt_zaula_curso_negr e de lt_zaula_curso_negr-celltab.
 
 DATA: ls_zaula_curso_negr LIKE LINE OF lt_zaula_curso_negr[],
-      ls_celltab          LIKE LINE OF lt_zaula_curso_negr-celltab[]. 
+      ls_celltab          LIKE LINE OF ls_zaula_curso_negr-celltab[]. 
 *------------------------------------------------------------------------------------------*
 
 "Passo 4: No form zf_obtem_dados, crio um field-symbol, faço um loop para percorrer a minha
@@ -25,7 +25,7 @@ DATA: ls_zaula_curso_negr LIKE LINE OF lt_zaula_curso_negr[],
          "correspondentes do field-symbol, agora populado, para a minha workarea ls_zaula_curso_negr.
 
 LOOP AT lt_zaula_curso_negr[] ASSIGNING FIELD-SYMBOL(<fs_aula_curso>). 
- MOVE-CORRESPONDINDING <fs_aula_curso> TO ls_zaula_curso_negr.
+    MOVE-CORRESPONDING <fs_aula_curso> TO ls_zaula_curso_negr.
 ENDLOOP.
 *------------------------------------------------------------------------------------------*
 
@@ -33,24 +33,24 @@ ENDLOOP.
           "flegado, preencherei os campos "style" e "fieldname" da workarea ls_celltab.
           "Após isso faço um insert da workarea para a tabela interna. Faço isso para cada campo
           "que quiser deixar como Negrito. 
-          "Por ultimo dou uma APPEND da ls_zaula_curso_negr para it_zaula_curso_negr[].
+          "Por ultimo dou uma APPEND da ls_zaula_curso_negr-celltab[].
           
           "OBS: Não esquecer de limpar a ls_zaula_curso_negr-celltab[].
 
 "LOOP AT lt_zaula_curso_negr[] ASSIGNING FIELD-SYMBOL(<fs_aula_curso>). 
   FREE: ls_zaula_curso_negr-celltab[]. 
-" MOVE-CORRESPONDINDING <fs_aula_curso> TO ls_zaula_curso_negr.
+" MOVE-CORRESPONDINGG <fs_aula_curso> TO ls_zaula_curso_negr.
   IF ls_zaula_curso_negr-ativo EQ 'X'.
     ls_celltab-fieldname = 'DT_INICIO'. "Nome do campo que quero deixar em Negrito.
     ls_celltab-style     = '00000121'.  "Código da fonte em Negrito.
-    INSERT ls_celltab INTO TABLE lt_zaula_curso_negr-celltab[].
+    INSERT ls_celltab INTO TABLE ls_zaula_curso_negr-celltab[].
     
     ls_celltab-fieldname = 'DT_FIM'. "Nome do campo que quero deixar em Negrito.
     ls_celltab-style     = '00000121'.  "Código da fonte em Negrito.
-    INSERT ls_celltab INTO TABLE lt_zaula_curso_negr-celltab[].
+    INSERT ls_celltab INTO TABLE ls_zaula_curso_negr-celltab[].
   ENDIF.
 
-  APPEND ls_zaula_curso_negr TO it_zaula_curso_negr[].
+   APPEND ls_celltab TO ls_zaula_curso_negr-celltab[].
 "ENDLOOP.
 *------------------------------------------------------------------------------------------*
 
