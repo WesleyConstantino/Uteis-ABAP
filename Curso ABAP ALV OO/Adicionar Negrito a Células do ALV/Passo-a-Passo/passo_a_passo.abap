@@ -21,10 +21,10 @@ DATA: ls_zaula_curso_negr LIKE LINE OF lt_zaula_curso_negr[],
 *------------------------------------------------------------------------------------------*
 
 "Passo 4: No form zf_obtem_dados, crio um field-symbol, faço um loop para percorrer a minha
-         "lt_zaula_curso, passar os valores dela para o field-symbol e mover os valores 
+         "it_ztaula_curso[], passar os valores dela para o field-symbol e mover os valores 
          "correspondentes do field-symbol, agora populado, para a minha workarea ls_zaula_curso_negr.
 
-LOOP AT lt_zaula_curso_negr[] ASSIGNING FIELD-SYMBOL(<fs_aula_curso>). 
+ LOOP AT it_ztaula_curso[] ASSIGNING FIELD-SYMBOL(<fs_aula_curso>).
     MOVE-CORRESPONDING <fs_aula_curso> TO ls_zaula_curso_negr.
 ENDLOOP.
 *------------------------------------------------------------------------------------------*
@@ -37,7 +37,7 @@ ENDLOOP.
           
           "OBS: Não esquecer de limpar a ls_zaula_curso_negr-celltab[].
 
-"LOOP AT lt_zaula_curso_negr[] ASSIGNING FIELD-SYMBOL(<fs_aula_curso>). 
+"LOOP AT it_ztaula_curso[] ASSIGNING FIELD-SYMBOL(<fs_aula_curso>). 
   FREE: ls_zaula_curso_negr-celltab[]. 
 " MOVE-CORRESPONDINGG <fs_aula_curso> TO ls_zaula_curso_negr.
   IF ls_zaula_curso_negr-ativo EQ 'X'.
