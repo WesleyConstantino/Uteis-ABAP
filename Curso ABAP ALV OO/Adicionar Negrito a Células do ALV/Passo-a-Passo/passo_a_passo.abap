@@ -33,7 +33,7 @@ ENDLOOP.
           "flegado, preencherei os campos "style" e "fieldname" da workarea ls_celltab.
           "Após isso faço um insert da workarea para a tabela interna. Faço isso para cada campo
           "que quiser deixar como Negrito. 
-          "Por ultimo dou uma APPEND da ls_zaula_curso_negr-celltab[].
+          "Por ultimo dou uma APPEND da ls_zaula_curso_negr para lt_zaula_curso_negr[].
           
           "OBS: Não esquecer de limpar a ls_zaula_curso_negr-celltab[].
 
@@ -50,7 +50,7 @@ ENDLOOP.
     INSERT ls_celltab INTO TABLE ls_zaula_curso_negr-celltab[].
   ENDIF.
 
-   APPEND ls_celltab TO ls_zaula_curso_negr-celltab[].
+    APPEND ls_zaula_curso_negr TO lt_zaula_curso_negr[].
 "ENDLOOP.
 *------------------------------------------------------------------------------------------*
 
