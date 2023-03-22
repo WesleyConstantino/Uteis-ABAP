@@ -83,7 +83,7 @@ ENDLOOP.
  "     i_save      = 'A'
  "   CHANGING
  "     it_fieldcatalog = lt_fieldcat[]
-      it_outtab       = it_zaula_curso_negr[]  "Tabela de saída
+      it_outtab       = lt_zaula_curso_negr[]  "Tabela de saída
  "   ).
 
     "Define título do ALV
