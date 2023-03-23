@@ -159,3 +159,52 @@ FREE: it_ztaula_curso[],
 "      PERFORM: zf_visualiza_alv_completo.
 "  ENDCASE.
 "ENDFORM.
+
+
+*-----------* Passo diferente para checkbox editável
+
+"Passo 10: No form zf_build_grida ou zf_build_gridb, adicionar método que atualiza a tela do fieldcat, caso haja 
+          "alteração nos dados.
+
+
+"FORM zf_build_grida.
+"  PERFORM zf_build_fieldcat USING:
+"            'NOME_CURSO' 'NOME_CURSO' 'ZTAULA_CURSO' 'Curso'      ' '  ' ' 'C710' ' ' CHANGING lt_fieldcat[],
+"            'DT_INICIO'  'DT_INICIO'  'ZTAULA_CURSO' 'Dt. Início' ' '  ' ' ' '    ' ' CHANGING lt_fieldcat[],
+"            'DT_FIM'     'DT_FIM'     'ZTAULA_CURSO' 'Dt. Fim'    ' '  ' ' ' '    ' ' CHANGING lt_fieldcat[],
+"            'ATIVO'      'ATIVO'      'ZTAULA_CURSO' 'Ativo'      'X'  ' ' ' '    ' ' CHANGING lt_fieldcat[].
+
+"  IF lo_grid_100 IS INITIAL.
+    "Containera, criado no layout da tela 100
+"    lo_container_100 = NEW cl_gui_custom_container( container_name = 'CONTAINERA' ).
+    "Instância o objeto do ALV
+"    lo_grid_100 = NEW cl_gui_alv_grid( i_parent = lo_container_100 )."Caso não precise de 2 containers, uso : "( i_parent = cl_gui_custom_container=>default_screen )."
+
+    "Permite fazer seleção múltipla de linhas no ALV
+"    lo_grid_100->set_ready_for_input( 1 ).
+
+    "Chama o ALV pela primeira vez
+"    lo_grid_100->set_table_for_first_display(
+"    EXPORTING
+"      it_toolbar_excluding = it_tool_bar[] "Remoção de botões do grid
+"      is_variant  = ls_variant "Variant para seleção múltiplas do alv
+"      is_layout   = ls_layout
+"      i_save      = 'A'
+"    CHANGING
+"      it_fieldcatalog = lt_fieldcat[]
+"      it_outtab       = lt_zaula_curso_negr[]  "Tabela de saída
+"    ).
+
+    "Define título do ALV
+"    lo_grid_100->set_gridtitle( 'Lista de Cursos' ).
+"  ELSE.
+   "Força a atualização do fieldcat
+   lo_grid_100a->set_frontend_fieldcatalog(
+    EXPORTING
+     it_fieldcatlog = lt_fieldcata[].
+    ).
+    "Atualiza tela, caso haja alteração nos dados da tabela interna
+"    lo_grid_100->refresh_table_display( ).
+"  ENDIF.
+
+"ENDFORM.
