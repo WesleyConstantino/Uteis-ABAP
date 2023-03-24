@@ -11,13 +11,15 @@ DATA:
   go_container_9000 TYPE REF TO cl_gui_custom_container. "Container
 *--------------------------------------------------------------------------------------------------------------*
 
+
 "Passo 2: Já no início da execusão do programa chamo a minha tela do module pool, no meu caso a tela 100.
 
 START-OF-SELECTION.
   CALL SCREEN 100.
 *--------------------------------------------------------------------------------------------------------------*
 
-"sso 3: No form zf_show_grid_100 (onde montei o fieldcat e crio os objetos do grid), crios os seguintes
+
+"Psso 3: No form zf_show_grid_100 (onde montei o fieldcat e crio os objetos do grid), crios os seguintes
          "objetos:
 
 *-------*Quando estiver usando container do module pool:
@@ -36,6 +38,7 @@ START-OF-SELECTION.
     lo_grid_100->set_ready_for_input( 1 ).
 *--------------------------------------------------------------------------------------------------------------*
 
+
 "Passo 4: No MODULE STATUS_0100 do PROCESS BEFORE OUTPUT faço a chamada dos performs zf_select e zf_show_grid_100.
 
 MODULE status_0100 OUTPUT.
@@ -46,6 +49,7 @@ MODULE status_0100 OUTPUT.
            zf_show_grid_100.
 ENDMODULE.
 *--------------------------------------------------------------------------------------------------------------*
+
 
 "Passo 5: No MODULE USER_COMMAND_0100 do PROCESS AFTER INPUT, implemento a lógica dos botões.
 
@@ -64,6 +68,7 @@ MODULE user_command_0100 INPUT.
 
 ENDMODULE.
 *--------------------------------------------------------------------------------------------------------------*
+
 
 "Passo 6: Crio um form para marcar ou desmarcar o campo do checklist com 'X' e atualizar a tabela transpareste com
          "essa alteração. No final, chamo o form que faz meu select para que a tela seja atualizada.
@@ -105,6 +110,7 @@ FORM z_exl_e_inc_insumos  USING    p_lv_okcode_100.
   PERFORM: zf_select.
 ENDFORM.
 *--------------------------------------------------------------------------------------------------------------*
+
 
 "Passo 7: For fim, crio um form para se resposabilazar pelo commit e rollback 
 
