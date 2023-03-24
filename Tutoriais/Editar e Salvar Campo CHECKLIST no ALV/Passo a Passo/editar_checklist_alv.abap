@@ -1,5 +1,8 @@
 "Editar e Atualizar Checklist no ALV:
 
+*Explicação: Esse trecho de código flega como 'X' ou desflega um campo checkbox de um ALV e salva essa alteração no banco de dados. 
+***********************************************************************************************************************************
+
 "Passo 1: Criar as estruturas variáveis:
 
 DATA:
