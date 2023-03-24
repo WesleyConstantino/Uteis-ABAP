@@ -5,112 +5,123 @@
 
 "Passo 1: Criar as estruturas variáveis:
 
+*&---------------------------------------------------------------------*
+*                           Estruturas                                 *
+*&---------------------------------------------------------------------*
 DATA:
-  lo_grid_100       TYPE REF TO cl_gui_alv_grid, "Grid
-  lv_okcode_100     TYPE sy-ucomm,               "Ok code do module pool
-  lt_fieldcat       TYPE lvc_t_fcat,             "Fieldcat
-  ls_layout         TYPE lvc_s_layo,             "Layout
-  ls_variant        TYPE disvariant,             "Variant
-  go_container_9000 TYPE REF TO cl_gui_custom_container. "Container
+  og_grid_9000      TYPE REF TO cl_gui_alv_grid, "Grid
+  vg_okcode_9000    TYPE sy-ucomm,   "Ok Code do Module Pool
+  tg_fieldcat       TYPE lvc_t_fcat, "Fieldcat
+  wa_layout         TYPE lvc_s_layo, "Layout
+  wa_variant        TYPE disvariant, "Variant
+  og_container_9000 TYPE REF TO cl_gui_custom_container. "Container do Module Pool
 *--------------------------------------------------------------------------------------------------------------*
 
 
-"Passo 2: Já no início da execusão do programa chamo a minha tela do module pool, no meu caso a tela 100.
+"Passo 2: Já no início da execusão do programa chamo a minha tela do module pool, no meu caso a tela 9000.
 
 START-OF-SELECTION.
-  CALL SCREEN 100.
+  CALL SCREEN 9000.
 *--------------------------------------------------------------------------------------------------------------*
 
 
-"Psso 3: No form zf_show_grid_100 (onde montei o fieldcat e crio os objetos do grid), crios os seguintes
+"Psso 3: No form zf_show_grid_9000 (onde montei o fieldcat e crio os objetos do grid), crios os seguintes
          "objetos:
 
 *-------*Quando estiver usando container do module pool:
     "Criação do objeto do container
-    go_container_9000 = NEW cl_gui_custom_container( container_name = 'CONTAINER_9000' ).
+    og_container_9000 = NEW cl_gui_custom_container( container_name = 'CONTAINER_9000' ).
     "Instância o objeto do ALV
-    lo_grid_100 = NEW cl_gui_alv_grid( i_parent = go_container_9000 ).
+    og_grid_9000 = NEW cl_gui_alv_grid( i_parent = og_container_9000 ).
 
     "Permite fazer seleção múltipla de linhas no ALV
-    lo_grid_100->set_ready_for_input( 1 ).
+    og_grid_9000->set_ready_for_input( 1 ).
 
 *-------*Sem o uso de container:
-     lo_grid_100 = NEW cl_gui_alv_grid( i_parent = cl_gui_custom_container=>default_screen ).
+     og_grid_9000 = NEW cl_gui_alv_grid( i_parent = cl_gui_custom_container=>default_screen ).
 
     "Permite fazer seleção múltipla de linhas no ALV
-    lo_grid_100->set_ready_for_input( 1 ).
+    og_grid_9000->set_ready_for_input( 1 ).
 *--------------------------------------------------------------------------------------------------------------*
 
 
-"Passo 4: No MODULE STATUS_0100 do PROCESS BEFORE OUTPUT faço a chamada dos performs zf_select e zf_show_grid_100.
+"Passo 4: No MODULE STATUS_9000 do PROCESS BEFORE OUTPUT faço a chamada dos performs zf_select e zf_show_grid_9000.
 
-MODULE status_0100 OUTPUT.
-  SET PF-STATUS 'STATUS100'. "Botões da tela 100
-  SET TITLEBAR 'TITULE100'.  "Código do título da Tela 100
+*&---------------------------------------------------------------------*
+*&      Module  STATUS_9000  OUTPUT
+*&---------------------------------------------------------------------*
+MODULE status_9000 OUTPUT.
+  SET PF-STATUS 'STATUS_9000'.
+  SET TITLEBAR 'TITULE_9000'.
 
   PERFORM: zf_select,
-           zf_show_grid_100.
+           zf_show_grid_9000.
 ENDMODULE.
 *--------------------------------------------------------------------------------------------------------------*
 
 
-"Passo 5: No MODULE USER_COMMAND_0100 do PROCESS AFTER INPUT, implemento a lógica dos botões.
+"Passo 5: No MODULE USER_COMMAND_9000 do PROCESS AFTER INPUT, implemento a lógica dos botões.
 
-MODULE user_command_0100 INPUT.
+*&---------------------------------------------------------------------*
+*&      Module  USER_COMMAND_9000  INPUT
+*&---------------------------------------------------------------------*
+MODULE user_command_9000 INPUT.
 
-  CASE lv_okcode_100.
+  CASE vg_okcode_9000.
     WHEN 'BACK'.
       LEAVE TO SCREEN 0. "Volta para a tela chamadora
-      "CLEAR: lv_salvou_item.
     WHEN 'EXIT'.
       LEAVE PROGRAM. "Sai do programa
-      "CLEAR: lv_salvou_item.
-    WHEN 'EXCLUSAO' OR 'INCLUSAO'.
-      PERFORM: z_exl_e_inc_insumos USING lv_okcode_100.
+    WHEN 'FLEGAR' OR 'DESFLEGAR'.
+      PERFORM: zf_flegar_e_desflegar USING vg_okcode_9000.
   ENDCASE.
 
 ENDMODULE.
 *--------------------------------------------------------------------------------------------------------------*
 
 
-"Passo 6: Crio um form para marcar ou desmarcar o campo do checklist com 'X' e atualizar a tabela transpareste com
+"Passo 6: Crio um form para marcar ou desmarcar o campo do checklist e atualizar a tabela transpareste com
          "essa alteração. No final, chamo o form que faz meu select para que a tela seja atualizada.
 
-FORM z_exl_e_inc_insumos  USING    p_lv_okcode_100.
+*&---------------------------------------------------------------------*
+*&      Form  ZF_FLEGAR_E_DESFLEGAR
+*&---------------------------------------------------------------------*
+FORM zf_flegar_e_desflegar  USING    p_vg_okcode_9000.
 
-  DATA: lt_selected_rows        TYPE lvc_t_row,
-        wa_zpficat_pinsumos_aux TYPE zpficat_pinsumos.
+  DATA: tl_selected_rows    TYPE lvc_t_row,
+        wa_ztaula_curso_aux TYPE ztaula_curso.
 
-  lo_grid_100->get_selected_rows(
+  og_grid_9000->get_selected_rows(
     IMPORTING
-      et_index_rows = lt_selected_rows ).
+      et_index_rows = tl_selected_rows ).
 
-  LOOP AT lt_selected_rows INTO DATA(wa_selected_rows).
+  LOOP AT tl_selected_rows INTO DATA(wa_selected_rows).
 
-    READ TABLE t_zpficat_pinsumos
-     INTO DATA(wa_zpficat_pinsumos)
+    READ TABLE t_ztaula_curso
+     INTO DATA(wa_ztaula_curso)
          INDEX wa_selected_rows-index.
 
     IF sy-subrc IS INITIAL   AND
-     (  p_lv_okcode_100 EQ 'EXCLUSAO' OR
-        p_lv_okcode_100 EQ 'INCLUSAO' ).
+     (  p_vg_okcode_9000 EQ 'FLEGAR' OR
+        p_vg_okcode_9000 EQ 'DESFLEGAR' ).
 
 
-      IF  p_lv_okcode_100 EQ 'EXCLUSAO'.
-        wa_zpficat_pinsumos-exclusao = 'X'.
-      ELSEIF  p_lv_okcode_100 EQ 'INCLUSAO'.
-        wa_zpficat_pinsumos-exclusao = ' '.
+      IF  p_vg_okcode_9000 EQ 'FLEGAR'.
+        wa_ztaula_curso-ativo = 'X'.
+      ELSEIF  p_vg_okcode_9000 EQ 'DESFLEGAR'.
+        wa_ztaula_curso-ativo = ' '.
       ENDIF.
 
-      MOVE-CORRESPONDING wa_zpficat_pinsumos TO wa_zpficat_pinsumos_aux.
-      MODIFY zpficat_pinsumos FROM wa_zpficat_pinsumos_aux.
+      MOVE-CORRESPONDING wa_ztaula_curso TO wa_ztaula_curso_aux.
+      MODIFY ztaula_curso FROM wa_ztaula_curso_aux.
 
       PERFORM z_commit_e_rollback.
 
-      CLEAR: wa_zpficat_pinsumos_aux.
+      CLEAR: wa_ztaula_curso_aux.
     ENDIF.
   ENDLOOP.
   PERFORM: zf_select.
+
 ENDFORM.
 *--------------------------------------------------------------------------------------------------------------*
 
