@@ -200,9 +200,9 @@ FREE: it_ztaula_curso[],
 "  ELSE.
    "Força a atualização do fieldcat
    lo_grid_100a->set_frontend_fieldcatalog(
-    EXPORTING
-     it_fieldcatlog = lt_fieldcata[].
-    ).
+         EXPORTING
+          it_fieldcatalog = lt_fieldcat[]
+        ).
     "Atualiza tela, caso haja alteração nos dados da tabela interna
 "    lo_grid_100->refresh_table_display( ).
 "  ENDIF.
