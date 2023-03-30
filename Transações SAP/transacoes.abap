@@ -11,3 +11,4 @@ SE80 - Criação e visualização de programas em geral.
 SE93 - Criação e transações.
 ZDOC_CREATE - Criação de documentação.
 SM30 - Manipulação dos dados de uma tabela.
+J1BNFE - Verificar nota PI
