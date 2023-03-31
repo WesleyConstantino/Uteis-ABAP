@@ -72,4 +72,42 @@
   
   
 ***********************************************************************************************************************************
-"Passo 3:
+"Passo 3: No module user_command_9000, adicionar o método check_changed_data( ) da classe cl_gui_alv_grid e a ação do botão "SAVE"
+         "dando um MODIFY na tabela transparente com os dados da tabela interna.
+
+*&---------------------------------------------------------------------*
+*&      Module  USER_COMMAND_9000  INPUT
+*&---------------------------------------------------------------------*
+MODULE user_command_9000 INPUT.
+   og_grid_9000->check_changed_data( ). "Método para pegar a alteração do checklist em tampo real
+
+    CASE vg_okcode_9000.
+ "   WHEN 'BACK'.
+ "     LEAVE TO SCREEN 0. "Volta para a tela chamadora
+ "   WHEN 'EXIT'.
+ "     LEAVE PROGRAM. "Sai do programa
+    WHEN 'SAVE'.
+      MODIFY ztaula_curso FROM TABLE t_ztaula_curso.
+      PERFORM z_commit_e_rollback.
+  ENDCASE.
+  
+ "ENDMODULE.
+  
+***********************************************************************************************************************************
+"Passo 3: Implementar o form , para fazer e tratar o commit e rollback.
+
+*&---------------------------------------------------------------------*
+*&      Form  Z_COMMIT_E_ROLLBACK
+*&---------------------------------------------------------------------*
+FORM z_commit_e_rollback.
+
+  IF sy-subrc IS INITIAL.
+    COMMIT WORK AND WAIT.
+    MESSAGE s398(00) WITH 'Alteração salva com sucesso!'.
+  ELSE.
+    ROLLBACK WORK.
+    MESSAGE s208(00) WITH 'Erro ao Tentar Gravar as Alterações!' DISPLAY LIKE 'E'.
+  ENDIF.
+
+ENDFORM.
+
