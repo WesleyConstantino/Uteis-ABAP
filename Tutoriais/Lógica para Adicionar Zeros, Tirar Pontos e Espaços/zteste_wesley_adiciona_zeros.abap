@@ -1,4 +1,5 @@
-"O que o programa faz: 
+"O que o programa faz: Recebe um número como parâmetro, o coloca dentro de três variáveis de forma formatada, isto é: (sem pontos, sem espaços e preenchendo as posições
+                       "vazias das variáveis com zeros). 
 
 REPORT zteste_wesley_adiciona_zeros.
 
