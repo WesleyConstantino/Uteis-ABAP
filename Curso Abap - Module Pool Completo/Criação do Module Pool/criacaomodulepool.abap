@@ -12,3 +12,8 @@ Criação do Module Pool:
 "Ex: MZaulaTOP.
 
 "Após isso mudo o título, caso queira.
+
+"Criação dos includes PBO, PAI e Form:
+
+"Clicar em SAPMZaula -> Descomentar os includes -> Na hora da criação,
+"mudo os títulos dos includes para "PBO, PAI ou Form" para facilitar a visualização.
