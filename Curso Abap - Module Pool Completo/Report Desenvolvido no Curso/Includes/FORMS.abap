@@ -1,8 +1,4 @@
 *&---------------------------------------------------------------------*
-*&  Include           MZAULAF01
-*&---------------------------------------------------------------------*
-
-*&---------------------------------------------------------------------*
 *&      Form  F_SELECINAR_VOOS
 *&---------------------------------------------------------------------*
 FORM f_selecinar_voos .
@@ -136,7 +132,84 @@ FORM f_montar_grid_200 .
       it_outtab       = lt_sflights[]  "Tabela de saída
     ).
   ELSE.
-    lo_grid_100->refresh_table_display( ). "Limpa a tela para que não crie uma tella sobre a outra.
+    lo_grid_200->refresh_table_display( ). "Limpa a tela para que não crie uma tella sobre a outra.
+  ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  F_DETALHE_DO_VOO
+*&---------------------------------------------------------------------*
+FORM f_detalhe_do_voo .
+
+  DATA: lt_index_rows TYPE lvc_t_row,
+        lt_row_no     TYPE lvc_t_roid.
+
+  lo_grid_100->get_selected_rows(   "Método para selecionar linha
+   IMPORTING
+    et_index_rows = lt_index_rows[]
+    et_row_no     = lt_row_no[]
+).
+
+  IF lt_row_no[] IS INITIAL.
+    MESSAGE 'Nenhuma linha foi selecionada!' TYPE 'S' DISPLAY LIKE 'W'.
+  ELSE.
+    READ TABLE lt_row_no[] ASSIGNING FIELD-SYMBOL(<fs_row_no>) INDEX 1.
+    READ TABLE lt_sflight[] ASSIGNING FIELD-SYMBOL(<fs_sflight>) INDEX <fs_row_no>-row_id.
+
+    IF sy-subrc EQ 0.
+      SELECT *
+        INTO TABLE lt_sflights2[]
+        FROM sflights2
+        WHERE carrid EQ <fs_sflight>-carrid AND
+              connid EQ <fs_sflight>-connid AND
+              fldate EQ <fs_sflight>-fldate.
+
+      IF sy-subrc EQ 0.
+        CALL SCREEN 300.
+      ELSE.
+        MESSAGE 'Não existe detalhe para esse vôo!' TYPE 'S' DISPLAY LIKE 'W'.
+      ENDIF.
+    ENDIF.
+  ENDIF.
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  F_MONTAR_TELA_300
+*&---------------------------------------------------------------------*
+FORM f_montar_tela_300 .
+
+  FREE: it_fieldcat[].
+
+  CLEAR: ls_layout,
+         ls_variant.
+
+*-----* Função para montar o fieldcat:
+  CALL FUNCTION 'LVC_FIELDCATALOG_MERGE'
+    EXPORTING
+      i_structure_name       = 'SFLIGHTS2' "Tabela de referência (Cadastrada na SE11).
+    CHANGING
+      ct_fieldcat            = it_fieldcat[] "Tabela interna do fieldcat.
+    EXCEPTIONS
+      inconsistent_interface = 1
+      program_error          = 2
+      OTHERS                 = 3.
+  IF lo_grid_300 IS INITIAL.
+    lo_container_300 = NEW cl_gui_custom_container( container_name = 'CONTAINER' ). "CONTAINER é o nome do meu container no layout.
+    lo_grid_300      = NEW cl_gui_alv_grid( i_parent = lo_container_300 ).
+
+    "Chama o ALV pela primeira vez
+    lo_grid_300->set_table_for_first_display(
+    EXPORTING
+      is_variant  = ls_variant "Variant para seleção múltipla do alv
+      is_layout   = ls_layout
+      i_save      = 'A'
+    CHANGING
+      it_fieldcatalog = it_fieldcat[]
+      it_outtab       = lt_sflights2[]  "Tabela de saída
+    ).
+  ELSE.
+    lo_grid_300->refresh_table_display( ). "Limpa a tela para que não crie uma tella sobre a outra.
   ENDIF.
 
 ENDFORM.
