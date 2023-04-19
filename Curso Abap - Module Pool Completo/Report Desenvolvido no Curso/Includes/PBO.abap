@@ -27,3 +27,14 @@ MODULE status_0200 OUTPUT.
 
   PERFORM: f_montar_grid_200.
 ENDMODULE.
+*&---------------------------------------------------------------------*
+*&      Module  STATUS_0300  OUTPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE status_0300 OUTPUT.
+  SET PF-STATUS 'S300'.
+  SET TITLEBAR 'T300'.
+
+  PERFORM: f_montar_tela_300.
+ENDMODULE.
