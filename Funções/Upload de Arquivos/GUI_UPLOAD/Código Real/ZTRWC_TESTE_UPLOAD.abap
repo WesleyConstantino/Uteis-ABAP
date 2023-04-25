@@ -179,6 +179,8 @@ FORM zf_exibe_alv_poo.
 
       CREATE OBJECT lo_header. "É necessário que criemos o objeto header
 
+      "Título
+      lo_header->create_header_information( row = 1 column = 1 text = 'Relatório do Upload' ).
 
       lo_header->add_row( ).
 
