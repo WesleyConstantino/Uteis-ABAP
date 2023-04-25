@@ -65,7 +65,8 @@ START-OF-SELECTION.
     MESSAGE 'Insira o caminho do upload do arquivo!' TYPE 'S' DISPLAY LIKE 'E'.
   ELSE.
     PERFORM: zf_gui_upload,
-             zf_split_upload.
+             zf_split_upload,
+             zf_exibe_alv_poo.
   ENDIF.
 
 *&---------------------------------------------------------------------*
@@ -158,5 +159,44 @@ FORM zf_split_upload.
       CLEAR  wa_out.
     ENDLOOP.
   ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  ZF_exibe_alv_poo
+*&---------------------------------------------------------------------*
+FORM zf_exibe_alv_poo.
+
+  DATA: lo_table   TYPE REF TO cl_salv_table,  "Acessar a classe "cl_salv_table"
+        lo_header  TYPE REF TO cl_salv_form_layout_grid,   "Para criação do header
+        lo_columns TYPE REF TO cl_salv_columns_table.  "Ajustar tamanho dos subtítulos
+
+  TRY.
+      cl_salv_table=>factory( IMPORTING r_salv_table = lo_table "Tabela local
+                             CHANGING t_table = it_out ). "Passar a tabela de saída, aqui é a t_out
+
+      lo_table->get_functions( )->set_all( abap_true ). "Ativar met codes
+
+      CREATE OBJECT lo_header. "É necessário que criemos o objeto header
+
+
+      lo_header->add_row( ).
+
+
+      lo_table->get_display_settings( )->set_striped_pattern( abap_true ).
+
+      lo_table->set_top_of_list( lo_header ).
+
+      lo_columns = lo_table->get_columns( ). "Ajustar tamanho dos subtítulos
+      lo_columns->set_optimize( abap_true ). "Ajustar tamanho dos subtítulos
+
+      lo_table->display( ) . "O dispay é fundamental para a exibição do ALV
+
+    CATCH cx_salv_msg
+          cx_root.
+
+      MESSAGE s398(00) WITH 'Erro ao exibir tabela' DISPLAY LIKE 'E'.
+
+  ENDTRY.
 
 ENDFORM.
