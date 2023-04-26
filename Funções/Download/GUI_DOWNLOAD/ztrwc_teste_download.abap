@@ -108,6 +108,19 @@ FORM zf_prepara_download.
     vl_dt_inicio = wa_ztaula_curso-dt_inicio.  "As variáveis que eram numéricas se tornam strings
     vl_dt_fim    = wa_ztaula_curso-dt_fim.
 
+*--* Início *--* Cria cabeçalho.
+    IF sy-tabix EQ '1'.
+      CONCATENATE 'Nome do Curso'
+                  'Data de Início'
+                  'Data Fim'
+                  'Ativo'
+                  INTO  wa_download-linha SEPARATED BY ';'.
+
+      APPEND wa_download TO t_download.
+      CLEAR  wa_download.
+    ENDIF.
+*--* Fim *--*
+
     CONCATENATE wa_ztaula_curso-nome_curso "Concatenate só aceita strings
                 vl_dt_inicio
                 vl_dt_fim
