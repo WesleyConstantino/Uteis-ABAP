@@ -1,3 +1,3 @@
 "Troca um caractére por outro
 
-replace all OCCURENCES of ',' in c_value with ' '.
+REPLACE ALL OCCURENCES of ',' in c_value with ' '.
