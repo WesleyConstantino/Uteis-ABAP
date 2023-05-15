@@ -14,11 +14,11 @@
 
   "wa_rec-zdtge  = p_wa_arquivo-registro+155(8).
   "wa_rec-znusq  = p_wa_arquivo-registro+731(10).
-  wa_rec-ztprg  = p_wa_arquivo-registro+0(1).
+  "wa_rec-ztprg  = p_wa_arquivo-registro+0(1).
   "wa_rec-BUKRS = p_wa_arquivo-registro+36(4).
   "wa_rec-HBKID = p_wa_arquivo-registro+54(5).
   "wa_rec-HKTID = p_wa_arquivo-registro+54(5).
-  wa_rec-ztxid  = p_wa_arquivo-registro+1(35).
+  "wa_rec-ztxid  = p_wa_arquivo-registro+1(35).
   "wa_rec-zispb  = p_wa_arquivo-registro+36(1).
   "wa_rec-ztpps  = p_wa_arquivo-registro+44(2).
   "wa_rec-zcnpj  = p_wa_arquivo-registro+46(16).
