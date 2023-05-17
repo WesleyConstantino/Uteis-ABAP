@@ -105,6 +105,13 @@ FORM f_variavel .
   BREAK-POINT.
 
   CLEAR vl_cityfrom.
+  
+* Com UP TO 1 ROWS; é semelhante ao SELECT SINGLE pois pega somente o primeiro registro, porém neste caso não há necessidade de passar todos os campos chaves na condição WHERE.
+    SELECT znusq UP TO 1 ROWS
+      INTO lv_znusq
+      FROM zfipixt_retreg
+      WHERE znusq = lv_process.
+    ENDSELECT.
 
 * Com mais variáveis
   SELECT SINGLE cityfrom cityto
