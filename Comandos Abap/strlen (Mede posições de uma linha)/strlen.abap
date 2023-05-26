@@ -8,4 +8,4 @@ LOOP AT ti_arquivo INTO DATA(wa_arquivo).
         MESSAGE s398 WITH text-e09 wa_lista-name text-e10 space DISPLAY LIKE c_e.
         EXIT. "Ignorar arquivo !
       ENDIF.
-ENDLOOP
+ENDLOOP.
