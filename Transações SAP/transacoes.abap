@@ -15,4 +15,5 @@ SE93 - Criação e transações.
 ZDOC_CREATE - Criação de documentação.
 SM30 - Manipulação dos dados de uma tabela.
 J1BNFE - Verificar nota PI.
+BAPI - Procurar Bapis.
 zrequest - Transportar Request e criar Request cópia.
