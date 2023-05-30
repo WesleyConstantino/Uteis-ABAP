@@ -1,5 +1,5 @@
 "CONV serve para converter um dado antes de passar para uma variável.
-Ëx: 
+"Ex: 
 
 DATA text TYPE c LENGTH 255.
 
