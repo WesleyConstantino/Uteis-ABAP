@@ -17,4 +17,6 @@ SM30 - Manipulação dos dados de uma tabela.
 J1BNFE - Verificar nota PI.
 BAPI - Procurar Bapis.
 SHDB - Batch Input.
+SMARTFORMS - Transação para criação de Smart Forms.
+SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
 zrequest - Transportar Request e criar Request cópia.
