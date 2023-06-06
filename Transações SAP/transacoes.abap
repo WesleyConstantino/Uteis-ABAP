@@ -10,6 +10,7 @@ SE19 - Implentar Badis.
 SE24 - Criação e visualização de classes.
 SE37 - Criação e visualização de funções.
 SE38 - Criação e visualização de reports.
+SE78 - Subir um arquivo de imagem para o SAP.
 SE80 - Criação e visualização de programas em geral.
 SE93 - Criação e transações.
 ZDOC_CREATE - Criação de documentação.
@@ -18,5 +19,6 @@ J1BNFE - Verificar nota PI.
 BAPI - Procurar Bapis.
 SHDB - Batch Input.
 SMARTFORMS - Transação para criação de Smart Forms.
+I18N - Mudar editor de texto do Smart Forms.
 SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
 zrequest - Transportar Request e criar Request cópia.
