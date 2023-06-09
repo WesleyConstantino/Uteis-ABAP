@@ -10,6 +10,7 @@ SE19 - Implentar Badis.
 SE24 - Criação e visualização de classes.
 SE37 - Criação e visualização de funções.
 SE38 - Criação e visualização de reports.
+SE73 - Configurações relacionadas a fontes. Podemos cricar códigos de barras e QR Code para usar no Smart Forms.
 SE78 - Subir um arquivo de imagem para o SAP.
 SE80 - Criação e visualização de programas em geral.
 SE93 - Criação e transações.
