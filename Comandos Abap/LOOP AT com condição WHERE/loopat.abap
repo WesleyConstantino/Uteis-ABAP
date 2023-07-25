@@ -7,3 +7,20 @@ Ex:
   "    EXIT.
   "  ENDIF.
   ENDLOOP.
+
+*******************************************************************
+Outras formas:
+
+*1:
+LOOP AT itab where field1(1) EQ '5'. 
+  "SELECT 
+       --- 
+   "FROM 
+       ---
+   "INTO CORRESPONDING FIELDS OF itab2
+   "WHERE 
+       ---
+    "APPEND: itab2.
+    "CLEAR: itab2.
+  "ENDSELECT.
+ENDLOOP.
