@@ -9,7 +9,7 @@ Ex:
   ENDLOOP.
 
 *******************************************************************
-Outras formas:
+*Outras formas:
 
 *Forma 1:
 LOOP AT itab where field1(1) EQ '5'. 
@@ -24,7 +24,7 @@ LOOP AT itab where field1(1) EQ '5'.
     "CLEAR: itab2.
   "ENDSELECT.
 ENDLOOP.
-
+*----------------------------------------------*
 *Forma 2: (com Range)
 data: it_itab1 type standard table of selopt,
           s_itab1 type selopt.
