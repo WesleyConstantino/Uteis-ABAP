@@ -24,4 +24,5 @@ SHDB - Batch Input.
 SMARTFORMS - Transação para criação de Smart Forms.
 I18N - Mudar editor de texto do Smart Forms.
 SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
+SU01 - Alterar senhas de usuários SAP.
 zrequest - Transportar Request e criar Request cópia.
