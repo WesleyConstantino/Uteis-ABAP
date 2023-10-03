@@ -1,5 +1,6 @@
 "Modifica 
 
 ***************************************************************************************************************************************
-"Exemplo real:
-MODIFY zpficat_pinsumos FROM TABLE gt_zpficat_pinsumos_modify.
+"Exemplo real: 
+"A tabela é modificada com os dados da workarea.
+MODIFY TG_TAB_STATUS FROM WA_TAB_STATUS.
