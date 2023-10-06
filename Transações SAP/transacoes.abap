@@ -1,5 +1,6 @@
 "Transações SAP:
 EWK1 - Pesquisar a utilização de funções, classes, métodos, comandos... em programas Z* do SAP "é a web do SAP".
+STMS - Transporte de request.
 SE01 - Criação, alteração e visualização de requests.
 SE09 - Criação e visualização de requests.
 SE11 - Dicionário de daados.
