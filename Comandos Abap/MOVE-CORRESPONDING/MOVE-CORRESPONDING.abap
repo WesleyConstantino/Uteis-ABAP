@@ -1,5 +1,5 @@
-"Move o que for correspondente de wa_zpficat_pinsumos para wa_zpficat_pinsumos_modify
+"Move o que for correspondente de pt_vbup_aux para pt_vbup.
 
 ***************************************************************************************************************************************
 "Exemplo real:
-MOVE-CORRESPONDING wa_zpficat_pinsumos TO wa_zpficat_pinsumos_modify.
+MOVE-CORRESPONDING pt_vbup_aux TO pt_vbup.
