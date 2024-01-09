@@ -4,3 +4,4 @@
 "Ctrl + D = Duplica uma linha de código.
 "Ctrl + , = Comenta uma linha de código.
 "Ctrl + . = Descomenta uma linha de código.
+"Alt + Botão direito do mouse = Seleciona várias linhas do código tornando possível dar espaço ou escrever em todas elas ao mesmo tempo.
