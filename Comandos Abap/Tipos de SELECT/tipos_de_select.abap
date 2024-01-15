@@ -209,3 +209,34 @@ FORM f_agregados .
   CLEAR st_spfli.
 
 ENDFORM.                    " f_agregados
+
+*&---------------------------------------------------------------------*
+*&      Form  f_appending_table
+*&---------------------------------------------------------------------*
+FORM f_appending_table .
+
+"Exemplo 1:
+* Adiciona os regitros de uma tabela sem sobrepor os dados da outra que está recebendo os dados.
+      SELECT bukrs lifnr augdt augbl zuonr gjahr belnr zlspr hbkid anfbn mansp hktid
+        FROM bsik 
+        APPENDING TABLE it_bsid
+        FOR ALL ENTRIES IN it_bkpf
+        WHERE bukrs = wl_ztbint0076-bukrs
+          AND belnr = it_bkpf-belnr
+          AND gjahr = it_bkpf-gjahr.
+
+"Exemplo 2:
+* Adiciona os regitros correspondentes de uma tabela sem sobrepor os dados da outra que está recebendo os dados.
+*Esse exemplo é usado quando as tabelas forem diferentes.
+            SELECT bukrs augdt augbl zuonr gjahr belnr blart
+              FROM bsas 
+              APPENDING CORRESPONDING FIELDS OF TABLE it_bsad
+              FOR ALL ENTRIES IN it_bkpf
+              WHERE bukrs = wl_ztbint0076-bukrs
+                AND belnr = it_bkpf-belnr
+                AND gjahr = it_bkpf-gjahr
+                AND augbl <> it_bkpf-belnr.
+
+
+ENDFORM.                    " f_appending_table
+
