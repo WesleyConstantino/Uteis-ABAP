@@ -31,6 +31,8 @@ PERFORM f_corresponding_fields.
 *  Seleciona conforme informações específicas ( MAX, MIN, AVG, SUM, COUNT )
 PERFORM f_agregados.
 
+*Adiciona os novos registros sem apagar os registros antigos de uma tabela.
+PERFORM f_appending_table.
 
 *&---------------------------------------------------------------------*
 *&      Form  f_simples
