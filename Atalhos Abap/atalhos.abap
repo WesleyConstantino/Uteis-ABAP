@@ -5,4 +5,6 @@
 "Ctrl + , = Comenta uma linha de código.
 "Ctrl + . = Descomenta uma linha de código.
 "Ctrl + Y = Selecionar várias linhas de uma tabela na SE11 ou selecionar uma request, tasck ou algo do tipo na SE09 para poder copiar (coisa que não dá pra fazer só com o mouse).
+"Ctrl + U = Deixa o texto maiúsculo.
+"Ctrl + L = Deixa o texto minúsculo.
 "Alt + Botão direito do mouse = Seleciona várias linhas do código tornando possível dar espaço ou escrever em todas elas ao mesmo tempo.
