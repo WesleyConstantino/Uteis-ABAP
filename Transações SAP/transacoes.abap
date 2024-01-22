@@ -15,7 +15,7 @@ SE73 - Configurações relacionadas a fontes. Podemos cricar códigos de barras 
 SE78 - Subir um arquivo de imagem para o SAP.
 SE80 - Criação e visualização de programas em geral.
 SE93 - Criação e transações.
-ST22 - Mostra os Dumps que rodaram do ambiente.
+ST22 - Mostra os Dumps que rodaram do ambiente (erros em tempo de execussão).
 ZDOC_CREATE - Criação de documentação.
 SM12 - Ver quem está logado no ambiente.
 SM30 - Manipulação dos dados de uma tabela.
