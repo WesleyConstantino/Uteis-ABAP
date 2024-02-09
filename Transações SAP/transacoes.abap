@@ -29,3 +29,4 @@ SPAD - Admistração de impressoras, criação novos formatos de páginas para S
 SU01 - Alterar senhas de usuários SAP.
 zrequest - Transportar Request e criar Request cópia.
 SREPO - Serve para comparar requests de ambientes diferentes.
+SU53 - Verifica as autorizações de um usuário dentro de uma transação.
