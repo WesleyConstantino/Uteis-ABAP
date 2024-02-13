@@ -3,10 +3,10 @@
 
 "Variáveis de mensagens:
  
-SY-MSGV1 = Texto
-SY-MSGV2 = Texto
-SY-MSGV3 = Texto
-SY-MSGV4 = Texto
-SY-MSGID = ID
-SY-MSGNO = Número
-SY-MSGTY = Tipo
+SY-MSGV1 = Texto da mensagem.
+SY-MSGV2 = Texto da mensagem.
+SY-MSGV3 = Texto da mensagem.
+SY-MSGV4 = Texto da mensagem.
+SY-MSGID = ID da mensagem.
+SY-MSGNO = Número da mensagem.
+SY-MSGTY = Tipo da mensagem.
