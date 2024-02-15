@@ -9,3 +9,4 @@
 "Ctrl + L = Deixa o texto minúsculo.
 "Ctrl + O = Navegar para uma linha específica do código.
 "Alt + Botão direito do mouse = Seleciona várias linhas do código tornando possível dar espaço ou escrever em todas elas ao mesmo tempo.
+"Windows + V = Últimos ítens copiados.
