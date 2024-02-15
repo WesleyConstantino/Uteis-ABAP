@@ -9,6 +9,7 @@ SE14 - Atualizar estrutura de tabela e ajustá-la ao banco de dados, após modif
 SE16 - Visualizar dados de uma tabela.
 SE18 - Procurar ou Badis.
 SE19 - Implentar Badis.
+SE20 - Visualizar enhancements.
 SE24 - Criação e visualização de classes.
 SE37 - Criação e visualização de funções.
 SE38 - Criação e visualização de reports.
