@@ -31,3 +31,4 @@ SU01 - Alterar senhas de usuários SAP.
 zrequest - Transportar Request e criar Request cópia.
 SREPO - Serve para comparar requests de ambientes diferentes.
 SU53 - Verifica as autorizações de um usuário dentro de uma transação.
+CMOD - trocar textos de elementos/campos de tabela de dados standard.
