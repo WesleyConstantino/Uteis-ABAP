@@ -1,3 +1,4 @@
+"Ctrl + A = Seleciona todas as linhas do código.
 "Ctrl + F = Procurar palavra chave no código ou auterar todas as ocorrencias de uma palavra.
 "Ctrl + C = Copia.
 "Ctrl + V = Cola.
