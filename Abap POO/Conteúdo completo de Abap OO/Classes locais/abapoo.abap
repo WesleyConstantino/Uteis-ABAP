@@ -21,6 +21,10 @@ ENDCLASS.
 "Implementação da classe
 CLASS lcl_cliente IMPLEMENTATION.
   METHOD set_cpf.
+   IF strlen( id_cpf ) NE 11.
+     MESSAGE 'Insira um número de CPF com 11 carácteres!' TYPE 'S' DISPLAY LIKE 'E'.
+     RETURN. "Return sai do método
+   ENDIF.
    me->md_cpf = id_cpf.  "Atriguto md_cpf receberá o valor do parâmetro de entrada id_cpf
   ENDMETHOD.
 
