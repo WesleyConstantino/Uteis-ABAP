@@ -15,7 +15,6 @@ CLASS lcl_cliente DEFINITION.
   PROTECTED SECTION.
   PRIVATE SECTION.
     DATA md_cpf  TYPE CHAR11. "Atributo
-    DATA md_nome TYPE CHAR50. "Atributo
 ENDCLASS.
 
 "Implementação da classe
