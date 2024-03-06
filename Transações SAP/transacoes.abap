@@ -19,7 +19,7 @@ SE80 - Criação e visualização de programas em geral.
 SE93 - Criação e transações.
 ST22 - Mostra os Dumps que rodaram do ambiente (erros em tempo de execussão).
 ZDOC_CREATE - Criação de documentação.
-SM12 - Ver quem está logado no ambiente.
+SM12 - Ver quem está logado no ambiente / Desbloquear objeto, caso tenha um usuário preso nele.
 SM30 - Manipulação dos dados de uma tabela.
 J1BNFE - Verificar nota PI.
 BAPI - Procurar Bapis.
