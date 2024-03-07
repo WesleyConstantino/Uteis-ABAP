@@ -64,6 +64,8 @@ DATA: ol_filho TYPE REF TO lcl_filho,
   CREATE OBJECT ol_filho.
   ol_pai = NEW lcl_pai( ).
 
+**DICA: Ctrl + espaço dá um auto complete no método e puxa seus atributos e toda a estrutura.**
+
 "O método abaixo possuí dois atributos, obrigatóriamente tenho que passar os dois, quando chamo o método:
   ol_pai->set_cores(
     EXPORTING
