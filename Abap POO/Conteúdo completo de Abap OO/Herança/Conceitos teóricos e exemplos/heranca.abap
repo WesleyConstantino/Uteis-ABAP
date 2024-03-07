@@ -36,3 +36,4 @@ CLASS lcl_filho DEFINITION INHERITING FROM lcl_pai.
         RETURNING
         VALUE(r_cor_bone) TYPE CHAR20.
 ENDCLASS.
+"(...)
