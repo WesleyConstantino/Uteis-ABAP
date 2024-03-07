@@ -37,3 +37,18 @@ CLASS lcl_filho DEFINITION INHERITING FROM lcl_pai.
         VALUE(r_cor_bone) TYPE CHAR20.
 ENDCLASS.
 "(...)
+"(...)
+"(...)
+START-OF-SELECTION.
+
+DATA: ol_filho TYPE REF TO lcl_filho.
+
+  CREATE OBJECT ol_filho.
+
+  "A classe filho herda os métodos e atributos públicos ou protegidos da classse pai:
+  ol_filho->set_cores(
+    EXPORTING
+      id_cor_calca  = 'Branca'
+  ).
+
+
