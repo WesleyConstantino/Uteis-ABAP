@@ -39,6 +39,7 @@ ENDCLASS.
 "(...)
 "(...)
 "(...)
+"Início da execusão do programa, fora da classe
 START-OF-SELECTION.
 
 DATA: ol_filho TYPE REF TO lcl_filho.
