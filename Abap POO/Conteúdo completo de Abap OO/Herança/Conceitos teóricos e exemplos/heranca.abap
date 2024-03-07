@@ -1,5 +1,8 @@
 "Herança
 
+"No exemplo abaixo, temos uma classe pai e uma classe filha. A classe filha herda os métodos e atrigutoa da classo pai que não forem 
+"privados:
+
 *******Definição da classe pai**********
 CLASS lcl_pai DEFINITION.
   PUBLIC SECTION.
