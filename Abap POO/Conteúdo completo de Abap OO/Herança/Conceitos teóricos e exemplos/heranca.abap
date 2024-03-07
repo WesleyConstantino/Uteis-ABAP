@@ -1,6 +1,6 @@
 "Herança
 
-*Definição da classe pai
+*******Definição da classe pai**********
 CLASS lcl_pai DEFINITION.
   PUBLIC SECTION.
   "Todos os métodos públicos podem ser acessados fora da classe e serão herdados pela classe filha.
@@ -23,7 +23,7 @@ CLASS lcl_pai DEFINITION.
     DATA md_cor_gravata  TYPE CHAR10.
 ENDCLASS.
 
-*Definição da classe filho
+*****Definição da classe filho******
 CLASS lcl_filho DEFINITION INHERITING FROM lcl_pai.
   PUBLIC SECTION.
    DATA md_cor_bone  TYPE CHAR20.
