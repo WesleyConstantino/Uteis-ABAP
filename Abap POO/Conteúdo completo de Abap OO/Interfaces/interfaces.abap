@@ -35,7 +35,7 @@ ENDCLASS.
 *zcl_filho
 CLASS zcl_filho IMPLEMENTATION.
  METHOD if_cumprimentar~cumprimentar.
-  WRITE:/ 'Olá, pessoal!'.
+  WRITE:/ 'Salve, galera!'.
  ENDMETHOD.
 ENDCLASS.
 
