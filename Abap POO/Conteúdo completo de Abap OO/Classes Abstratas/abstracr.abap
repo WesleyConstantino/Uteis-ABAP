@@ -1,3 +1,8 @@
+*Classes abstratas
+
+"São classes que servem como base para outras classes, não podem ser instanciadas,
+são classes incompletas.
+
 REPORT ZR_CLASSES_ABSTRATAS.
 
 *IMPLEMENTAÇÕES DE CLASSES:
