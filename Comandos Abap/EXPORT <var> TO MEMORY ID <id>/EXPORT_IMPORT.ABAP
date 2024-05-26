@@ -45,6 +45,9 @@ IMPORT v_1 FROM MEMORY ID 'V1'.
 "O resultado do write abaixo será "Wesley".
 WRITE: v_1.
 
+"Os comandos abaixo limpam a memória:
+FREE MEMORY ID 'V1'.
+
 
 
 
