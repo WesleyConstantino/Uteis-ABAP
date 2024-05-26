@@ -48,6 +48,9 @@ WRITE: v_1.
 "Os comandos abaixo limpam a memória:
 FREE MEMORY ID 'V1'.
 
+"Limpeza de Memória: É uma boa prática limpar a memória após o uso para evitar desperdício de recursos.
+"Para isso, pode-se usar o comando FREE MEMORY ID <identificador>..
+
 
 
 
