@@ -8,6 +8,7 @@
 
 *Principais ifotipos do módulo PA:
 "0000 - Infotipo de ações para um funcionário.
+"0001 - Infotipo que faz a ligação entre funcionário e empresa. 
 
 *Como saber em qual tabela estão os dados de um infotipo: basta juntar as síglas PA + o número do infotipo.
 "Ex: quero saber o nome da tabela onde estão os dados do infotipo 0021. PA + 0021 = PA0021 (nome da tabela).
