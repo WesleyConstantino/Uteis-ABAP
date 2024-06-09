@@ -1,4 +1,4 @@
-*Transações de HCM:
+*Transações de HCM do módulo PA:
 "PA20 - Consulta de funcionários.
 "PA30 - Permite tomar ações encima de cada infotipo.
 
