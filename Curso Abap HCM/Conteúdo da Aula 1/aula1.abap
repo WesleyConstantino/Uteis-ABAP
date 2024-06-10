@@ -4,7 +4,7 @@
 
 *Infotipos:
 "Oque é um infotipo: é uma estrutura que armazena os dados de um funcionário dentro do banco de dados. O infotipo é um código numérico, normalmente de quatro dígitos. Existem submodulos de infotipos, na 
-"aula 1, formam apresentados apenas infotipos do submódulo PA, os infotipos deste módulo sempre começam com 00.
+"aula 1, formam apresentados apenas infotipos do submódulo PA, os infotipos deste módulo sempre começam em 0000 e vão até 0999.
 
 *Principais ifotipos do submódulo PA abordados na aula::
 "0000 - Infotipo de ações para um funcionário.
