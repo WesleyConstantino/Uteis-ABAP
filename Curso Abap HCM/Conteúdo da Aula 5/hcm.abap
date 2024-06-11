@@ -8,7 +8,9 @@
 "Criando um report que usa tabela lógica de HCM (criação do primeiro repor para HCM).
 
 "Reports criados:
+**********************************************************************************************************************************************************
 
+"Report 1:
 REPORT Z_TESTE_WESLEY.
 
 "O Infotype 0001 (Organizational Assignment) é declarado, indicando que os dados deste Infotype serão utilizados no report:
@@ -31,3 +33,9 @@ PROVIDE * FROM P0001 BETWEEN pn-begda AND pn-endda.
           p0001-begda.
 
 ENDPROVIDE.
+
+"Explicação do report 1:
+"O que o report acima faz: Este report lê os registros de funcionários a partir da tabela PERNR. Para cada funcionário, ele obtém os dados do Infotype 
+"0001 (P0001) dentro do período especificado (pn-begda e pn-endda). Em seguida, ele exibe na tela o número de identificação do funcionário (PERNR), a 
+"posição (STELL) e a data de início (BEGDA).
+**********************************************************************************************************************************************************
