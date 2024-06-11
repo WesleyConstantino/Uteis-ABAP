@@ -13,6 +13,7 @@
 *Comandos Abap específicos do módulo HCM:
 "INFOTYPES - serve para declarar no código os infotipos que usaremos.
 "PROVIDE - serve para ler os dados de um infotipo ou vários infotipos ao mesmo tempo (funciona como um loop).
+"GET - Lê um registro UMA tabela e para cada registro, o bloco de código subsequente é executado (comando não exclusivo somente do HCM). 
 
 *Campo de tabela inpotante no HCM:
 "PENR - PERNR é um identificador único atribuído a cada funcionário dentro do sistema SAP HCM. Ele é um campo chave para talvez todas as tabelas do HCM.
