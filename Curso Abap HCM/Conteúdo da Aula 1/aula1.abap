@@ -1,6 +1,9 @@
-*Transações de HCM do submódulo PA abordadas na aula::
+*Transações de HCM do submódulo PA abordadas na aula:
 "PA20 - Consulta de funcionários.
 "PA30 - Permite tomar ações encima de cada infotipo.
+
+*O que é o submódulo de PA:
+"PA - Admistração de pessoal (submódulo referente a armazenamento das informações de funcionários).
 
 *Infotipos:
 "Oque é um infotipo: é uma estrutura que armazena os dados de um funcionário dentro do banco de dados. O infotipo é um código numérico, normalmente de quatro dígitos. Existem submodulos de infotipos, na 
