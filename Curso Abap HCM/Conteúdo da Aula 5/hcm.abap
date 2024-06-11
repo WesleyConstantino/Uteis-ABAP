@@ -1,5 +1,18 @@
+*Transações de HCM abordadas na aula:
+"SE36 - criar, visualizar e editar tabelas lógicas.
+
+*O que são tabelas lógicas:
+"No SAP HCM (Human Capital Management), tabelas lógicas são utilizadas para simplificar a gestão de dados de recursos humanos. Elas permitem que você acesse informações armazenadas em várias tabelas físicas através de uma única interface lógica. Isso facilita a consulta e manipulação de dados sem a necessidade de lidar diretamente com a complexidade das tabelas subjacentes.
+
+*Tabelas lógicas:
+"PNP - tabela lógica para reculperar informações do submódulo PA.
+"PNPCE - tabela lógica para reculperar informações do submódulo PA e TM (é uma versão melhorada da PNP).
+"PCH - tabela lógica para reculperar informações do submódulo OM.
+"PAP - tabela lógica para reculperar informações de recrutamento. 
+
+*Comandos Abap específicos do módulo HCM:
 "INFOTYPES - serve para declarar no código os infotipos que usaremos.
-"Ex do uso do comando INFOTYPES: "INFOTYPES: 0001."
+"PROVIDE - serve para ler os dados de um infotipo ou vários infotipos ao mesmo tempo (funciona como um loop).
 
 *Campo de tabela inpotante no HCM:
 "PENR - PERNR é um identificador único atribuído a cada funcionário dentro do sistema SAP HCM. Ele é um campo chave para talvez todas as tabelas do HCM.
