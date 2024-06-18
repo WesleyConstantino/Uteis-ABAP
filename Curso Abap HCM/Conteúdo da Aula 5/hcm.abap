@@ -53,3 +53,34 @@ ENDPROVIDE.
 "0001 (P0001) dentro do período especificado (pn-begda e pn-endda). Em seguida, ele exibe na tela o número de identificação do funcionário (PERNR), a 
 "posição (STELL) e a data de início (BEGDA).
 **********************************************************************************************************************************************************
+
+"Report 2:
+REPORT Z_TESTE_WESLEY.
+
+"O Infotype 0001 (Organizational Assignment) é declarado, indicando que os dados deste Infotype serão utilizados no report:
+INFOTYPES: 0001.
+
+"A tabela de banco de dados padrão PERNR é declarada. Esta tabela contém o número de identificação dos funcionários.
+TABLES: pernr.
+
+START-OF-SELECTION.
+
+"O comando GET lê os dados de cada registro da tabela PERNR em uma iteração. Cada vez que um número de funcionário é lido, o bloco de código subsequente
+"é executado:
+GET pernr.
+
+"Makro rp_provide_from_last, serve para reculperar o registro mais recente de um infotipo.
+"p0001 é o infotipo que estamos acessando.
+"space indica que o infotipo não possui nenhum subtipo. Caso possisse, deveria colocar o subtipo no lugar do comando space.
+"pn-begda pn-endda indica o período que estou querendo acessar do infotipo.
+rp_provide_from_last p0001 space pn-begda pn-endda.
+ "pnp-sw-found = 1 sinaliza que foi encontrado um registro na makro.
+ IF pnp-sw-found = 1.
+   WRITE:/ pernr-pernr,
+           p0001-stell,
+           pn-begda,
+           pn-endda.
+ ELSE.
+   "REJECT é semelhante ao comando CONTINUE.
+   REJECT.
+ ENDIF.
