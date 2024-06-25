@@ -63,9 +63,9 @@ SELECTION-SCREEN: BEGIN OF BLOCK b WITH FRAME TITLE TEXT-002.
   SELECTION-SCREEN:   SKIP.
   PARAMETERS:         p_lrng(2)    TYPE n OBLIGATORY DEFAULT '01'.
   SELECTION-SCREEN:   SKIP.
-  PARAMETERS: p_excomm AS CHECKBOX DEFAULT con_false,
-              p_nohits AS CHECKBOX DEFAULT con_false,
-              p_edit   AS CHECKBOX DEFAULT space.
+*  PARAMETERS: p_excomm AS CHECKBOX DEFAULT con_false,
+*              p_nohits AS CHECKBOX DEFAULT con_false,
+*              p_edit   AS CHECKBOX DEFAULT space.
 SELECTION-SCREEN: END   OF BLOCK b.
 
 SELECTION-SCREEN: BEGIN OF BLOCK c WITH FRAME TITLE TEXT-003.
@@ -83,21 +83,25 @@ START-OF-SELECTION.
         p_excl2 TYPE c LENGTH 80, "Não usar
         p_excl3 TYPE c LENGTH 80. "Não usar
 
+  DATA: p_excomm TYPE c LENGTH 1 VALUE 'X', "Ignorar comentários.
+        p_nohits TYPE c LENGTH 1, "Não usar
+        p_edit   TYPE c LENGTH 1. "Não usar
+
   DATA: p_strg1 TYPE c LENGTH 80, "Parametro de pesquisa 1.
         p_strg2 TYPE c LENGTH 80. "Parametro de pesquisa 2.
 
 IF  rb_xk01 EQ 'X'.
-  p_strg1 = 'xk01'.
+  p_strg1 = '''xk01'''.
 ELSEIF rb_xk02 EQ 'X'.
-  p_strg1 = 'xk02'.
+  p_strg1 = '''xk02'''.
 ELSEIF rb_xk03 EQ 'X'.
-  p_strg1 = 'xk03'.
+  p_strg1 = '''xk03'''.
 ELSEIF rb_xd01 EQ 'X'.
-  p_strg1 = 'xd01'.
+  p_strg1 = '''xd01'''.
 ELSEIF rb_xd02 EQ 'X'.
-  p_strg1 = 'xd02'.
+  p_strg1 = '''xd02'''.
 ELSEIF rb_xd03 EQ 'X'.
-  p_strg1 = 'xd03'.
+  p_strg1 = '''xd03'''.
 ENDIF.
 
 *WS - Migração Mignow - 25/06/24
