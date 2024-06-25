@@ -61,7 +61,7 @@ SELECTION-SCREEN: BEGIN OF BLOCK b WITH FRAME TITLE TEXT-002.
 
 *WS - Migração Mignow - 25/06/24
   SELECTION-SCREEN:   SKIP.
-  PARAMETERS:         p_lrng(2)    TYPE n OBLIGATORY DEFAULT '01'.
+*  PARAMETERS:         p_lrng(2)    TYPE n OBLIGATORY DEFAULT '01'.
   SELECTION-SCREEN:   SKIP.
 *  PARAMETERS: p_excomm AS CHECKBOX DEFAULT con_false,
 *              p_nohits AS CHECKBOX DEFAULT con_false,
@@ -86,6 +86,8 @@ START-OF-SELECTION.
   DATA: p_excomm TYPE c LENGTH 1 VALUE 'X', "Ignorar comentários.
         p_nohits TYPE c LENGTH 1, "Não usar
         p_edit   TYPE c LENGTH 1. "Não usar
+
+  DATA p_lrng TYPE n LENGTH 2 VALUE '01'. "Não usar
 
   DATA: p_strg1 TYPE c LENGTH 80, "Parametro de pesquisa 1.
         p_strg2 TYPE c LENGTH 80. "Parametro de pesquisa 2.
