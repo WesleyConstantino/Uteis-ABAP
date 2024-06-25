@@ -33,9 +33,9 @@ TYPES: t_tab_long_lines TYPE STANDARD TABLE OF t_abapsource_long.  "CB
 *-----------------------------------------------------------------------
 *-----------------------------------------------------------------------
 SELECTION-SCREEN: BEGIN OF BLOCK a WITH FRAME TITLE TEXT-001.
-  SELECT-OPTIONS:     s_devc FOR  tadir-devclass OBLIGATORY MEMORY ID dvc.
-  SELECT-OPTIONS:     s_rest FOR  tadir-obj_name. "MEMORY ID dvc. "Nome do obj
-  PARAMETER:          p_conpck AS CHECKBOX DEFAULT 'X'.
+  SELECT-OPTIONS:     s_devc FOR  tadir-devclass OBLIGATORY MEMORY ID dvc. "Pacote.
+  SELECT-OPTIONS:     s_rest FOR  tadir-obj_name NO-DISPLAY.  "Campo oculto   "Nome do obj   "MEMORY ID dvc.
+*  PARAMETER:          p_conpck AS CHECKBOX DEFAULT 'X'.
   SELECTION-SCREEN:   SKIP.
 
 *WS - Migração Mignow - 25/06/24
@@ -53,20 +53,31 @@ SELECTION-SCREEN: BEGIN OF BLOCK a WITH FRAME TITLE TEXT-001.
 
 SELECTION-SCREEN: END   OF BLOCK a.
 
-SELECTION-SCREEN: BEGIN OF BLOCK b WITH FRAME TITLE TEXT-002.
+*WS - Migração Mignow - 25/06/24
+
+INITIALIZATION.
+*Apenda valor inicial para o campo s_devc
+  s_devc-sign = 'I'.
+  s_devc-option = 'EQ'.
+  s_devc-low = 'Z*'.
+  APPEND s_devc.
+
+*SELECTION-SCREEN: BEGIN OF BLOCK b WITH FRAME TITLE TEXT-002.
 *WS - Migração Mignow - 25/06/24
 *PARAMETERS:         p_excl1(80),
 *                    p_excl2(80),
 *                    p_excl3(80).
 
 *WS - Migração Mignow - 25/06/24
-  SELECTION-SCREEN:   SKIP.
+*  SELECTION-SCREEN:   SKIP.
 *  PARAMETERS:         p_lrng(2)    TYPE n OBLIGATORY DEFAULT '01'.
-  SELECTION-SCREEN:   SKIP.
+*  SELECTION-SCREEN:   SKIP.
 *  PARAMETERS: p_excomm AS CHECKBOX DEFAULT con_false,
 *              p_nohits AS CHECKBOX DEFAULT con_false,
 *              p_edit   AS CHECKBOX DEFAULT space.
-SELECTION-SCREEN: END   OF BLOCK b.
+*SELECTION-SCREEN: END   OF BLOCK b.
+
+*WS - Migração Mignow - 25/06/24
 
 SELECTION-SCREEN: BEGIN OF BLOCK c WITH FRAME TITLE TEXT-003.
   PARAMETERS: p_prog AS CHECKBOX DEFAULT con_true,                "Não ocultar
@@ -88,6 +99,8 @@ START-OF-SELECTION.
         p_edit   TYPE c LENGTH 1. "Não usar
 
   DATA p_lrng TYPE n LENGTH 2 VALUE '01'. "Não usar
+
+  DATA  p_conpck TYPE c LENGTH 1 VALUE 'X'.
 
   DATA: p_strg1 TYPE c LENGTH 80, "Parametro de pesquisa 1.
         p_strg2 TYPE c LENGTH 80. "Parametro de pesquisa 2.
