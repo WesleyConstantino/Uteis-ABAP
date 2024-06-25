@@ -55,12 +55,12 @@ SELECTION-SCREEN: END   OF BLOCK a.
 
 *WS - Migração Mignow - 25/06/24
 
-INITIALIZATION.
-*Apenda valor inicial para o campo s_devc
-  s_devc-sign = 'I'.
-  s_devc-option = 'EQ'.
-  s_devc-low = 'Z*'.
-  APPEND s_devc.
+*INITIALIZATION.
+**Apenda valor inicial para o campo s_devc
+*  s_devc-sign = 'I'.
+*  s_devc-option = 'EQ'.
+*  s_devc-low = 'Z*'.
+*  APPEND s_devc.
 
 *SELECTION-SCREEN: BEGIN OF BLOCK b WITH FRAME TITLE TEXT-002.
 *WS - Migração Mignow - 25/06/24
@@ -105,19 +105,19 @@ START-OF-SELECTION.
   DATA: p_strg1 TYPE c LENGTH 80, "Parametro de pesquisa 1.
         p_strg2 TYPE c LENGTH 80. "Parametro de pesquisa 2.
 
-IF  rb_xk01 EQ 'X'.
-  p_strg1 = '''xk01'''.
-ELSEIF rb_xk02 EQ 'X'.
-  p_strg1 = '''xk02'''.
-ELSEIF rb_xk03 EQ 'X'.
-  p_strg1 = '''xk03'''.
-ELSEIF rb_xd01 EQ 'X'.
-  p_strg1 = '''xd01'''.
-ELSEIF rb_xd02 EQ 'X'.
-  p_strg1 = '''xd02'''.
-ELSEIF rb_xd03 EQ 'X'.
-  p_strg1 = '''xd03'''.
-ENDIF.
+  IF  rb_xk01 EQ 'X'.
+    p_strg1 = '''xk01'''.
+  ELSEIF rb_xk02 EQ 'X'.
+    p_strg1 = '''xk02'''.
+  ELSEIF rb_xk03 EQ 'X'.
+    p_strg1 = '''xk03'''.
+  ELSEIF rb_xd01 EQ 'X'.
+    p_strg1 = '''xd01'''.
+  ELSEIF rb_xd02 EQ 'X'.
+    p_strg1 = '''xd02'''.
+  ELSEIF rb_xd03 EQ 'X'.
+    p_strg1 = '''xd03'''.
+  ENDIF.
 
 *WS - Migração Mignow - 25/06/24
 
@@ -764,6 +764,23 @@ FORM scan_prog USING    i_devclass   TYPE devclass
            NOT l_str_source-line CS p_excl3 ) AND
          ( p_excomm IS INITIAL OR
            l_str_source-line(1) <> '*' ).
+
+*WS - Migração Mignow - 25/06/24
+        DATA: lv_line_split_1 TYPE char255,
+              lv_line_split_2 TYPE char255,
+              lv_line         TYPE char255.
+
+        lv_line = l_str_source-line.
+
+        " Verifica se o primeiro caractere é um espaço
+        IF lv_line+0(1) = ' '.
+          lv_line = lv_line+1.  " Remove o primeiro caractere (espaço)
+        ENDIF.
+
+        SPLIT lv_line AT '=' INTO lv_line_split_1 lv_line_split_2.
+
+*WS - Migração Mignow - 25/06/24
+
         l_flg_write = con_true.
         l_cnt_line  = 0.
       ENDIF.
