@@ -750,11 +750,39 @@ FORM scan_prog USING    i_devclass   TYPE devclass
   l_str_lines-devclass = i_devclass.
   l_str_lines-progname = i_objname.
 
+*WS - Migração Mignow - 25/06/24
+DATA: lt_call_function TYPE TABLE OF t_str_lines,
+      wa_call_function TYPE t_str_lines.
+
+TYPES: BEGIN OF ty_line_split,
+         line     LIKE abapsource-line,
+       END   OF ty_line_split.
+
+       DATA: lt_line_split TYPE TABLE OF ty_line_split.
+*WS - Migração Mignow - 25/06/24
+
 * Search source for selection criteria
   LOOP AT i_tab_source INTO l_str_source.
     g_line_number = sy-tabix.
     CLEAR l_flg_write.
+
+*WS - Migração Mignow - 25/06/24
+
+    IF l_str_source-line CS 'CALL FUNCTION' AND l_str_source-line NS '*'.
+      wa_call_function-line = l_str_source-line.
+      wa_call_function-devclass = l_str_lines-devclass.
+      wa_call_function-progname = l_str_lines-progname.
+      wa_call_function-linno    = l_str_lines-linno.
+
+      APPEND wa_call_function TO lt_call_function.
+      CLEAR wa_call_function.
+    ENDIF.
+
+
     IF l_str_source-line CS p_strg1 AND
+*WS - Migração Mignow - 25/06/24
+*      l_str_source-line CS lv_line_split_2 AND
+*WS - Migração Mignow - 25/06/24
        ( p_strg2 IS INITIAL OR l_str_source-line CS p_strg2 ).
       IF ( p_excl1 IS INITIAL OR
            NOT l_str_source-line CS p_excl1 ) AND
@@ -778,7 +806,10 @@ FORM scan_prog USING    i_devclass   TYPE devclass
         ENDIF.
 
         SPLIT lv_line AT '=' INTO lv_line_split_1 lv_line_split_2.
+        CLEAR lv_line_split_2.
+        CONCATENATE 'CALL FUNCTION' lv_line_split_1 INTO lv_line_split_2.
 
+        APPEND lv_line_split_2 TO lt_line_split.
 *WS - Migração Mignow - 25/06/24
 
         l_flg_write = con_true.
@@ -804,6 +835,11 @@ FORM scan_prog USING    i_devclass   TYPE devclass
     l_str_lines-line  = 'Keine Treffer'(014).
     APPEND l_str_lines TO g_tab_lines.
   ENDIF.
+
+*WS - Migração Mignow - 25/06/24
+   
+
+*WS - Migração Mignow - 25/06/24
 
 ENDFORM.                    " scan_prog
 
