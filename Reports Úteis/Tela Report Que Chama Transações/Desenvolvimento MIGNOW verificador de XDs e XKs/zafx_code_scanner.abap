@@ -832,12 +832,16 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 *      APPEND l_str_lines TO g_tab_lines.
 *      CLEAR l_str_lines.
 
+*WS - Migração Mignow - 25/06/24
+    ENDIF.
+
+*WS - Migração Mignow - 25/06/24
       IF lt_line_split IS NOT INITIAL.
 
         LOOP AT lt_line_split INTO DATA(wa_line_split).
 
-          IF wa_line_split-line CS 'CALL TRANSACTION' AND
-            wa_line_split-line CS l_str_source-line.
+          IF l_str_source-line CP '*CALL TRANSACTION*'. "AND
+             "l_str_source-line CP wa_line_split-line.
 
             l_str_lines-linno = g_line_number.
             l_str_lines-line  = l_str_source-line.
@@ -850,7 +854,6 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 
       ENDIF.
 *WS - Migração Mignow - 25/06/24
-    ENDIF.
 
   ENDLOOP.
 
