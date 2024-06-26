@@ -840,8 +840,8 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 
         LOOP AT lt_line_split INTO DATA(wa_line_split).
 
-          IF l_str_source-line CP '*CALL TRANSACTION*'. "AND
-             "l_str_source-line CP wa_line_split-line.
+          IF l_str_source-line CP '*CALL TRANSACTION*' AND
+             l_str_source-line CP wa_line_split-line.
 
             l_str_lines-linno = g_line_number.
             l_str_lines-line  = l_str_source-line.
