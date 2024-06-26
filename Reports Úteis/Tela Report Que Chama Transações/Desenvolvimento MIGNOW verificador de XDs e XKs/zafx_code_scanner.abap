@@ -751,33 +751,35 @@ FORM scan_prog USING    i_devclass   TYPE devclass
   l_str_lines-progname = i_objname.
 
 *WS - Migração Mignow - 25/06/24
-DATA: lt_call_function TYPE TABLE OF t_str_lines,
-      wa_call_function TYPE t_str_lines.
+*DATA: lt_call_function TYPE TABLE OF t_str_lines,
+*      wa_call_function TYPE t_str_lines.
 
-TYPES: BEGIN OF ty_line_split,
-         line     LIKE abapsource-line,
-       END   OF ty_line_split.
+  TYPES: BEGIN OF ty_line_split,
+           line LIKE abapsource-line,
+         END   OF ty_line_split.
 
-       DATA: lt_line_split TYPE TABLE OF ty_line_split.
+  DATA: lt_line_split TYPE TABLE OF ty_line_split.
 *WS - Migração Mignow - 25/06/24
 
 * Search source for selection criteria
-  LOOP AT i_tab_source INTO l_str_source.
+*WS - Migração Mignow - 25/06/24
+  LOOP AT i_tab_source INTO l_str_source. "WHERE line CS 'CALL TRANSACTION' AND line NS '*'.
+*WS - Migração Mignow - 25/06/24
     g_line_number = sy-tabix.
     CLEAR l_flg_write.
 
 *WS - Migração Mignow - 25/06/24
 
-    IF l_str_source-line CS 'CALL FUNCTION' AND l_str_source-line NS '*'.
-      wa_call_function-line = l_str_source-line.
-      wa_call_function-devclass = l_str_lines-devclass.
-      wa_call_function-progname = l_str_lines-progname.
-      wa_call_function-linno    = l_str_lines-linno.
-
-      APPEND wa_call_function TO lt_call_function.
-      CLEAR wa_call_function.
-    ENDIF.
-
+*    IF l_str_source-line CS 'CALL TRANSACTION' AND l_str_source-line NS '*'.
+*      wa_call_function-line = l_str_source-line.
+*      wa_call_function-devclass = l_str_lines-devclass.
+*      wa_call_function-progname = l_str_lines-progname.
+*      wa_call_function-linno    = l_str_lines-linno.
+*
+*      APPEND wa_call_function TO lt_call_function.
+*      CLEAR wa_call_function.
+*    ENDIF.
+*WS - Migração Mignow - 25/06/24
 
     IF l_str_source-line CS p_strg1 AND
 *WS - Migração Mignow - 25/06/24
@@ -807,7 +809,7 @@ TYPES: BEGIN OF ty_line_split,
 
         SPLIT lv_line AT '=' INTO lv_line_split_1 lv_line_split_2.
         CLEAR lv_line_split_2.
-        CONCATENATE 'CALL FUNCTION' lv_line_split_1 INTO lv_line_split_2.
+        CONCATENATE 'CALL TRANSACTION' lv_line_split_1 INTO lv_line_split_2.
 
         APPEND lv_line_split_2 TO lt_line_split.
 *WS - Migração Mignow - 25/06/24
@@ -821,9 +823,29 @@ TYPES: BEGIN OF ty_line_split,
       l_cnt_line  = l_cnt_line + 1.
       l_flg_found = con_true.
 
-      l_str_lines-linno = g_line_number.
-      l_str_lines-line  = l_str_source-line.
-      APPEND l_str_lines TO g_tab_lines.
+*WS - Migração Mignow - 25/06/24
+*      l_str_lines-linno = g_line_number.
+*      l_str_lines-line  = l_str_source-line.
+*      APPEND l_str_lines TO g_tab_lines.
+*      CLEAR l_str_lines.
+
+        IF lt_line_split IS NOT INITIAL.
+
+          LOOP AT lt_line_split INTO DATA(wa_line_split).
+
+         IF wa_line_split CS l_str_source-line.
+
+            l_str_lines-linno = g_line_number.
+            l_str_lines-line  = l_str_source-line.
+            APPEND l_str_lines TO g_tab_lines.
+            CLEAR l_str_lines.
+
+         ENDIF.
+            CLEAR: wa_line_split.
+          ENDLOOP.
+
+        ENDIF.
+*WS - Migração Mignow - 25/06/24
     ENDIF.
 
   ENDLOOP.
@@ -837,8 +859,20 @@ TYPES: BEGIN OF ty_line_split,
   ENDIF.
 
 *WS - Migração Mignow - 25/06/24
-   
-
+*  LOOP AT i_tab_source INTO l_str_source WHERE line CS 'CALL TRANSACTION' AND line NS '*'.
+*
+*    LOOP AT lt_line_split INTO DATA(wa_line_split) WHERE line CS l_str_source-line.
+*
+*      l_str_lines-linno = g_line_number.
+*      l_str_lines-line  = l_str_source-line.
+*      APPEND l_str_lines TO g_tab_lines.
+*      CLEAR l_str_lines.
+*
+*      CLEAR: wa_line_split.
+*    ENDLOOP.
+*
+*    CLEAR: l_str_source.
+*  ENDLOOP.
 *WS - Migração Mignow - 25/06/24
 
 ENDFORM.                    " scan_prog
