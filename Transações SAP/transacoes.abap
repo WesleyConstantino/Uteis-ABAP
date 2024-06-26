@@ -5,6 +5,7 @@ ST05 - Trace SQL.
 SE01 - Criação, alteração e visualização de requests.
 SE09 - Criação e visualização de requests.
 SE11 - Dicionário de daados.
+SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 SE14 - Atualizar estrutura de tabela e ajustá-la ao banco de dados, após modificar campos chave na SE11.
 SE16 - Visualizar dados de uma tabela.
 SE18 - Procurar ou Badis.
