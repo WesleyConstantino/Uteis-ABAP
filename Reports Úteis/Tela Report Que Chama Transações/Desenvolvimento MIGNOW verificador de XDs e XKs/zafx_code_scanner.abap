@@ -787,6 +787,7 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 *      l_str_source-line CS lv_line_split_2 AND
 *WS - Migração Mignow - 25/06/24
        ( p_strg2 IS INITIAL OR l_str_source-line CS p_strg2 ).
+
       IF ( p_excl1 IS INITIAL OR
            NOT l_str_source-line CS p_excl1 ) AND
          ( p_excl2 IS INITIAL OR
@@ -811,10 +812,12 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 
         SPLIT lv_line AT '=' INTO lv_line_split_1 lv_line_split_2.
         CLEAR lv_line_split_2.
-*CONCATENATE 'CALL TRANSACTION' lv_line_split_1 INTO lv_line_split_2.
 
-*        APPEND lv_line_split_2 TO lt_line_split.
-        APPEND lv_line_split_1 TO lt_line_split.
+        CONDENSE lv_line_split_1.
+        CONCATENATE '*' lv_line_split_1 '*' INTO lv_line_split_2.
+
+        APPEND lv_line_split_2 TO lt_line_split.
+*        APPEND lv_line_split_1 TO lt_line_split.
 *WS - Migração Mignow - 25/06/24
 
         l_flg_write = con_true.
@@ -835,7 +838,6 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 *WS - Migração Mignow - 25/06/24
     ENDIF.
 
-*WS - Migração Mignow - 25/06/24
       IF lt_line_split IS NOT INITIAL.
 
         LOOP AT lt_line_split INTO DATA(wa_line_split).
