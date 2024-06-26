@@ -33,8 +33,8 @@ TYPES: t_tab_long_lines TYPE STANDARD TABLE OF t_abapsource_long.  "CB
 *-----------------------------------------------------------------------
 *-----------------------------------------------------------------------
 SELECTION-SCREEN: BEGIN OF BLOCK a WITH FRAME TITLE TEXT-001.
-  SELECT-OPTIONS:     s_devc FOR  tadir-devclass OBLIGATORY MEMORY ID dvc. "Pacote.
-  SELECT-OPTIONS:     s_rest FOR  tadir-obj_name NO-DISPLAY.  "Campo oculto   "Nome do obj   "MEMORY ID dvc.
+  SELECT-OPTIONS: s_devc FOR  tadir-devclass OBLIGATORY MEMORY ID dvc.
+  SELECT-OPTIONS: s_rest FOR  tadir-obj_name NO-DISPLAY.
 *  PARAMETER:          p_conpck AS CHECKBOX DEFAULT 'X'.
   SELECTION-SCREEN:   SKIP.
 
@@ -80,9 +80,9 @@ SELECTION-SCREEN: END   OF BLOCK a.
 *WS - Migração Mignow - 25/06/24
 
 SELECTION-SCREEN: BEGIN OF BLOCK c WITH FRAME TITLE TEXT-003.
-  PARAMETERS: p_prog AS CHECKBOX DEFAULT con_true,                "Não ocultar
-              p_fugr AS CHECKBOX DEFAULT con_true,  "Não ocultar
-              p_cinc AS CHECKBOX DEFAULT con_true.  "Não ocultar
+  PARAMETERS: p_prog AS CHECKBOX DEFAULT con_true,
+              p_fugr AS CHECKBOX DEFAULT con_true,
+              p_cinc AS CHECKBOX DEFAULT con_true.
 
 SELECTION-SCREEN: END   OF BLOCK c.
 
@@ -94,7 +94,8 @@ START-OF-SELECTION.
         p_excl2 TYPE c LENGTH 80, "Não usar
         p_excl3 TYPE c LENGTH 80. "Não usar
 
-  DATA: p_excomm TYPE c LENGTH 1 VALUE 'X', "Ignorar comentários.
+       "Ignorar comentários.
+  DATA: p_excomm TYPE c LENGTH 1 VALUE 'X',
         p_nohits TYPE c LENGTH 1, "Não usar
         p_edit   TYPE c LENGTH 1. "Não usar
 
@@ -148,28 +149,25 @@ FORM process_devc.
 
 
 
-* Get all packages on first level...
+* Obtem os pacotes
   SELECT * FROM tadir INTO TABLE l_tab_tadir            "#EC CI_GENBUFF
                          WHERE pgmid    = 'R3TR' AND
                                object   = 'DEVC' AND
                                devclass IN s_devc.    "#EC CI_SGLSELECT
 
-* Ignore invalid TADIR entries.
+* Ignora as entradas da TADIR inválidas
   DELETE l_tab_tadir WHERE obj_name IS INITIAL.
 
   DESCRIBE TABLE l_tab_tadir LINES l_cnt.
 
-* Check if local package $TMP in selection criteria
+* Verifica o pacote local $TMP nos critérios de seleção
   CLEAR l_flg_process_tmp.
   IF c_devc_tmp IN s_devc.
     l_flg_process_tmp = con_true.
     l_cnt = l_cnt + 1.
   ENDIF.
 
-
-
-****************begin package structure explosion
-***************************
+* inicia a explosão da estrutura de pacotes
   IF p_conpck EQ abap_true.
 
     FIELD-SYMBOLS:
@@ -186,11 +184,12 @@ FORM process_devc.
 
       CLEAR t_descendant.
 
+*Obtem todos os subpacotes de um pacote específico
       CALL METHOD cl_pak_package_queries=>get_all_subpackages
         EXPORTING
-          im_package     = <f_tadir>-devclass
+          im_package     = <f_tadir>-devclass "Nome do pacote
         IMPORTING
-          et_subpackages = t_descendant
+          et_subpackages = t_descendant "Retorno dos subpacotes
         EXCEPTIONS
           OTHERS         = 1.
 
@@ -763,14 +762,16 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 
 * Search source for selection criteria
 *WS - Migração Mignow - 25/06/24
-  LOOP AT i_tab_source INTO l_str_source. "WHERE line CS 'CALL TRANSACTION' AND line NS '*'.
+"..."WHERE line CS 'CALL TRANSACTION' AND line NS '*'.
+  LOOP AT i_tab_source INTO l_str_source.
 *WS - Migração Mignow - 25/06/24
     g_line_number = sy-tabix.
     CLEAR l_flg_write.
 
 *WS - Migração Mignow - 25/06/24
 
-*    IF l_str_source-line CS 'CALL TRANSACTION' AND l_str_source-line NS '*'.
+*    IF l_str_source-line CS 'CALL TRANSACTION'
+"AND l_str_source-line NS '*'.
 *      wa_call_function-line = l_str_source-line.
 *      wa_call_function-devclass = l_str_lines-devclass.
 *      wa_call_function-progname = l_str_lines-progname.
@@ -804,14 +805,16 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 
         " Verifica se o primeiro caractere é um espaço
         IF lv_line+0(1) = ' '.
-          lv_line = lv_line+1.  " Remove o primeiro caractere (espaço)
+          " Remove o primeiro caractere (espaço)
+          lv_line = lv_line+1.
         ENDIF.
 
         SPLIT lv_line AT '=' INTO lv_line_split_1 lv_line_split_2.
         CLEAR lv_line_split_2.
-        CONCATENATE 'CALL TRANSACTION' lv_line_split_1 INTO lv_line_split_2.
+*CONCATENATE 'CALL TRANSACTION' lv_line_split_1 INTO lv_line_split_2.
 
-        APPEND lv_line_split_2 TO lt_line_split.
+*        APPEND lv_line_split_2 TO lt_line_split.
+        APPEND lv_line_split_1 TO lt_line_split.
 *WS - Migração Mignow - 25/06/24
 
         l_flg_write = con_true.
@@ -829,22 +832,23 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 *      APPEND l_str_lines TO g_tab_lines.
 *      CLEAR l_str_lines.
 
-        IF lt_line_split IS NOT INITIAL.
+      IF lt_line_split IS NOT INITIAL.
 
-          LOOP AT lt_line_split INTO DATA(wa_line_split).
+        LOOP AT lt_line_split INTO DATA(wa_line_split).
 
-         IF wa_line_split CS l_str_source-line.
+          IF wa_line_split-line CS 'CALL TRANSACTION' AND
+            wa_line_split-line CS l_str_source-line.
 
             l_str_lines-linno = g_line_number.
             l_str_lines-line  = l_str_source-line.
             APPEND l_str_lines TO g_tab_lines.
             CLEAR l_str_lines.
 
-         ENDIF.
-            CLEAR: wa_line_split.
-          ENDLOOP.
+          ENDIF.
+          CLEAR: wa_line_split.
+        ENDLOOP.
 
-        ENDIF.
+      ENDIF.
 *WS - Migração Mignow - 25/06/24
     ENDIF.
 
@@ -859,9 +863,11 @@ FORM scan_prog USING    i_devclass   TYPE devclass
   ENDIF.
 
 *WS - Migração Mignow - 25/06/24
-*  LOOP AT i_tab_source INTO l_str_source WHERE line CS 'CALL TRANSACTION' AND line NS '*'.
+*  LOOP AT i_tab_source INTO l_str_source WHERE
+" line CS 'CALL TRANSACTION' AND line NS '*'.
 *
-*    LOOP AT lt_line_split INTO DATA(wa_line_split) WHERE line CS l_str_source-line.
+*    LOOP AT lt_line_split INTO DATA(wa_line_split)
+" WHERE line CS l_str_source-line.
 *
 *      l_str_lines-linno = g_line_number.
 *      l_str_lines-line  = l_str_source-line.
@@ -889,19 +895,19 @@ FORM navigate_to_object USING i_objname  TYPE sobj_name
     EXIT.
   ENDIF.
 
-* Set edit mode
+* Valida se o modo é de edição ou visualização
   l_operation = 'EDIT'.
   IF i_edit <> con_true.
     l_operation = 'SHOW'.
   ENDIF.
 
-* Navigation to current object
+* Navegação para o objeto atual
   CALL FUNCTION 'RS_TOOL_ACCESS'
     EXPORTING
-      operation           = l_operation
-      object_name         = i_objname
-      object_type         = 'REPS'
-      position            = i_position
+      operation           = l_operation "EDIT ou SHOW
+      object_name         = i_objname "Nome do objeto atual
+      object_type         = 'REPS' "Tipo do objeto
+      position            = i_position  "Posição
     EXCEPTIONS
       not_executed        = 0
       invalid_object_type = 0
