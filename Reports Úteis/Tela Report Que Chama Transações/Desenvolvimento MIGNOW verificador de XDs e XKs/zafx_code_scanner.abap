@@ -206,7 +206,7 @@ FORM process_devc.
     DELETE ADJACENT DUPLICATES FROM t_cumul.
 
     LOOP AT t_cumul ASSIGNING <f_cumul>.
-* is DEVC-TADIR already in  L_TAB_TADIR...
+* O DEVC-TADIR já está em L_TAB_TADIR
       READ TABLE l_tab_tadir WITH KEY devclass = <f_cumul> TRANSPORTING
       NO FIELDS.
       IF sy-subrc EQ 0.
@@ -224,14 +224,9 @@ FORM process_devc.
     ENDLOOP.
 
   ENDIF.
-****************end package structure explosion
+****************Finaliza a explosão da estrutura de pacotes
 
-
-* Write count of packages into list
-**  FORMAT COLOR COL_TOTAL INTENSIFIED ON.
-**  WRITE: / 'Anzahl gefundener Pakete:', l_cnt.
-
-* Process packages
+* Processo de pacotes
   l_tabix = 0.
   LOOP AT l_tab_tadir INTO l_str_tadir.
     l_tabix = l_tabix + 1.
@@ -239,7 +234,7 @@ FORM process_devc.
     PERFORM scan_devc USING l_devclass l_tabix l_cnt p_lrng.
   ENDLOOP.
 
-* Process local package $TMP
+* Processo de pacotes locais $TMP
   IF l_flg_process_tmp = con_true.
     l_tabix = l_tabix + 1.
     PERFORM scan_devc USING c_devc_tmp l_tabix l_cnt p_lrng.
@@ -369,15 +364,18 @@ FORM scan_devc USING u_devc         TYPE devclass
                      u_count        TYPE i
                      u_cnt_line     TYPE n.
 
-* Scan sources of current package
+* Scaneia códigos do pacote atual
+  "Reports:
   IF p_prog = con_true.
     PERFORM scan_devc_prog
       USING u_devc u_index u_count u_cnt_line.
   ENDIF.
+  "Funções:
   IF p_fugr = con_true.
     PERFORM scan_devc_fugr
       USING u_devc u_index u_count u_cnt_line.
   ENDIF.
+  "Classes:
   IF p_cinc = con_true.
     PERFORM scan_devc_class
       USING u_devc u_index u_count u_cnt_line.
@@ -404,13 +402,13 @@ FORM scan_devc_prog USING u_devc     TYPE devclass
         l_tab_source    TYPE t_tab_long_lines,    "CB
         l_text          TYPE itex132.
 
-* Initialization
+* Inicialização
   l_idx_devc = u_index.
   l_cnt_devc = u_count.
   CONCATENATE l_idx_devc '/' l_cnt_devc INTO l_aux_devc.
   CONDENSE l_aux_devc.
 
-* Get programs of current package
+* Obtem programas do pacote atual
   REFRESH l_tab_tadir.
   IF u_devc <> c_devc_tmp.
     SELECT * FROM tadir INTO TABLE l_tab_tadir          "#EC CI_GENBUFF
@@ -428,39 +426,43 @@ FORM scan_devc_prog USING u_devc     TYPE devclass
             obj_name IN s_rest.                       "#EC CI_SGLSELECT
   ENDIF.
 
-* Ignore invalid TADIR entries.
+* Ignora entradas da TADIR inválidas.
   DELETE l_tab_tadir WHERE obj_name IS INITIAL.
 
-* Write count of programs into list
+* Grava a contagem de programas na lista
   DESCRIBE TABLE l_tab_tadir LINES l_cnt.
   IF l_cnt = 0.
     EXIT.
   ENDIF.
 
-* Process all program sources
+* Processa todas as linhas do programa
   l_cnt_str = l_cnt.
   CONDENSE l_cnt_str.
   LOOP AT l_tab_tadir INTO l_str_tadir.
     l_tabix_str = sy-tabix.
     CONDENSE l_tabix_str.
 
-*   Display progress indicator
+*   Exibir indicador de progresso
     l_percentage = 100 * ( sy-tabix / l_cnt ).
     CONCATENATE 'Scanne Paket'(008) u_devc l_aux_devc
                 '(' 'Report'(009) l_tabix_str 'von'(010) l_cnt_str ')'
                 INTO l_text SEPARATED BY space.
+
+*   Função que Exibe o indicador de progresso
     CALL FUNCTION 'SAPGUI_PROGRESS_INDICATOR'
       EXPORTING
-        percentage = l_percentage
-        text       = l_text.
+        percentage = l_percentage "Porcentagem progresso a ser exibida.
+        text       = l_text. "Texto que será exibido durante o scanner.
 
     l_rep_name = l_str_tadir-obj_name.
     REFRESH l_tab_source.
+*   Faz a leitura das linhas do repot atual:
     READ REPORT l_rep_name INTO l_tab_source STATE 'I'.
     IF sy-subrc NE 0.
       READ REPORT l_rep_name INTO l_tab_source.
     ENDIF.
     IF sy-subrc = 0.
+*   Faz o scanner da linha atual de acordo com os filtros:
       PERFORM scan_prog USING    u_devc
                                  l_rep_name
                                  u_cnt_line
@@ -737,10 +739,9 @@ FORM scan_prog USING    i_devclass   TYPE devclass
         l_flg_found  TYPE xfeld,
         l_flg_write  TYPE xfeld,
         l_cnt_line   TYPE i,
-*        l_modulo       TYPE i,
         l_str_lines  TYPE t_str_lines.
 
-* Initialization
+* Inicialização
   CLEAR l_flg_found.
   g_line_object = i_objname.
   l_cnt_line = 1000.
@@ -760,33 +761,14 @@ FORM scan_prog USING    i_devclass   TYPE devclass
   DATA: lt_line_split TYPE TABLE OF ty_line_split.
 *WS - Migração Mignow - 25/06/24
 
-* Search source for selection criteria
-*WS - Migração Mignow - 25/06/24
-"..."WHERE line CS 'CALL TRANSACTION' AND line NS '*'.
+* Fonte de pesquisa para critérios de seleção
+  "LOOP de cada linha do programa atual:
   LOOP AT i_tab_source INTO l_str_source.
-*WS - Migração Mignow - 25/06/24
+
     g_line_number = sy-tabix.
     CLEAR l_flg_write.
 
-*WS - Migração Mignow - 25/06/24
-
-*    IF l_str_source-line CS 'CALL TRANSACTION'
-"AND l_str_source-line NS '*'.
-*      wa_call_function-line = l_str_source-line.
-*      wa_call_function-devclass = l_str_lines-devclass.
-*      wa_call_function-progname = l_str_lines-progname.
-*      wa_call_function-linno    = l_str_lines-linno.
-*
-*      APPEND wa_call_function TO lt_call_function.
-*      CLEAR wa_call_function.
-*    ENDIF.
-*WS - Migração Mignow - 25/06/24
-
-    IF l_str_source-line CS p_strg1 AND
-*WS - Migração Mignow - 25/06/24
-*      l_str_source-line CS lv_line_split_2 AND
-*WS - Migração Mignow - 25/06/24
-       ( p_strg2 IS INITIAL OR l_str_source-line CS p_strg2 ).
+    IF l_str_source-line CS p_strg1.
 
       IF ( p_excl1 IS INITIAL OR
            NOT l_str_source-line CS p_excl1 ) AND
@@ -812,12 +794,11 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 
         SPLIT lv_line AT '=' INTO lv_line_split_1 lv_line_split_2.
         CLEAR lv_line_split_2.
-
+        "Remove os espaços:
         CONDENSE lv_line_split_1.
         CONCATENATE '*' lv_line_split_1 '*' INTO lv_line_split_2.
 
         APPEND lv_line_split_2 TO lt_line_split.
-*        APPEND lv_line_split_1 TO lt_line_split.
 *WS - Migração Mignow - 25/06/24
 
         l_flg_write = con_true.
@@ -825,28 +806,18 @@ FORM scan_prog USING    i_devclass   TYPE devclass
       ENDIF.
     ENDIF.
 
-    IF l_flg_write = con_true OR l_cnt_line < i_cnt_line.
-      l_cnt_line  = l_cnt_line + 1.
-      l_flg_found = con_true.
-
-*WS - Migração Mignow - 25/06/24
-*      l_str_lines-linno = g_line_number.
-*      l_str_lines-line  = l_str_source-line.
-*      APPEND l_str_lines TO g_tab_lines.
-*      CLEAR l_str_lines.
-
-*WS - Migração Mignow - 25/06/24
-    ENDIF.
-
       IF lt_line_split IS NOT INITIAL.
-
+*   Loop com o nome da variável que tem a transação obsoleta
         LOOP AT lt_line_split INTO DATA(wa_line_split).
 
+          "Filtro para efetuar o append na tabela de saída
           IF l_str_source-line CP '*CALL TRANSACTION*' AND
-             l_str_source-line CP wa_line_split-line.
+             l_str_source-line CP wa_line_split-line AND
+             l_str_source-line+0(1) NE '*'.
 
             l_str_lines-linno = g_line_number.
             l_str_lines-line  = l_str_source-line.
+            "Append na tabela da saída
             APPEND l_str_lines TO g_tab_lines.
             CLEAR l_str_lines.
 
@@ -866,25 +837,6 @@ FORM scan_prog USING    i_devclass   TYPE devclass
     l_str_lines-line  = 'Keine Treffer'(014).
     APPEND l_str_lines TO g_tab_lines.
   ENDIF.
-
-*WS - Migração Mignow - 25/06/24
-*  LOOP AT i_tab_source INTO l_str_source WHERE
-" line CS 'CALL TRANSACTION' AND line NS '*'.
-*
-*    LOOP AT lt_line_split INTO DATA(wa_line_split)
-" WHERE line CS l_str_source-line.
-*
-*      l_str_lines-linno = g_line_number.
-*      l_str_lines-line  = l_str_source-line.
-*      APPEND l_str_lines TO g_tab_lines.
-*      CLEAR l_str_lines.
-*
-*      CLEAR: wa_line_split.
-*    ENDLOOP.
-*
-*    CLEAR: l_str_source.
-*  ENDLOOP.
-*WS - Migração Mignow - 25/06/24
 
 ENDFORM.                    " scan_prog
 
