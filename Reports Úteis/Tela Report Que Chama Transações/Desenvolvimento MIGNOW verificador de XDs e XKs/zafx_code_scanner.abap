@@ -21,9 +21,19 @@ DATA: BEGIN OF g_tab_lines OCCURS 0,
 
 * Global data
 TABLES:    tadir.                                           "#EC NEEDED
+
 CONSTANTS: c_devc_tmp    TYPE devclass VALUE '$TMP'.
+
 DATA: g_line_object TYPE sobj_name,
       g_line_number TYPE sytabix.
+
+"Parametros de entrada do programa original AFX_CODE_SCANNER:
+DATA: p_nohits TYPE c LENGTH 1, "Não usar
+      p_edit   TYPE c LENGTH 1, "Não usar
+      p_lrng TYPE n LENGTH 2 VALUE '01', "Não usar
+      p_conpck TYPE c LENGTH 1 VALUE 'X',
+      p_strg1 TYPE c LENGTH 80. "Parametro de pesquisa.
+
 TYPES: BEGIN OF t_abapsource_long,  "CB
          line TYPE char255,
        END OF   t_abapsource_long.
@@ -55,17 +65,8 @@ SELECTION-SCREEN: END   OF BLOCK c.
 
 "Início da execução
 START-OF-SELECTION.
-*WS - Migração Mignow - 25/06/24
 
-  DATA: p_nohits TYPE c LENGTH 1, "Não usar
-        p_edit   TYPE c LENGTH 1. "Não usar
-
-  DATA p_lrng TYPE n LENGTH 2 VALUE '01'. "Não usar
-
-  DATA  p_conpck TYPE c LENGTH 1 VALUE 'X'.
-
-  DATA: p_strg1 TYPE c LENGTH 80. "Parametro de pesquisa.
-
+*Wesley Santos - Mignow - 25/06/24
   IF  rb_xk01 EQ 'X'.
     p_strg1 = '''xk01'''.
   ELSEIF rb_xk02 EQ 'X'.
@@ -79,8 +80,7 @@ START-OF-SELECTION.
   ELSEIF rb_xd03 EQ 'X'.
     p_strg1 = '''xd03'''.
   ENDIF.
-
-*WS - Migração Mignow - 25/06/24
+*Wesley Santos - Mignow - 25/06/24
 
   PERFORM process_devc.
 
@@ -105,9 +105,6 @@ FORM process_devc.
 * Initialization
   REFRESH: g_tab_lines,
            l_tab_tadir.
-
-
-
 
 * Obtem os pacotes
   SELECT * FROM tadir INTO TABLE l_tab_tadir            "#EC CI_GENBUFF
@@ -160,7 +157,6 @@ FORM process_devc.
       APPEND <f_tadir>-devclass TO t_cumul.
 
     ENDLOOP.
-
 
     SORT t_cumul BY table_line ASCENDING.
     DELETE ADJACENT DUPLICATES FROM t_cumul.
@@ -709,16 +705,16 @@ FORM scan_prog USING    i_devclass   TYPE devclass
   l_str_lines-devclass = i_devclass.
   l_str_lines-progname = i_objname.
 
-*WS - Migração Mignow - 25/06/24
-*DATA: lt_call_function TYPE TABLE OF t_str_lines,
-*      wa_call_function TYPE t_str_lines.
-
+*Wesley Santos - Mignow - 25/06/24
   TYPES: BEGIN OF ty_line_split,
            line LIKE abapsource-line,
          END   OF ty_line_split.
 
-  DATA: lt_line_split TYPE TABLE OF ty_line_split.
-*WS - Migração Mignow - 25/06/24
+  DATA: lt_line_split TYPE TABLE OF ty_line_split,
+        lv_line_split_1 TYPE char255,
+        lv_line_split_2 TYPE char255,
+        lv_line         TYPE char255.
+*Wesley Santos - Mignow - 25/06/24
 
 * Fonte de pesquisa para critérios de seleção
   "LOOP de cada linha do programa atual:
@@ -730,13 +726,9 @@ FORM scan_prog USING    i_devclass   TYPE devclass
     "Verifica se a linha tem a transação obsoleta
     IF l_str_source-line CS p_strg1.
 
-         "Ignora linhas com comentários para o split.
-         IF  l_str_source-line(1) <> '*'.
-
-*WS - Migração Mignow - 25/06/24
-        DATA: lv_line_split_1 TYPE char255,
-              lv_line_split_2 TYPE char255,
-              lv_line         TYPE char255.
+*Wesley Santos - Mignow - 25/06/24
+       "Ignora linhas com comentários para o split.
+       IF  l_str_source-line(1) <> '*'.
 
         lv_line = l_str_source-line.
 
@@ -753,13 +745,14 @@ FORM scan_prog USING    i_devclass   TYPE devclass
         CONCATENATE '*' lv_line_split_1 '*' INTO lv_line_split_2.
 
         APPEND lv_line_split_2 TO lt_line_split.
-*WS - Migração Mignow - 25/06/24
+*Wesley Santos - Mignow - 25/06/24
 
         l_flg_write = con_true.
         l_cnt_line  = 0.
       ENDIF.
     ENDIF.
 
+*Wesley Santos - Mignow - 25/06/24
       IF lt_line_split IS NOT INITIAL.
 *   Loop com o nome da variável que tem a transação obsoleta
         LOOP AT lt_line_split INTO DATA(wa_line_split).
@@ -782,7 +775,7 @@ FORM scan_prog USING    i_devclass   TYPE devclass
         ENDLOOP.
 
       ENDIF.
-*WS - Migração Mignow - 25/06/24
+*Wesley Santos - Mignow - 25/06/24
 
   ENDLOOP.
 
