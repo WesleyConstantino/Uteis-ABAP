@@ -702,8 +702,6 @@ FORM scan_prog USING    i_devclass   TYPE devclass
   l_cnt_line = 1000.
 
   CLEAR l_str_lines.
-*  l_str_lines-devclass = i_devclass.
-*  l_str_lines-progname = i_objname.
 
 *Wesley Santos - Mignow - 25/06/24
   TYPES: BEGIN OF ty_line_split,
@@ -835,12 +833,10 @@ FORM alv_user_command
 
 *  BREAK-POINT.
   CASE i_ucomm.
-
     WHEN '&IC1'.
       PERFORM navigate_to_object USING l_str_lines-progname
                                        l_position
                                        p_edit.
-
   ENDCASE.
 
 * refresh sempre col- e row-stable
