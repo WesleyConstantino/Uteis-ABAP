@@ -702,8 +702,8 @@ FORM scan_prog USING    i_devclass   TYPE devclass
   l_cnt_line = 1000.
 
   CLEAR l_str_lines.
-  l_str_lines-devclass = i_devclass.
-  l_str_lines-progname = i_objname.
+*  l_str_lines-devclass = i_devclass.
+*  l_str_lines-progname = i_objname.
 
 *Wesley Santos - Mignow - 25/06/24
   TYPES: BEGIN OF ty_line_split,
