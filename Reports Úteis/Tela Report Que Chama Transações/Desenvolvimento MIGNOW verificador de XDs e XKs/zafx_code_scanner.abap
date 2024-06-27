@@ -90,21 +90,14 @@ SELECTION-SCREEN: END   OF BLOCK c.
 START-OF-SELECTION.
 *WS - Migração Mignow - 25/06/24
 
-  DATA: p_excl1 TYPE c LENGTH 80, "Não usar
-        p_excl2 TYPE c LENGTH 80, "Não usar
-        p_excl3 TYPE c LENGTH 80. "Não usar
-
-       "Ignorar comentários.
-  DATA: p_excomm TYPE c LENGTH 1 VALUE 'X',
-        p_nohits TYPE c LENGTH 1, "Não usar
+  DATA: p_nohits TYPE c LENGTH 1, "Não usar
         p_edit   TYPE c LENGTH 1. "Não usar
 
   DATA p_lrng TYPE n LENGTH 2 VALUE '01'. "Não usar
 
   DATA  p_conpck TYPE c LENGTH 1 VALUE 'X'.
 
-  DATA: p_strg1 TYPE c LENGTH 80, "Parametro de pesquisa 1.
-        p_strg2 TYPE c LENGTH 80. "Parametro de pesquisa 2.
+  DATA: p_strg1 TYPE c LENGTH 80. "Parametro de pesquisa.
 
   IF  rb_xk01 EQ 'X'.
     p_strg1 = '''xk01'''.
@@ -767,16 +760,11 @@ FORM scan_prog USING    i_devclass   TYPE devclass
     g_line_number = sy-tabix.
     CLEAR l_flg_write.
 
+    "Verifica se a linha tem a transação obsoleta
     IF l_str_source-line CS p_strg1.
 
-      IF ( p_excl1 IS INITIAL OR
-           NOT l_str_source-line CS p_excl1 ) AND
-         ( p_excl2 IS INITIAL OR
-           NOT l_str_source-line CS p_excl2 ) AND
-         ( p_excl3 IS INITIAL OR
-           NOT l_str_source-line CS p_excl3 ) AND
-         ( p_excomm IS INITIAL OR
-           l_str_source-line(1) <> '*' ).
+         "Ignora linhas com comentários para o split.
+         IF  l_str_source-line(1) <> '*'.
 
 *WS - Migração Mignow - 25/06/24
         DATA: lv_line_split_1 TYPE char255,
