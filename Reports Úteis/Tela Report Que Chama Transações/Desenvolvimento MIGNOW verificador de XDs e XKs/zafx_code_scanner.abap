@@ -240,7 +240,7 @@ FORM process_devc.
     PERFORM scan_devc USING c_devc_tmp l_tabix l_cnt p_lrng.
   ENDIF.
 
-* Display scan result data
+* Exibe dados de resultado da varredura
   PERFORM scan_result_display.
 
 ENDFORM.                    "process_devc
@@ -259,7 +259,7 @@ FORM scan_result_display.
         l_tab_fieldcat   TYPE slis_t_fieldcat_alv,
         l_str_fieldcat   TYPE slis_fieldcat_alv.
 
-* Initialzation
+* Iniialização
   CLEAR:   l_str_layout,
            l_str_event,
            l_str_sort,
@@ -270,21 +270,19 @@ FORM scan_result_display.
            l_tab_fieldcat.
   l_repid = sy-repid.
 
-* Initialize Layout for activity log
+* Inicializa o Layout do ALV
   l_str_layout-detail_popup         = con_true.
   l_str_layout-detail_initial_lines = con_true.
   l_str_layout-expand_all           = con_true.
   l_str_layout-colwidth_optimize    = con_true.
   l_str_layout-zebra                = con_true.
 
-
-
-* Get possible events
+* Chamar a função para obter todos os eventos possíveis para o ALV
   CALL FUNCTION 'REUSE_ALV_EVENTS_GET'
     EXPORTING
       i_list_type = 0
     IMPORTING
-      et_events   = l_tab_all_events.
+      et_events   = l_tab_all_events. "Lista de eventos.
 
 
   READ TABLE l_tab_all_events WITH KEY name = slis_ev_user_command
@@ -305,7 +303,9 @@ FORM scan_result_display.
   l_str_sort-up = con_true.
   APPEND l_str_sort TO l_tab_sort.
 
-
+* Monta fieldcat automáticamente:
+"Obs: todas as linhas do report devem ter até 72 carácteres,
+"caso contrário será gerado um dump nesta função.
   CALL FUNCTION 'REUSE_ALV_FIELDCATALOG_MERGE'
     EXPORTING
       i_program_name         = l_repid
@@ -338,6 +338,7 @@ FORM scan_result_display.
     MODIFY l_tab_fieldcat FROM l_str_fieldcat INDEX sy-tabix.
   ENDIF.
 
+* Exibe ALV
   CALL FUNCTION 'REUSE_ALV_LIST_DISPLAY'
     EXPORTING
       i_callback_program = l_repid
@@ -497,13 +498,13 @@ FORM scan_devc_fugr USING u_devc     TYPE devclass
         l_tab_source    TYPE TABLE OF t_abapsource_long,       "CB
         l_text          TYPE itex132.
 
-* Initialization
+* Inicialização
   l_idx_devc = u_index.
   l_cnt_devc = u_count.
   CONCATENATE l_idx_devc '/' l_cnt_devc INTO l_aux_devc.
   CONDENSE l_aux_devc.
 
-* Get function pools of current package
+* Obtem funções do pacote atual
   REFRESH l_tab_tadir.
   IF u_devc <> c_devc_tmp.
     SELECT * FROM tadir INTO TABLE l_tab_tadir          "#EC CI_GENBUFF
@@ -520,23 +521,23 @@ FORM scan_devc_fugr USING u_devc     TYPE devclass
             obj_name IN s_rest.                       "#EC CI_SGLSELECT
   ENDIF.
 
-* Ignore invalid TADIR entries.
+* Ignora entradas inválidas da TADIR.
   DELETE l_tab_tadir WHERE obj_name IS INITIAL.
 
-* Write count of function pools into list
+* Grava a contagem de linhas da função
   DESCRIBE TABLE l_tab_tadir LINES l_cnt.
   IF l_cnt = 0.
     EXIT.
   ENDIF.
 
-* Process all function pools
+* Processa todos os grupos de funções
   l_cnt_str = l_cnt.
   CONDENSE l_cnt_str.
   LOOP AT l_tab_tadir INTO l_str_tadir.
     l_tabix_str = sy-tabix.
     CONDENSE l_tabix_str.
 
-*   Display progress indicator
+*   Indicador de progresso durante a execução:
     l_percentage = 100 * ( sy-tabix / l_cnt ).
     CONCATENATE 'Scanne Paket'(008) u_devc l_aux_devc
                 '(' 'FuGr'(011) l_tabix_str 'von'(010) l_cnt_str ')'
@@ -546,21 +547,20 @@ FORM scan_devc_fugr USING u_devc     TYPE devclass
         percentage = l_percentage
         text       = l_text.
 
-*   Get function pool objects
-*    write: / l_str_tadir-obj_name.
+*   Obtém objetos do grupo de funções atal:
     l_str_e071-pgmid    = l_str_tadir-pgmid.
     l_str_e071-object   = l_str_tadir-object.
     l_str_e071-obj_name = l_str_tadir-obj_name.
     REFRESH l_tab_e071.
     CALL FUNCTION 'STOR_RESOLVE_FUGR'
       EXPORTING
-        is_e071 = l_str_e071
+        is_e071 = l_str_e071 "Passa o grupo de função.
       TABLES
-        tt_e071 = l_tab_e071
+        tt_e071 = l_tab_e071 "Recebe os módulos de função.
       EXCEPTIONS
         OTHERS  = 0.
 
-*   Read basis program sources and search for specified strings
+*Lê os programas base e procura cadeias de caracteres especificadas
     LOOP AT l_tab_e071 INTO l_str_e071 WHERE object = 'REPO' .
       l_rep_name = l_str_e071-obj_name.
       REFRESH l_tab_source.
@@ -569,19 +569,16 @@ FORM scan_devc_fugr USING u_devc     TYPE devclass
         READ REPORT l_rep_name INTO l_tab_source.
       ENDIF.
       IF sy-subrc = 0.
+        "scanner da linha atual:
         PERFORM scan_prog USING    u_devc
                                    l_rep_name
                                    u_cnt_line
                           CHANGING l_tab_source.       "CB
-**      ELSE.
-**        FORMAT COLOR COL_NEGATIVE.
-**        WRITE: / 'Report', l_rep_name, 'nicht gefunden!'.
+
       ENDIF.
     ENDLOOP .
 
-* (A) Keine generierten Dialoge?!? Das sollte man evtl. optional
-*     anbieten (Zeitpunkt-Routinen!)
-*   Read function module sources and search for specified strings
+* Lê linhas do módulo de função e procure strings especificadas
     LOOP AT l_tab_e071 INTO l_str_e071 WHERE object = 'FUNC' .
       IF l_str_e071-obj_name(4) = 'VIEW'. "Keine gen. Dialoge
         CONTINUE.
@@ -598,6 +595,7 @@ FORM scan_devc_fugr USING u_devc     TYPE devclass
           READ REPORT l_rep_name INTO l_tab_source.
         ENDIF.
         IF sy-subrc = 0.
+          "scanner da linha atual:
           PERFORM scan_prog USING    u_devc
                                      l_rep_name
                                      u_cnt_line
@@ -643,13 +641,13 @@ FORM scan_devc_class USING u_devc     TYPE devclass
         l_tab_selopt    TYPE STANDARD TABLE OF rsdsselopt,
         l_str_selopt    LIKE LINE OF l_tab_selopt.
 
-* Initialization
+* Inicialização
   l_idx_devc = u_index.
   l_cnt_devc = u_count.
   CONCATENATE l_idx_devc '/' l_cnt_devc INTO l_aux_devc.
   CONDENSE l_aux_devc.
 
-* Get classes of current package
+* Obtém as classes do pacote atual
   REFRESH l_tab_tadir.
   IF u_devc <> c_devc_tmp.
     SELECT * FROM tadir INTO TABLE l_tab_tadir          "#EC CI_GENBUFF
@@ -666,22 +664,22 @@ FORM scan_devc_class USING u_devc     TYPE devclass
             obj_name IN s_rest.                       "#EC CI_SGLSELECT
   ENDIF.
 
-* Ignore invalid TADIR entries.
+* Ignora entradas inválidas da TADIR.
   DELETE l_tab_tadir WHERE obj_name IS INITIAL.
 
-* Write count of function pools into list
+* Grava a contagem de classes na lista
   DESCRIBE TABLE l_tab_tadir LINES l_cnt.
   IF l_cnt = 0.
   ENDIF.
 
-* Process all function pools
+* Processa todas as classes
   l_cnt_str = l_cnt.
   CONDENSE l_cnt_str.
   LOOP AT l_tab_tadir INTO l_str_tadir.
     l_tabix_str = sy-tabix.
     CONDENSE l_tabix_str.
 
-*   Display progress indicator
+*   Indicador de progresso durante a execução:
     l_percentage = 100 * ( sy-tabix / l_cnt ).
     CONCATENATE 'Scanne Paket'(008) u_devc l_aux_devc
                 '(' 'Klasse'(012) l_tabix_str 'von'(010) l_cnt_str ')'
@@ -691,7 +689,7 @@ FORM scan_devc_class USING u_devc     TYPE devclass
         percentage = l_percentage
         text       = l_text.
 
-* get includes for current class
+* Obtém os includes da classe atual:
     REFRESH l_tab_selopt.
     l_str_selopt-sign = 'I'.
     l_str_selopt-option = 'CP'.
@@ -702,7 +700,7 @@ FORM scan_devc_class USING u_devc     TYPE devclass
     SELECT * FROM trdir INTO TABLE l_tab_trdir
               WHERE name IN l_tab_selopt.             "#EC CI_SGLSELECT
 
-
+*   LOOP em todas as classes do pacote atual
     LOOP AT l_tab_trdir INTO l_str_trdir.
       l_rep_name = l_str_e071-obj_name.
       REFRESH l_tab_source.
@@ -713,6 +711,7 @@ FORM scan_devc_class USING u_devc     TYPE devclass
       ENDIF.
 
       IF sy-subrc = 0.
+        "scanner da linha atual da classe:
         PERFORM scan_prog USING    u_devc
                                    l_rep_name
                                    u_cnt_line
@@ -817,6 +816,8 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 
             l_str_lines-linno = g_line_number.
             l_str_lines-line  = l_str_source-line.
+            l_str_lines-devclass = i_devclass.
+            l_str_lines-progname = i_objname.
             "Append na tabela da saída
             APPEND l_str_lines TO g_tab_lines.
             CLEAR l_str_lines.
@@ -830,7 +831,7 @@ FORM scan_prog USING    i_devclass   TYPE devclass
 
   ENDLOOP.
 
-* No hits found
+* Nenhum resultado encontrado
   IF p_nohits = con_true AND l_flg_found IS INITIAL.
 
     l_str_lines-linno = 1.
@@ -848,9 +849,11 @@ FORM navigate_to_object USING i_objname  TYPE sobj_name
                               i_edit     TYPE xfeld.
   DATA: l_operation(5).
 
-  IF i_objname IS INITIAL.
-    EXIT.
-  ENDIF.
+*WS - Migração Mignow - 25/06/24
+*  IF i_objname IS INITIAL.
+*    EXIT.
+*  ENDIF.
+*WS - Migração Mignow - 25/06/24
 
 * Valida se o modo é de edição ou visualização
   l_operation = 'EDIT'.
@@ -898,7 +901,7 @@ FORM alv_user_command
 
   ENDCASE.
 
-* Do refresh always col- and row-stable
+* refresh sempre col- e row-stable
   IF i_selfield-refresh = con_true.
     i_selfield-col_stable = con_true.
     i_selfield-row_stable = con_true.
