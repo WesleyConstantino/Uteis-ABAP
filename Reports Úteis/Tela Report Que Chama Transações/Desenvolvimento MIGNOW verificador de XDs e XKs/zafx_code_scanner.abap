@@ -725,8 +725,10 @@ FORM scan_prog USING    i_devclass   TYPE devclass
     IF l_str_source-line CS p_strg1.
 
 *Wesley Santos - Mignow - 25/06/24
-       "Ignora linhas com comentários para o split.
-       IF  l_str_source-line(1) <> '*'.
+       "Ignora linhas com comentários e CALL TRANSACTION
+       "para o split.
+       IF  l_str_source-line(1) <> '*' AND
+           l_str_source-line NP '*CALL TRANSACTION*'.
 
         lv_line = l_str_source-line.
 
