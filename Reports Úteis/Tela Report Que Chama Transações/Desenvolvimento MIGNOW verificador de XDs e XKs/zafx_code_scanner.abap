@@ -35,12 +35,7 @@ TYPES: t_tab_long_lines TYPE STANDARD TABLE OF t_abapsource_long.  "CB
 SELECTION-SCREEN: BEGIN OF BLOCK a WITH FRAME TITLE TEXT-001.
   SELECT-OPTIONS: s_devc FOR  tadir-devclass OBLIGATORY MEMORY ID dvc.
   SELECT-OPTIONS: s_rest FOR  tadir-obj_name NO-DISPLAY.
-*  PARAMETER:          p_conpck AS CHECKBOX DEFAULT 'X'.
   SELECTION-SCREEN:   SKIP.
-
-*WS - Migração Mignow - 25/06/24
-*  PARAMETERS: p_strg1(80) OBLIGATORY,
-*              p_strg2(80).
 
   PARAMETERS: rb_xk01 RADIOBUTTON GROUP gr1 DEFAULT 'X',
               rb_xk02 RADIOBUTTON GROUP gr1,
@@ -49,35 +44,7 @@ SELECTION-SCREEN: BEGIN OF BLOCK a WITH FRAME TITLE TEXT-001.
               rb_xd02 RADIOBUTTON GROUP gr1,
               rb_xd03 RADIOBUTTON GROUP gr1.
 
-*WS - Migração Mignow - 25/06/24
-
 SELECTION-SCREEN: END   OF BLOCK a.
-
-*WS - Migração Mignow - 25/06/24
-
-*INITIALIZATION.
-**Apenda valor inicial para o campo s_devc
-*  s_devc-sign = 'I'.
-*  s_devc-option = 'EQ'.
-*  s_devc-low = 'Z*'.
-*  APPEND s_devc.
-
-*SELECTION-SCREEN: BEGIN OF BLOCK b WITH FRAME TITLE TEXT-002.
-*WS - Migração Mignow - 25/06/24
-*PARAMETERS:         p_excl1(80),
-*                    p_excl2(80),
-*                    p_excl3(80).
-
-*WS - Migração Mignow - 25/06/24
-*  SELECTION-SCREEN:   SKIP.
-*  PARAMETERS:         p_lrng(2)    TYPE n OBLIGATORY DEFAULT '01'.
-*  SELECTION-SCREEN:   SKIP.
-*  PARAMETERS: p_excomm AS CHECKBOX DEFAULT con_false,
-*              p_nohits AS CHECKBOX DEFAULT con_false,
-*              p_edit   AS CHECKBOX DEFAULT space.
-*SELECTION-SCREEN: END   OF BLOCK b.
-
-*WS - Migração Mignow - 25/06/24
 
 SELECTION-SCREEN: BEGIN OF BLOCK c WITH FRAME TITLE TEXT-003.
   PARAMETERS: p_prog AS CHECKBOX DEFAULT con_true,
@@ -86,7 +53,7 @@ SELECTION-SCREEN: BEGIN OF BLOCK c WITH FRAME TITLE TEXT-003.
 
 SELECTION-SCREEN: END   OF BLOCK c.
 
-*-----------------------------------------------------------------------
+"Início da execução
 START-OF-SELECTION.
 *WS - Migração Mignow - 25/06/24
 
@@ -836,12 +803,6 @@ FORM navigate_to_object USING i_objname  TYPE sobj_name
                               i_position TYPE sytabix
                               i_edit     TYPE xfeld.
   DATA: l_operation(5).
-
-*WS - Migração Mignow - 25/06/24
-*  IF i_objname IS INITIAL.
-*    EXIT.
-*  ENDIF.
-*WS - Migração Mignow - 25/06/24
 
 * Valida se o modo é de edição ou visualização
   l_operation = 'EDIT'.
