@@ -17,3 +17,4 @@
 "HRPAD00INFTY - Badi do tipo "Definições".
 
 *Conteúdos trabalhados na aula:
+"Criando uma implementação para a Badi HRPAD00INFTY e vendo sua alteração no standard.
