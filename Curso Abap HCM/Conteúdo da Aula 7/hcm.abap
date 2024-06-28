@@ -5,8 +5,8 @@
 
 *Implementando uma Badi:
 "SE19 -> Badi clássico -> Nome da Badi = nome da badi que deseja implementar -> Clique em "Criar Implem." -> Nome da Implementação = Nome iniciado com "Z" 
-"ou "Y" escolhido por você -> dê OK -> Na tela seguinte, adicione uma descrição à Badi e faça a ativação -> Implemente a Badi como desejar(ao ativar, a 
-"implementação criada será chamada toda vez que a Badi for chamada num programa).
+"ou "Y" escolhido por você -> dê OK -> Na tela seguinte, adicione uma descrição à Badi e faça a ativação -> Implemente a Badi como desejar através dos métodos
+"(ao ativar, a implementação criada será chamada toda vez que a Badi for chamada num programa).
 "Obs: é possível fazer multiplas implementações para uma mesma Badi.
 
 *Transações usardas para localizar uma Badi:
