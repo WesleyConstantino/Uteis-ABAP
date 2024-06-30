@@ -4,7 +4,7 @@
 "São pontos de ampliação onde é possível fazer alterações dentro do código standard.
 
 *O que são modifications?
-"Uma forma de modificar o standard diretamente(não recomendado).
+"Uma forma de modificar o standard diretamente(não recomendado, pois a empresa pode até perder o suporte da SAP nos piores casos).
 
 *Como criar um enhancement point:
 *.................................................................................................................................................................*
