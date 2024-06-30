@@ -7,6 +7,7 @@
 "Uma forma de modificar o standard diretamente(não recomendado).
 
 *Como criar um enhancement point:
+*.................................................................................................................................................................*
 "Passo 1(visualizando os pontos de ampliação existentes no código):Abra o progrma standard -> Clique em Processar na aba superior -> Operações de Ampliação 
 "-> Visualizar pontos de ampliação implícitos.
 "Obs: após realizar as intruções do passo 1, os pontos do standard onde for possível criar um enhancement point ficará sinalizado pela linha de comentário abaixo:
@@ -19,6 +20,7 @@
 "código.
 
 "Passo 3(ativando seu enhancement): Após terminar a codificação, ative seu enhancement clicando no botão "Ampliações" ou pressionando Ctrl + F3.
+*.................................................................................................................................................................*
 
 *Transações usadas para visualizar e editar um enhancement point:
 "SE19
