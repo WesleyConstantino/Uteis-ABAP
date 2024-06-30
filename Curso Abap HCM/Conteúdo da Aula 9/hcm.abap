@@ -9,4 +9,4 @@
 "SQ01 - SAP Query (criar, visualizar ou modificar uma Query).
 
 *Temas trabalhados na aula:
-"Criando uma Quickview, exportando uma Quickview para o SAP Query.
+"Criando uma Quickview, exportando uma Quickview para o SAP Query e crando uma Query.
