@@ -26,4 +26,4 @@
 "SE19
 
 *Conteúdo trabalhado em aula:
-"Criando um enhancement e vendo seu comportamento no standard.
+"Criando uma modification, criando um enhancement e vendo seu comportamento no standard.
