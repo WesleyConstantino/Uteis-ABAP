@@ -76,6 +76,7 @@
 "SHDB - Batch Input.
 "SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 "SM30 - Manipulação dos dados de uma tabela (inserir dados numa tabela de forma recomendável).
+"SQ02 - Transação para verificar/criar ou modificar infoset.
 "SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
 "SREPO - Serve para comparar requests de ambientes diferentes.
 "STMS - Transporte de request.
@@ -91,7 +92,7 @@
 
 
 *  V  *................................................................................................................................................*
-
+"VOFM - Visualizar formulas e requisitos (são formas de alterar o standard que criam includes no padrão de nomenclatura "RV45C905").
 
 *  W  *................................................................................................................................................*
 
@@ -105,7 +106,3 @@
 *  Z  *................................................................................................................................................*
 "Trasações customizadas.
 
-
-
-SQ02 - Transação para verificar/criar ou modificar infoset.
-VOFM - Visualizar formulas e requisitos (são formas de alterar o standard que criam includes no padrão de nomenclatura "RV45C905").
