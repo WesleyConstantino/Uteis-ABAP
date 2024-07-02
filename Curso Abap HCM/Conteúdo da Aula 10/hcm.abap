@@ -6,3 +6,5 @@
 
 *Temas trabalhados na aula:
 "Reculperando os dados de um funcionário.
+
+"Tempo pausado = 12:56
