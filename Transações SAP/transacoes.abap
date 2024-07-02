@@ -1,15 +1,18 @@
-"Transações SAP:
-EWK1 - Pesquisar a utilização de funções, classes, métodos, comandos... em programas Z* do SAP "é a web do SAP".
-STMS - Transporte de request.
-ST05 - Trace SQL.
-SE01 - Criação, alteração e visualização de requests.
-SE09 - Criação e visualização de requests.
-SE11 - Dicionário de daados.
-SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
-SE14 - Atualizar estrutura de tabela e ajustá-la ao banco de dados, após modificar campos chave na SE11.
-SE16 - Visualizar dados de uma tabela.
-SE18 - Procurar ou Badis.
-SE19 - Implentar Badis.
+*Transações SAP:
+
+"EWK1 - Pesquisar a utilização de funções, classes, métodos, comandos... em programas Z* do SAP "é a web do SAP".
+"CODE_SACANNER - Pesquisar códigos (trechos, palavras...). É melhor que a EWK1!
+"STMS - Transporte de request.
+"ST05 - Trace SQL.
+"SE01 - Criação, alteração e visualização de requests.
+"SE09 - Criação e visualização de requests.
+"SE10 - Criação e visualização de requests.
+"SE11 - Dicionário de daados.
+"SE14 - Atualizar estrutura de tabela e ajustá-la ao banco de dados, após modificar campos chave na SE11.
+"SE16 - Visualizar dados de uma tabela.
+"SE16N - Visualizar dados de uma tabela.
+"SE18 - Procurar ou Badis.
+"SE19 - Implentar Badis.
 SE20 - Visualizar enhancements.
 SE24 - Criação e visualização de classes.
 SE37 - Criação e visualização de funções.
@@ -18,6 +21,7 @@ SE73 - Configurações relacionadas a fontes. Podemos cricar códigos de barras 
 SE78 - Subir um arquivo de imagem para o SAP.
 SE80 - Criação e visualização de programas em geral.
 SE93 - Criação e transações.
+"SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 ST22 - Mostra os Dumps que rodaram do ambiente (erros em tempo de execussão).
 ZDOC_CREATE - Criação de documentação.
 SM12 - Ver quem está logado no ambiente / Desbloquear objeto, caso tenha um usuário preso nele.
