@@ -6,6 +6,7 @@
 "BAPI - Procurar Bapis.
 
 *  C  *................................................................................................................................................*
+"CMOD - trocar textos de elementos/campos de tabela de dados standard.
 "CODE_SACANNER - Pesquisar códigos (trechos, palavras...). É melhor que a EWK1!
 
 *  D  *................................................................................................................................................*
@@ -54,8 +55,6 @@
 
 
 *  S  *................................................................................................................................................*
-"STMS - Transporte de request.
-"ST05 - Trace SQL.
 "SE01 - Criação, alteração e visualização de requests.
 "SE09 - Criação e visualização de requests.
 "SE10 - Criação e visualização de requests.
@@ -77,7 +76,13 @@
 "SHDB - Batch Input.
 "SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 "SM30 - Manipulação dos dados de uma tabela (inserir dados numa tabela de forma recomendável).
+"SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
+"SREPO - Serve para comparar requests de ambientes diferentes.
+"STMS - Transporte de request.
+"ST05 - Trace SQL.
 "ST22 - Mostra os Dumps que rodaram do ambiente (erros em tempo de execussão).
+"SU01 - Alterar senhas de usuários SAP (somente com usuário autorizado).
+"SU53 - Verifica as autorizações de um usuário dentro de uma transação.
 
 *  T  *................................................................................................................................................*
 
@@ -102,10 +107,5 @@
 
 
 
-SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
-SU01 - Alterar senhas de usuários SAP.
-SREPO - Serve para comparar requests de ambientes diferentes.
-SU53 - Verifica as autorizações de um usuário dentro de uma transação.
-CMOD - trocar textos de elementos/campos de tabela de dados standard.
 SQ02 - Transação para verificar/criar ou modificar infoset.
 VOFM - Visualizar formulas e requisitos (são formas de alterar o standard que criam includes no padrão de nomenclatura "RV45C905").
