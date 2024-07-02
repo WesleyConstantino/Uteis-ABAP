@@ -73,8 +73,8 @@
 "SE78 - Subir um arquivo de imagem para o SAP.
 "SE80 - Visualizar/criar ou editar programas em geral.
 "SE93 - Visualizar/criar ou editar transações.
-"SMARTFORMS - Transação para criação de Smart Forms.
 "SHDB - Batch Input.
+"SMARTFORMS - Transação para criação de Smart Forms.
 "SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 "SM30 - Manipulação dos dados de uma tabela (inserir dados numa tabela de forma recomendável).
 "SQ02 - Transação para verificar/criar ou modificar infoset.
