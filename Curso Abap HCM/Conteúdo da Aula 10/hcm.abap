@@ -8,3 +8,4 @@
 "Reculperando os dados de um funcionário.
 
 "Tempo pausado = 12:56
+"Tempo pausado = 22:44
