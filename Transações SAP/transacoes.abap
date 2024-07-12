@@ -77,6 +77,7 @@
 "SMARTFORMS - Transação para criação de Smart Forms.
 "SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 "SM30 - Manipulação dos dados de uma tabela (inserir dados numa tabela de forma recomendável).
+"SM30 - Visualizar os jobs que estão rodando no ambiente.
 "SQ02 - Transação para verificar/criar ou modificar infoset.
 "SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
 "SREPO - Serve para comparar requests de ambientes diferentes.
