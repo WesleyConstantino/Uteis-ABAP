@@ -83,6 +83,7 @@
 "SREPO - Serve para comparar requests de ambientes diferentes.
 "STMS - Transporte de request.
 "ST05 - Trace SQL.
+"ST12 - Trace SQL mais completo que o trace da ST05.
 "ST22 - Mostra os Dumps que rodaram do ambiente (erros em tempo de execussão).
 "SU01 - Alterar senhas de usuários SAP (somente com usuário autorizado).
 "SU53 - Verifica as autorizações de um usuário dentro de uma transação.
