@@ -7,7 +7,7 @@
 "BAPI - Procurar Bapis.
 
 *  C  *................................................................................................................................................*
-"CMOD - trocar textos de elementos/campos de tabela de dados standard.
+"CMOD - Criação de SAP Enhancement(Enhancements do tipo Customer Exits). Ações possíveis: 
 "CODE_SACANNER - Pesquisar códigos (trechos, palavras...). É melhor que a EWK1!
 
 *  D  *................................................................................................................................................*
@@ -75,6 +75,7 @@
 "SE93 - Visualizar/criar ou editar transações.
 "SHDB - Batch Input.
 "SMARTFORMS - Transação para criação de Smart Forms.
+"SMOD - Visualização e edição de SAP Enhancement(Enhancements do tipo Customer Exits).
 "SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 "SM30 - Manipulação dos dados de uma tabela (inserir dados numa tabela de forma recomendável).
 "SM30 - Visualizar os jobs que estão rodando no ambiente.
