@@ -1,4 +1,4 @@
-*Tema principal da aula: Desenvolvimento de report HCM.
+*Tema principal da aula: Desenvolvimento de report HCM  que faz a leitura de dados da folha de pagamento.
 
 *Funções de HCM usadas na aula:
 "CU_READ_RGDIR 
