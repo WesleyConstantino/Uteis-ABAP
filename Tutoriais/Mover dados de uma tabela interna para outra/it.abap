@@ -11,6 +11,10 @@ T_SAIDA_AUX[] = T_SAIDA[].
 "Este terceiro exemplo faz a mesma coisa que o exemplo 2, porém é menos performatico.
 MOVE T_SAIDA_AUX[] TO T_SAIDA[].
 
-*Exemplo 3:
+*Exemplo 4:
+"Este terceiro exemplo faz a mesma coisa que o exemplo 3.
+APPEND LINES OF T_SAIDA_AUX TO T_SAIDA.
+
+*Exemplo 5:
 "Este terceiro exemplo faz a mesma coisa que o exemplo 1, porém é menos performatico.
 MOVE T_SAIDA_AUX[] CORRESPONDING TO T_SAIDA[].
