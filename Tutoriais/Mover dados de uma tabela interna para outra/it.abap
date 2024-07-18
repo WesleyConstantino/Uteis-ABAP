@@ -16,5 +16,9 @@ MOVE T_SAIDA_AUX[] TO T_SAIDA[].
 APPEND LINES OF T_SAIDA_AUX TO T_SAIDA.
 
 *Exemplo 5:
+"Este terceiro exemplo faz a mesma coisa que o exemplo 3.
+INSERT LINES OF T_SAIDA_AUX INTO TABLE T_SAIDA.
+
+*Exemplo 6:
 "Este terceiro exemplo faz a mesma coisa que o exemplo 1, porém é menos performatico.
 MOVE T_SAIDA_AUX[] CORRESPONDING TO T_SAIDA[].
