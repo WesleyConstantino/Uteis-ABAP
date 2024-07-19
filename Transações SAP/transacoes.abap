@@ -56,6 +56,7 @@
 
 
 *  S  *................................................................................................................................................*
+"SAT  - Análise de programas em tempo de execução (tempo gasto com processamento Abap X Banco de dados).
 "SE01 - Criação, alteração e visualização de requests.
 "SE09 - Criação e visualização de requests.
 "SE10 - Criação e visualização de requests.
