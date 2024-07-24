@@ -1,10 +1,4 @@
-*Tema principal da aula:
+*Tema principal da aula: Desenvolvimento de um report ALV com tabelas lógicas
 
-*Funções de HCM usadas na aula:
-"
-  
-*Tabelas de HCM usadas na aula:
-"
-  
 *Temas trabalhados na aula:
-"
+"Desenvolvimento de um report ALV com tabelas lógicas.
