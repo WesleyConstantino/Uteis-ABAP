@@ -64,7 +64,7 @@
 "SE14 - Atualizar estrutura de tabela e ajustá-la ao banco de dados, após modificar campos chave na SE11.
 "SE16 - Visualizar dados de uma tabela.
 "SE16N - Visualizar dados de uma tabela.
-"SE18 - Procurar ou Badis.
+"SE18 - Procurar ou criar implementações para Badis.
 "SE19 - Implentar Badis.
 "SE20 - Visualizar/criar ou editar enhancements.
 "SE24 - Visualizar/criar ou editar classes.
