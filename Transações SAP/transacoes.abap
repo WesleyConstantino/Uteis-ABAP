@@ -80,6 +80,7 @@
 "SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 "SM30 - Manipulação dos dados de uma tabela (inserir dados numa tabela de forma recomendável).
 "SM37 - Visualizar os jobs que estão rodando no ambiente.
+"SQ01 - Criar, visualizar ou modificar Querys.
 "SQ02 - Transação para verificar/criar ou modificar infoset.
 "SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
 "SPRO - transção para fazer customizações numa transação standard (os funcionais quem usam essa transação).
