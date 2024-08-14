@@ -83,6 +83,7 @@
 "SM37 - Visualizar os jobs que estão rodando no ambiente.
 "SQ01 - Criar, visualizar ou modificar Querys.
 "SQ02 - Transação para verificar/criar ou modificar infoset.
+"SQ03 - 
 "SPAD - Admistração de impressoras, criação novos formatos de páginas para Smart Forms, entre outras coisas.
 "SPRO - transção para fazer customizações numa transação standard (os funcionais quem usam essa transação).
 "SREPO - Serve para comparar requests de ambientes diferentes.
