@@ -79,6 +79,7 @@
 "SMOD - Visualização e edição de SAP Enhancement(Enhancements do tipo Customer Exits).
 "SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
 "SM30 - Manipulação dos dados de uma tabela (inserir dados numa tabela de forma recomendável).
+"SM35 - Processamento de pasta Batch (para ver o processamento de batch input).
 "SM37 - Visualizar os jobs que estão rodando no ambiente.
 "SQ01 - Criar, visualizar ou modificar Querys.
 "SQ02 - Transação para verificar/criar ou modificar infoset.
