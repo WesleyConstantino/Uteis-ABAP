@@ -10,19 +10,21 @@ CLASS lcl_conta DEFINITION.
                im_titular TYPE string
                im_saldo   TYPE p,
              retorna_saldo,
-             imprime_atributos,
-             retorna_num_contas.
+             imprime_atributos.
+"Métodos estáticos:
+             CLASS-METHODS retorna_num_contas.
 
-   PRIVATE SECTION.
-"Atributos privados:
+   PROTECTED SECTION.
+"Atributos protegidos:
     DATA: titular    TYPE string, "string
-          saldo      TYPE p LENGTH 16 DECIMALS 2, "decimal
-          num_contas TYPE i. "inteiro
+          saldo      TYPE p LENGTH 16 DECIMALS 2. "decimal
+"Atributos estáticos:
+    CLASS-DATA num_contas TYPE i. "inteiro
 ENDCLASS.
 
 CLASS lcl_conta IMPLEMENTATION.
  METHOD constructor.
-   num_contas = num_contas + 1.
+   ADD 1 TO num_contas.
  ENDMETHOD.
 
  METHOD define_atributos.
