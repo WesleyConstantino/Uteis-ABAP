@@ -12,7 +12,7 @@ CLASS lcl_conta DEFINITION.
              retorna_saldo,
              imprime_atributos.
 "Métodos estáticos:
-             CLASS-METHODS retorna_num_contas.
+             CLASS-METHODS retorna_num_contas. "Com CLASS-METHODS esta variável vira uma tabela(lista para contagem).
 
    PROTECTED SECTION.
 "Atributos protegidos:
