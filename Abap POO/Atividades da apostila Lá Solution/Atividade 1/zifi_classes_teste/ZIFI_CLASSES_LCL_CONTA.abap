@@ -37,6 +37,7 @@ CLASS lcl_conta IMPLEMENTATION.
  ENDMETHOD.
 
  METHOD imprime_atributos.
+   WRITE:/ 'Conta' COLOR = 6 ,num_contas COLOR = 4. "COLOR muda a cor da linha do WRITE.
    WRITE:/ 'Titular:',titular.
    WRITE:/ 'Saldo:',saldo.
    WRITE:/ 'Número de contas:',num_contas.
