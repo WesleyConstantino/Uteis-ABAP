@@ -72,6 +72,7 @@
 "SE37 - Visualizar/criar ou editar funções.
 "SE38 - Visualizar/criar ou editar reports.
 "SE73 - Configurações relacionadas a fontes. Podemos cricar códigos de barras e QR Code para usar no Smart Forms.
+"SE51 - Criação/visualização e edição de telas/screens(layouts).
 "SE78 - Subir um arquivo de imagem para o SAP.
 "SE80 - Visualizar/criar ou editar programas em geral.
 "SE93 - Visualizar/criar ou editar transações.
