@@ -374,8 +374,6 @@ ENDCLASS.
 
 
 CLASS ZCL_MIG_MARC_UTIL IMPLEMENTATION.
-
-
 * <SIGNATURE>---------------------------------------------------------------------------------------+
 * | Static Public Method ZCL_MIG_MARC_UTIL=>INSERT_MARC_SINGLE
 * +-------------------------------------------------------------------------------------------------+
