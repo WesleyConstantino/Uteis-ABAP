@@ -767,7 +767,7 @@ CLASS lcl_upload IMPLEMENTATION.
         wa_marc-zzpreis_b = v_zzpreis_b.
         wa_marc-zzmhd = v_zzmhd.
         wa_marc-mandt = sy-mandt.
-        wa_marc-mmstd = v_mmstd+0(2) && v_mmstd+3(2) && v_mmstd+6(4).
+        wa_marc-mmstd = v_mmstd+6(4) && v_mmstd+3(2) && v_mmstd+0(2).
 
         "Converte o campo MATNR e adiciona zeros, conforme o tamanho do MATNR no ambiente
         CALL FUNCTION 'CONVERSION_EXIT_MATN1_INPUT'
@@ -804,6 +804,7 @@ CLASS lcl_upload IMPLEMENTATION.
 *            ROLLBACK WORK.
 *          ENDIF.
 
+    TRY .
       "Método que faz o insert na MARC
       CALL METHOD zcl_mig_marc_util=>insert_marc_single
         EXPORTING
@@ -1144,6 +1145,11 @@ CLASS lcl_upload IMPLEMENTATION.
           iv_zzek5_abschlag         = wa_marc-zzek5_abschlag
           iv_zzpreis_b              = wa_marc-zzpreis_b
           iv_zzmhd                  = wa_marc-zzmhd.
+
+          WRITE:/ wa_marc-mandt ,',', wa_marc-matnr ,',', wa_marc-werks, ',Sucesso!'.
+    CATCH cx_root.
+          WRITE:/ wa_marc-mandt ,',', wa_marc-matnr ,',', wa_marc-werks, ',Erro!'.
+    ENDTRY.
 
     ENDLOOP.
   ENDMETHOD.
