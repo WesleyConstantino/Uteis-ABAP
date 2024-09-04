@@ -6,8 +6,11 @@ CLASS zcl_mig_marc_util DEFINITION
 
     DATA: t_marc TYPE TABLE OF marc.
 
+    "Essa interface nos permite fazer operações no banco de dados via linguagem SQL nativa
     INTERFACES: if_amdp_marker_hdb.
 
+
+    "Update na MARC
     CLASS-METHODS update_marc_valifrom_single
       IMPORTING
         VALUE(iv_mandt)                  TYPE mandt
@@ -15,12 +18,14 @@ CLASS zcl_mig_marc_util DEFINITION
         VALUE(iv_werks)                  TYPE werks_d
         VALUE(iv_mmstd)                  TYPE mmstd.
 
+    *Delete na MARC
     CLASS-METHODS delete_marc_single
       IMPORTING
         VALUE(iv_mandt)                  TYPE mandt
         VALUE(iv_matnr)                  TYPE matnr
         VALUE(iv_werks)                  TYPE werks_d.
 
+    "Insert na MARC
     CLASS-METHODS insert_marc_single
       IMPORTING
         VALUE(iv_mandt)                  TYPE mandt
