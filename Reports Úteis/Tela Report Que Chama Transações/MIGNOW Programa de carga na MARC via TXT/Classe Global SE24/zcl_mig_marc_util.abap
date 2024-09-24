@@ -1,3 +1,4 @@
+*Obs: essa classe acessa o banco de dados direto via SQL Script, sendo assim, só podemos ativá-la pelo Eclipse.
 CLASS zcl_mig_marc_util DEFINITION
   PUBLIC
   FINAL
