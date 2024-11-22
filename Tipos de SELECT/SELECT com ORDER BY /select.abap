@@ -18,4 +18,4 @@
                   ORDER BY remessa.
 *<---21/11/2024 - Migração S4 - WS
 
-Explicação do exemplo acima: no SELECT acima, o "ORDER BY" remessa irá ordenar a tabela interna "vl_saida" a partir do campo "remessa".
+"Explicação do exemplo acima: no SELECT acima, o "ORDER BY" remessa irá ordenar a tabela interna "vl_saida" a partir do campo "remessa".
