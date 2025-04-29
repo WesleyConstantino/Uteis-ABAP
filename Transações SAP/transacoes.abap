@@ -9,7 +9,7 @@
 
 *  C  *................................................................................................................................................*
 "CMOD - Criação de SAP Enhancement(Enhancements do tipo Customer Exits). Ações possíveis: 
-"CODE_SACANNER - Pesquisar códigos (trechos, palavras...). É melhor que a EWK1!
+"CODE_SCANNER - Pesquisar códigos (trechos, palavras...). É melhor que a EWK1!
 
 *  D  *................................................................................................................................................*
 
