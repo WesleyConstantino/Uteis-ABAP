@@ -83,6 +83,8 @@
 "SM30 - Manipulação dos dados de uma tabela (inserir dados numa tabela de forma recomendável).
 "SM35 - Processamento de pasta Batch (para ver o processamento de batch input).
 "SM37 - Visualizar os jobs que estão rodando no ambiente.
+"SM50 - Visualisar programas presos em LOOP (procesos presos).
+"SM66 - Visualisar programas presos em LOOP (procesos presos).
 "SQ01 - Criar, visualizar ou modificar Querys.
 "SQ02 - Transação para verificar/criar ou modificar infoset.
 "SQ03 - 
