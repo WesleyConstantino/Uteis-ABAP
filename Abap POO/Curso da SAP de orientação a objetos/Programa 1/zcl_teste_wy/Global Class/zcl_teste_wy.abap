@@ -32,6 +32,7 @@ CLASS zcl_teste_wy IMPLEMENTATION.
 
   connection->carrier_id    = 'SQ'.
   connection->connection_id = '0001'.
+  lcl_connection=>conn_counter = 1.
   APPEND connection TO connections.
 
  ENDMETHOD.
