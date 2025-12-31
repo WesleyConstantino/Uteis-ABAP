@@ -7,7 +7,7 @@ class lcl_connection definition.
 
    DATA carrier_id    TYPE S_CARR_ID.
    DATA connection_id TYPE S_CONN_ID.
-
+   "Componentes estático:
    CLASS-DATA conn_counter TYPE i.
 
   protected section.
