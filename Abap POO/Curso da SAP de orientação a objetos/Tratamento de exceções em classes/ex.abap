@@ -14,7 +14,7 @@ CLASS lcl_connection IMPLEMENTATION.
 
   ENDMETHOD.
 
-  *...............................................................*
+*...............................................................*
 "Forma 2:
 METHOD if_oo_adt_classrun~main.
 
