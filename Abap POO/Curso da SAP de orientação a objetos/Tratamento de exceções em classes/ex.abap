@@ -1,18 +1,28 @@
 *...............................................................*
 "Forma 1:
-CLASS lcl_connection IMPLEMENTATION.
+METHODS constructor
+      IMPORTING
+        i_connection_id TYPE /dmo/connection_id
+        i_carrier_id    TYPE /dmo/carrier_id
+        "Tratamento com RAISE EXCEPTION TYPE (declaração da exceção):
+      RAISING
+        cx_ABAP_INVALID_VALUE.
 
-  METHOD set_attributes.
+...
 
+METHOD constructor.
+ 
     IF i_carrier_id IS INITIAL OR i_connection_id IS INITIAL.
-      "Tratamento com RAISE EXCEPTION TYPE:
+     "Tratamento com RAISE EXCEPTION TYPE:
       RAISE EXCEPTION TYPE cx_abap_invalid_value.
     ENDIF.
 
-    carrier_id    = i_carrier_id.
-    connection_id = i_connection_id.
+    me->connection_id = i_connection_id.
+    me->carrier_id    = i_carrier_id.
 
   ENDMETHOD.
+
+...
 
 *...............................................................*
 "Forma 2:
