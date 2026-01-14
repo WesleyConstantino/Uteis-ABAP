@@ -20,10 +20,3 @@ agencies_upd = VALUE #( ( agencyid = '0700##' name = 'Some fancy new name' ) ).
 
           "Os dados são efetivamente gravados no banco:
           COMMIT ENTITIES.
-
-
-
-
-
-
-   
