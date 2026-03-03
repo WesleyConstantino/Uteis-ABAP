@@ -59,7 +59,7 @@ selection-screen end of block b03.
 at selection-screen output.
   comm1 = 'Nº Seq, Referência/Nr.Seq, Data da Fatura, Data Lançamento,'.
   comm2 = 'Forma de Pagamento, Moeda, Vl. Frete, Fornecedor.'.
-  comm3 = '"I" - Importação - ZYCI003_F'(c01).
+  comm3 = '"SHDB" - Módulo - Transção'(c01).
 
 at selection-screen on value-request for p_file.
   perform busca_arquivo_local.
