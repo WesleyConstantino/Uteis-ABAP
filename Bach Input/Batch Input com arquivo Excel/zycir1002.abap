@@ -6,21 +6,21 @@
 *&
 *&---------------------------------------------------------------------*
 
-report /pws/zycir1002.
+report zycir1002.
 
 *TOP:
 "Types:
 types: begin of ty_batch_input,
-        nrseq    type alsmex_tabline-value, "/PWS/ZYCIE003-NRSEQ,
-        nrfat    type alsmex_tabline-value, "/pws/zycie006-nrfat,
-        dtincl   type alsmex_tabline-value, "/pws/zycie006-dtincl,
-        dtlanc   type alsmex_tabline-value, "/PWS/ZYCIE006-DTLANC,
-        frpagto  type alsmex_tabline-value, "/pws/zycie006-frpagto,
-        waers    type alsmex_tabline-value, "/pws/zycie006-waers,
-*        tpfatura TYPE alsmex_tabline-value, "/pws/zycie006-tpfatura,
+        nrseq    type alsmex_tabline-value, 
+        nrfat    type alsmex_tabline-value, 
+        dtincl   type alsmex_tabline-value, 
+        dtlanc   type alsmex_tabline-value, 
+        frpagto  type alsmex_tabline-value, 
+        waers    type alsmex_tabline-value, 
+*        tpfatura TYPE alsmex_tabline-value, 
 "campo fechado
-        vlfre    type alsmex_tabline-value, "/pws/zycie006-vlfre,
-        lifnr    type alsmex_tabline-value, "/pws/zycie006-lifnr,
+        vlfre    type alsmex_tabline-value, 
+        lifnr    type alsmex_tabline-value, 
        end of ty_batch_input,
 
        begin of ty_message,
@@ -192,78 +192,78 @@ form monta_bdc.
   loop at itab_batch_input into wa_batch_input.
     lv_tabix = sy-tabix.
 
-   perform monta_tela_bdc using '/PWS/SAPMZYCI003' '0004'.
-   perform monta_dados using '/PWS/ZYCIE003-NRSEQ' wa_batch_input-nrseq.
+   perform monta_tela_bdc using 'SAPMZYCI003' '0004'.
+   perform monta_dados using 'ZYCIE003-NRSEQ' wa_batch_input-nrseq.
    perform monta_dados using 'BDC_OKCODE' '=ENTER'.
 
-   perform monta_tela_bdc using '/PWS/SAPMZYCI003' '0100'.
-   perform monta_dados using '/PWS/ZYCIE006-NRFAT' wa_batch_input-nrfat.
-   perform monta_dados using '/PWS/ZYCIE006-DTINCL'
+   perform monta_tela_bdc using 'SAPMZYCI003' '0100'.
+   perform monta_dados using 'ZYCIE006-NRFAT' wa_batch_input-nrfat.
+   perform monta_dados using 'ZYCIE006-DTINCL'
          wa_batch_input-dtincl.
-   perform monta_dados using '/PWS/ZYCIE006-DTLANC'
+   perform monta_dados using 'ZYCIE006-DTLANC'
          wa_batch_input-dtlanc.
-   perform monta_dados using '/PWS/ZYCIE006-LIFNR'
+   perform monta_dados using 'ZYCIE006-LIFNR'
          wa_batch_input-lifnr.
-   perform monta_dados using '/PWS/ZYCIE006-FRPAGTO'
+   perform monta_dados using 'ZYCIE006-FRPAGTO'
          wa_batch_input-frpagto.
-   perform monta_dados using '/PWS/ZYCIE006-WAERS'
+   perform monta_dados using 'ZYCIE006-WAERS'
          wa_batch_input-waers.
-*   PERFORM monta_dados USING '/PWS/ZYCIE006-DTBASE'
+*   PERFORM monta_dados USING 'ZYCIE006-DTBASE'
 *         wa_batch_input-dtbase.
-   perform monta_dados using '/PWS/ZYCIE006-VLFRE'
+   perform monta_dados using 'ZYCIE006-VLFRE'
          wa_batch_input-vlfre.
    perform monta_dados using 'BDC_OKCODE' 'ENTE'.
 
-   perform monta_tela_bdc using '/PWS/SAPMZYCI003' '0100'.
-   perform monta_dados using '/PWS/ZYCIE006-NRFAT'
+   perform monta_tela_bdc using 'SAPMZYCI003' '0100'.
+   perform monta_dados using 'ZYCIE006-NRFAT'
     wa_batch_input-nrfat.
-   perform monta_dados using '/PWS/ZYCIE006-DTINCL'
+   perform monta_dados using 'ZYCIE006-DTINCL'
    wa_batch_input-dtincl.
-   perform monta_dados using '/PWS/ZYCIE006-DTLANC'
+   perform monta_dados using 'ZYCIE006-DTLANC'
    wa_batch_input-dtlanc.
-   perform monta_dados using '/PWS/ZYCIE006-LIFNR' wa_batch_input-lifnr.
-   perform monta_dados using '/PWS/ZYCIE006-FRPAGTO'
+   perform monta_dados using 'ZYCIE006-LIFNR' wa_batch_input-lifnr.
+   perform monta_dados using 'ZYCIE006-FRPAGTO'
    wa_batch_input-frpagto.
-   perform monta_dados using '/PWS/ZYCIE006-WAERS' wa_batch_input-waers.
-*   PERFORM monta_dados USING '/PWS/ZYCIE006-DTBASE'
+   perform monta_dados using 'ZYCIE006-WAERS' wa_batch_input-waers.
+*   PERFORM monta_dados USING 'ZYCIE006-DTBASE'
 *  wa_batch_input-DTBASE.
-   perform monta_dados using '/PWS/ZYCIE006-VLFRE' wa_batch_input-vlfre.
+   perform monta_dados using 'ZYCIE006-VLFRE' wa_batch_input-vlfre.
    perform monta_dados using 'BDC_OKCODE' '=SAVE'.
 
-   perform monta_tela_bdc using '/PWS/SAPMZYCI003' '0100'.
+   perform monta_tela_bdc using 'SAPMZYCI003' '0100'.
    perform monta_dados using 'BDC_OKCODE' '=ENTE'.
-   perform monta_dados using '/PWS/ZYCIE006-NRFAT'
+   perform monta_dados using 'ZYCIE006-NRFAT'
     wa_batch_input-nrfat.
-   perform monta_dados using '/PWS/ZYCIE006-DTINCL'
+   perform monta_dados using 'ZYCIE006-DTINCL'
    wa_batch_input-dtincl.
-   perform monta_dados using '/PWS/ZYCIE006-DTLANC'
+   perform monta_dados using 'ZYCIE006-DTLANC'
    wa_batch_input-dtlanc.
-   perform monta_dados using '/PWS/ZYCIE006-LIFNR' wa_batch_input-lifnr.
-   perform monta_dados using '/PWS/ZYCIE006-FRPAGTO'
+   perform monta_dados using 'ZYCIE006-LIFNR' wa_batch_input-lifnr.
+   perform monta_dados using 'ZYCIE006-FRPAGTO'
    wa_batch_input-frpagto.
-   perform monta_dados using '/PWS/ZYCIE006-WAERS' wa_batch_input-waers.
-   perform monta_dados using '/PWS/ZYCIE006-VLFRE' wa_batch_input-vlfre.
+   perform monta_dados using 'ZYCIE006-WAERS' wa_batch_input-waers.
+   perform monta_dados using 'ZYCIE006-VLFRE' wa_batch_input-vlfre.
 
-   perform monta_tela_bdc using '/PWS/SAPMZYCI003' '0100'.
-   perform monta_dados using '/PWS/ZYCIE006-NRFAT'
+   perform monta_tela_bdc using 'SAPMZYCI003' '0100'.
+   perform monta_dados using 'ZYCIE006-NRFAT'
     wa_batch_input-nrfat.
-   perform monta_dados using '/PWS/ZYCIE006-DTINCL'
+   perform monta_dados using 'ZYCIE006-DTINCL'
    wa_batch_input-dtincl.
-   perform monta_dados using '/PWS/ZYCIE006-DTLANC'
+   perform monta_dados using 'ZYCIE006-DTLANC'
    wa_batch_input-dtlanc.
-   perform monta_dados using '/PWS/ZYCIE006-LIFNR' wa_batch_input-lifnr.
-   perform monta_dados using '/PWS/ZYCIE006-FRPAGTO'
+   perform monta_dados using 'ZYCIE006-LIFNR' wa_batch_input-lifnr.
+   perform monta_dados using 'ZYCIE006-FRPAGTO'
    wa_batch_input-frpagto.
-   perform monta_dados using '/PWS/ZYCIE006-WAERS' wa_batch_input-waers.
-*   PERFORM monta_dados USING '/PWS/ZYCIE006-DTBASE'
+   perform monta_dados using 'ZYCIE006-WAERS' wa_batch_input-waers.
+*   PERFORM monta_dados USING 'ZYCIE006-DTBASE'
 *  wa_batch_input-DTBASE.
-   perform monta_dados using '/PWS/ZYCIE006-VLFRE' wa_batch_input-vlfre.
+   perform monta_dados using 'ZYCIE006-VLFRE' wa_batch_input-vlfre.
    perform monta_dados using 'BDC_OKCODE' '=SAVE'.
 
 
-   perform monta_tela_bdc using '/PWS/SAPMZYCI003' '0004'.
+   perform monta_tela_bdc using 'SAPMZYCI003' '0004'.
    perform monta_dados using 'BDC_OKCODE' '/ESAIR'.
-   perform monta_dados using '/PWS/ZYCIE003-NRSEQ' wa_batch_input-nrseq.
+   perform monta_dados using '-ZYCIE003-NRSEQ' wa_batch_input-nrseq.
 
    if wa_batch_input-nrseq is not initial.
      concatenate 'Linha' lv_tabix ':' wa_batch_input-nrseq
@@ -319,7 +319,7 @@ endform.                    " F_MONTA_DADOS
 form call_transaction.
    data lv_mode type c value 'N'.
 
-   call transaction '/PWS/ZYCI003_F' using itab_bdcdata
+   call transaction 'ZYCI003_F' using itab_bdcdata
                                      mode  lv_mode
                                      messages into itab_message.
 
